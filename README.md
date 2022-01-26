@@ -12,5 +12,5 @@ git clone https://github.com/Fresh-Advance/development-oxid-recipes.git recipes/
 
 Run the recipe, for example:
 ```
-./recipes/oxid-esales/b-6.4.x-dev/run.sh
+./recipes/oxid-esales/b-6.4.x-ce-dev/run.sh
 ```
