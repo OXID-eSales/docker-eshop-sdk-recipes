@@ -27,7 +27,7 @@ Run the recipe, for example:
 
 Any recipe outcome can have its own specifics. Read carefully before breaking your leg :)
 
-### b-6.4.x-ce-dev instructions
+### b-6.4.x-Xe-dev instructions
 
 Running old selenium tests examples:
 
