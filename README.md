@@ -22,3 +22,22 @@ Run the recipe, for example:
 ```
 ./recipes/oxid-esales/b-6.4.x-ce-dev/run.sh
 ```
+
+## Recipe Specifics
+
+Any recipe outcome can have its own specifics. Read carefully before breaking your leg :)
+
+### b-6.4.x-ce-dev instructions
+
+Running old selenium tests examples:
+
+```
+# docker default run:
+docker-compose exec -T -e SELENIUM_SERVER_IP=seleniumfirefox php vendor/bin/runtests-selenium
+
+# run from the php container:
+SELENIUM_SERVER_IP=seleniumfirefox vendor/bin/runtests-selenium
+
+#run from the php container with specific group:
+SELENIUM_SERVER_IP=seleniumfirefox vendor/bin/runtests-selenium AllTestsSelenium --group=sieg
+```
