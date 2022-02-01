@@ -9,6 +9,8 @@ Oxid eShop setup recipes
 
 3. It should be some Linux or Mac :) No idea if it will work with Windows at all.
 
+4. The ``127.0.0.1 localhost.local`` should be added to /etc/hosts
+
 ## Installation instructions:
 
 Clone the environment and recipes first
