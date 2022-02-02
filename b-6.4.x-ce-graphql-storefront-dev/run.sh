@@ -7,6 +7,7 @@ cd $SCRIPT_PATH/../../../ || exit
 git clone https://github.com/OXID-eSales/oxideshop_ce.git --branch=b-6.4.x source
 
 make setup
+make addbasicservices
 sed "s/display_errors =.*/display_errors = false/" -i containers/php-fpm/custom.ini
 sed -i -e "s+/var/www/+/var/www/source/+" containers/httpd/project.conf
 sed -i "1s+^+xdebug.max_nesting_level=1000\n\n+" containers/php-fpm/custom.ini

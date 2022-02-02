@@ -7,6 +7,7 @@ cd $SCRIPT_PATH/../../../ || exit
 git clone https://github.com/OXID-eSales/oxideshop_ce.git --branch=b-6.4.x source
 
 make setup
+make addbasicservices
 make file=services/selenium-chrome.yml addservice
 make file=recipes/oxid-esales/services/selenium-firefox-old.yml addservice
 
