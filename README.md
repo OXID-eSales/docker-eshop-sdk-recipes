@@ -43,3 +43,16 @@ SELENIUM_SERVER_IP=seleniumfirefox vendor/bin/runtests-selenium
 #run from the php container with specific group:
 SELENIUM_SERVER_IP=seleniumfirefox vendor/bin/runtests-selenium AllTestsSelenium --group=sieg
 ```
+
+Running codeception tests examples:
+
+```
+# docker default run:
+docker-compose exec -T -e SELENIUM_SERVER_HOST=selenium -e BROWSER_NAME=chrome php vendor/bin/runtests-codeception
+
+# run from the php container:
+SELENIUM_SERVER_HOST=selenium BROWSER_NAME=chrome vendor/bin/runtests-codeception
+
+#run from the php container with specific group:
+SELENIUM_SERVER_HOST=selenium BROWSER_NAME=chrome vendor/bin/runtests-codeception --group=sieg
+```
