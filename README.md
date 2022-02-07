@@ -56,3 +56,17 @@ SELENIUM_SERVER_HOST=selenium BROWSER_NAME=chrome vendor/bin/runtests-codeceptio
 #run from the php container with specific group:
 SELENIUM_SERVER_HOST=selenium BROWSER_NAME=chrome vendor/bin/runtests-codeception --group=sieg
 ```
+
+### b-6.4.x-ce-graphql-storefront-dev instructions
+
+Running codeception tests examples:
+
+```
+# docker default run:
+docker-compose exec \
+-e ADDITIONAL_TEST_PATHS=vendor/oxid-esales/graphql-storefront/tests \
+-e ACTIVATE_ALL_MODULES=1 \
+-e RUN_TESTS_FOR_SHOP=0 \
+-e RUN_TESTS_FOR_MODULES=0 \
+php vendor/bin/runtests-codeception
+```
