@@ -13,14 +13,17 @@ Oxid eShop setup recipes
 
 ## Installation instructions:
 
-Clone the environment and recipes first
+1. Clone the SDK to ``MyProject`` directory in this case:
 ```
-mkdir myNewShinyProject && cd myNewShinyProject
-git clone https://github.com/Fresh-Advance/development.git .
-git clone https://github.com/Fresh-Advance/development-oxid-recipes.git recipes/oxid-esales
+echo MyProject && git clone https://github.com/OXID-eSales/docker-eshop-sdk $_ && cd $_
 ```
 
-Run the recipe, for example:
+2. Clone recipes
+```
+git clone https://github.com/OXID-eSales/docker-eshop-sdk-recipes recipes/oxid-esales
+```
+
+3. And last - run the desired recipe, for example:
 ```
 ./recipes/oxid-esales/b-6.4.x-ce-dev/run.sh
 ```
