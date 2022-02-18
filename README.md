@@ -3,6 +3,8 @@ Oxid eShop setup recipes
 
 ## Prerequirements
 
+0. PERL is required to be available on the system! Try if you have one installed with ``perl -v```
+
 1. Check if other docker project is stopped! If you have something running, ports may conflict and nothing will work as intended, just take a minute and stop everything before running this!
 
 2. You should have docker and docker-compose installed on your machine.
