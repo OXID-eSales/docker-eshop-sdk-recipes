@@ -58,7 +58,7 @@ docker-compose exec -T php composer require oxid-esales/graphql-base:* --no-upda
 docker-compose exec -T php composer require oxid-esales/graphql-storefront:* --no-update
 
 # Configure Tests dependencies
-docker-compose exec -T php composer require codeception/module-rest --dev --no-update
+docker-compose exec -T php composer require codeception/module-rest ^1.4.2 --dev --no-update
 docker-compose exec -T php composer require codeception/module-phpbrowser ^1.0.2 --dev --no-update
 
 # Run dependencies installation and reset the shop to development state
