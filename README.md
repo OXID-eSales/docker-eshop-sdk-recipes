@@ -47,6 +47,9 @@ SELENIUM_SERVER_IP=seleniumfirefox vendor/bin/runtests-selenium
 
 #run from the php container with specific group:
 SELENIUM_SERVER_IP=seleniumfirefox vendor/bin/runtests-selenium AllTestsSelenium --group=sieg
+
+#run single test file from the php container:
+SELENIUM_SERVER_IP=seleniumfirefox php vendor/bin/runtests-selenium --filter MyTest:: AllTestsSelenium
 ```
 
 Running codeception tests examples:
