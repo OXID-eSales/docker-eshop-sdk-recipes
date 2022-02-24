@@ -17,12 +17,12 @@ Oxid eShop setup recipes
 
 1. Clone the SDK to ``MyProject`` directory in this case:
 ```
-echo MyProject && git clone https://github.com/OXID-eSales/docker-eshop-sdk $_ && cd $_
+echo MyProject && git clone git@github.com:OXID-eSales/docker-eshop-sdk.git $_ && cd $_
 ```
 
 2. Clone recipes
 ```
-git clone https://github.com/OXID-eSales/docker-eshop-sdk-recipes recipes/oxid-esales
+git clone git@github.com:OXID-eSales/docker-eshop-sdk-recipes.git recipes/oxid-esales
 ```
 
 3. And last - run the desired recipe, for example:
