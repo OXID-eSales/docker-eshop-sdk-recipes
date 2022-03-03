@@ -12,10 +12,6 @@ make addbasicservices
 
 # Configure containers
 perl -pi\
-  -e 's#display_errors =.*#display_errors = false#g;'\
-  containers/php/custom.ini
-
-perl -pi\
   -e 's#/var/www/#/var/www/source/#g;'\
   containers/httpd/project.conf
 
