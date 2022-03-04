@@ -12,7 +12,7 @@ make addbasicservices
 
 # Configure containers
 perl -pi\
-  -e 's#display_errors =.*#display_errors = false#g;'\
+  -e 's#error_reporting = .*#error_reporting = E_ALL ^ E_WARNING ^ E_DEPRECATED#g;'\
   -e 'print "xdebug.max_nesting_level=1000\n" if $. == 1'\
   containers/php/custom.ini
 

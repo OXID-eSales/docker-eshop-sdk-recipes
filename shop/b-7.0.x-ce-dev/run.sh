@@ -14,7 +14,7 @@ make file=recipes/oxid-esales/services/selenium-firefox-old.yml addservice
 
 # Configure containers
 perl -pi\
-  -e 's#display_errors =.*#display_errors = false#g;'\
+  -e 's#error_reporting = .*#error_reporting = E_ALL ^ E_WARNING ^ E_DEPRECATED#g;'\
   containers/php/custom.ini
 
 perl -pi\
