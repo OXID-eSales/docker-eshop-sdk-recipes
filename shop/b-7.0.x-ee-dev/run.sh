@@ -2,7 +2,7 @@
 
 SCRIPT_PATH=$(dirname ${BASH_SOURCE[0]})
 
-cd $SCRIPT_PATH/../../../ || exit
+cd $SCRIPT_PATH/../../../../ || exit
 
 git clone https://github.com/OXID-eSales/oxideshop_ce.git --branch=b-7.0.x source
 
