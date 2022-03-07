@@ -6,14 +6,14 @@ cd $SCRIPT_PATH/../../../../ || exit
 
 git clone git@github.com:OXID-eSales/oxideshop_ce.git --branch=b-6.3.x source
 
-#change php version to 7.4
-perl -pi\
-  -e 's#8.0#7.4#g;'\
-  .env
-
 # Prepare services configuration
 make setup
 make addbasicservices
+
+#change php version to 7.4
+perl -pi\
+  -e 's#PHP_VERSION=.*#PHP_VERSION="7.4"#g;'\
+  .env
 
 # Configure containers
 perl -pi\
