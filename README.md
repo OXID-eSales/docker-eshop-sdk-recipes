@@ -78,3 +78,10 @@ docker-compose exec \
 -e RUN_TESTS_FOR_MODULES=0 \
 php vendor/bin/runtests-codeception
 ```
+
+### Moga themes
+
+Additional action required after the recipe is done:
+* Activate the moga theme in admin.
+
+The 7.0.x shop is not yet working with moga theme.

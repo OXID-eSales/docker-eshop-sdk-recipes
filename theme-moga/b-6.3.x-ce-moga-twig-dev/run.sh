@@ -67,4 +67,4 @@ cd source/source/Application/views
 
 ln -s ../Application/views/moga-twig/out/moga/ ../../out/moga-twig
 
-echo "Done!"
+echo "Recipe done! Activate the Moga theme in the Admin panel!!"
