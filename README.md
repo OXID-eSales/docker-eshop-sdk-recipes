@@ -27,7 +27,7 @@ git clone git@github.com:OXID-eSales/docker-eshop-sdk-recipes.git recipes/oxid-e
 
 3. And last - run the desired recipe, for example:
 ```
-./recipes/oxid-esales/b-6.4.x-ce-dev/run.sh
+./recipes/oxid-esales/shop/b-6.4.x-ce-dev/run.sh
 ```
 
 ## Recipe Specifics
