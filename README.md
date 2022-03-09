@@ -1,17 +1,26 @@
-# development-oxid-recipes
-Oxid eShop setup recipes
+# OXID eShop Setup Recipes
+
+Recipes used together with https://github.com/OXID-eSales/docker-eshop-sdk for an OXID eShop development environment.
 
 ## Prerequirements
 
-0. PERL is required to be available on the system! Try if you have one installed with ``perl -v```
+Check if other docker projects are stopped! If you have something running, ports may conflict and nothing will work as intended!
 
-1. Check if other docker project is stopped! If you have something running, ports may conflict and nothing will work as intended, just take a minute and stop everything before running this!
+### Linux / MacOS
 
-2. You should have docker and docker-compose installed on your machine.
+- Docker and Docker-Compose
+- Makefile
+- PERL. Try if you have it installed with `perl -v`
+- `127.0.0.1 localhost.local` added to `/etc/hosts`
 
-3. It should be some Linux or Mac :) No idea if it will work with Windows at all.
+### Windows
 
-4. The ``127.0.0.1 localhost.local`` should be added to /etc/hosts
+- Windows Subsystem for Linux:
+  - Install with `wsl --install`, reboot and add your Linux user
+  - Update with `sudo apt update && apt upgrade`
+  - Install Makefile with `sudo apt install make`
+- Docker Desktop for Windows with WSL2 backend enabled
+- `127.0.0.1 localhost.local` added to `%windir%\system32\drivers\etc\hosts`
 
 ## Installation instructions:
 
