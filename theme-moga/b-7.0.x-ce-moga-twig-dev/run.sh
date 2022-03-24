@@ -51,7 +51,7 @@ docker-compose exec -T \
 
 # Add twig-component and themes
 docker-compose exec -T php composer require oxid-esales/twig-component:dev-b-7.0.x
-docker-compose exec -T php composer require oxid-esales/twig-admin-theme
+docker-compose exec -T php composer require oxid-esales/twig-admin-theme:dev-b-7.0.x
 docker-compose exec -T php composer require oxid-esales/moga-twig-theme:* --no-update
 
 # Run dependencies installation and reset the shop to development state
