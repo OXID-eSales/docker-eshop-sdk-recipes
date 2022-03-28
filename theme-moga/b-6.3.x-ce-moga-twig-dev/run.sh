@@ -65,6 +65,6 @@ docker-compose exec -T php php vendor/bin/reset-shop
 #Symlink /out/moga-twig
 cd source/source/Application/views
 
-ln -s ../Application/views/moga-twig/out/moga/ ../../out/moga-twig
+ln -s ../Application/views/moga-twig/out/moga-twig/ ../../out/moga-twig
 
 echo "Recipe done! Activate the Moga theme in the Admin panel!!"
