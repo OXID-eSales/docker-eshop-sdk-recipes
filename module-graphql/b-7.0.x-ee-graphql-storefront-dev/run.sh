@@ -71,10 +71,12 @@ docker-compose exec -T php composer update --no-interaction
 docker-compose exec -T php php vendor/bin/reset-shop
 
 # Install and activate modules
-docker-compose exec -T php bin/oe-console oe:module:install-configuration source/modules/oe/graphql-base
-docker-compose exec -T php bin/oe-console oe:module:install-configuration source/modules/oe/graphql-storefront
+docker-compose exec -T php bin/oe-console oe:module:install vendor/oxid-esales/graphql-base
+docker-compose exec -T php bin/oe-console oe:module:install vendor/oxid-esales/graphql-storefront
 docker-compose exec -T php bin/oe-console oe:module:activate oe_graphql_base
 docker-compose exec -T php bin/oe-console oe:module:activate oe_graphql_storefront
 docker-compose exec -T php vendor/bin/oe-eshop-doctrine_migration migrations:migrate
 
-echo "Done!"
+docker-compose exec -T php bin/oe-console oe:admin:create --admin-email='admin@admin.com' --admin-password='admin'
+
+echo "Done! Admin login: admin@admin.com Password: admin"
