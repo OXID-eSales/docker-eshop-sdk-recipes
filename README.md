@@ -6,6 +6,9 @@ Recipes used together with https://github.com/OXID-eSales/docker-eshop-sdk for a
 
 Check if other docker projects are stopped! If you have something running, ports may conflict and nothing will work as intended!
 
+For recipes that involves private repositories, you will need the Github token which have access to those repositories.
+In case Github credentials are asked, put your username and the **Github Token in place of password**!
+
 ### Linux / MacOS
 
 - Docker and Docker-Compose
