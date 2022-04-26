@@ -16,7 +16,7 @@ perl -pi\
   containers/httpd/project.conf
 
 perl -pi\
-  -e 's#PHP_VERSION=.*#PHP_VERSION="7.4"#g;'\
+  -e 's#PHP_VERSION=.*#PHP_VERSION=7.4#g;'\
   .env
 
 # Configure shop
@@ -38,13 +38,13 @@ perl -pi\
   source/source/config.inc.php
 
 # Clone Country VAT module to modules directory
-git clone git@github.com:OXID-eSales/country-vat-module.git --branch=b-6.x source/source/modules/oxps/countryvatadministration
+git clone https://github.com/OXID-eSales/country-vat-module.git --branch=b-6.x source/source/modules/oxps/countryvatadministration
 
 # Start all containers
 make up
 
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git git@github.com:OXID-eSales/oxideshop_pe.git
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git git@github.com:OXID-eSales/oxideshop_ee.git
+docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
+docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
 docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.3.x --no-update
 docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.3.x --no-plugins --no-scripts
 

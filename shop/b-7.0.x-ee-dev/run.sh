@@ -4,7 +4,7 @@ SCRIPT_PATH=$(dirname ${BASH_SOURCE[0]})
 
 cd $SCRIPT_PATH/../../../../ || exit
 
-git clone git@github.com:OXID-eSales/oxideshop_ce.git --branch=b-7.0.x source
+git clone https://github.com/OXID-eSales/oxideshop_ce.git --branch=b-7.0.x source
 
 make setup
 make addbasicservices
@@ -41,8 +41,8 @@ perl -pi\
 # Start all containers
 make up
 
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git git@github.com:OXID-eSales/oxideshop_pe.git
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git git@github.com:OXID-eSales/oxideshop_ee.git
+docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee
+docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe
 
 docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-7.0.x --no-update
 docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-7.0.x --no-plugins --no-scripts
