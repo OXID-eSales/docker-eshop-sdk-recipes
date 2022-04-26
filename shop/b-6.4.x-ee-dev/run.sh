@@ -41,9 +41,8 @@ docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee gi
 docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe
 
 docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.4.x --no-update
-docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.4.x --no-update
+docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.4.x --no-plugins --no-scripts
 
-docker-compose exec php composer update --no-plugins --no-scripts
 docker-compose exec -T php composer update --no-interaction
 docker-compose exec -T php php vendor/bin/reset-shop
 

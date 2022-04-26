@@ -4,7 +4,7 @@ SCRIPT_PATH=$(dirname ${BASH_SOURCE[0]})
 
 cd $SCRIPT_PATH/../../../../ || exit
 
-git clone git@github.com:OXID-eSales/oxideshop_ce.git --branch=b-6.5.x source
+git clone https://github.com/OXID-eSales/oxideshop_ce.git --branch=b-6.5.x source
 
 # Prepare services configuration
 make setup
@@ -38,14 +38,14 @@ perl -pi\
   source/source/config.inc.php
 
 # Clone GraphQL modules to modules directory
-git clone git@github.com:OXID-eSales/graphql-base-module.git --branch=b-6.5.x source/source/modules/oe/graphql-base
-git clone git@github.com:OXID-eSales/graphql-storefront-module.git --branch=b-6.5.x source/source/modules/oe/graphql-storefront
+git clone https://github.com/OXID-eSales/graphql-base-module.git --branch=b-6.5.x source/source/modules/oe/graphql-base
+git clone https://github.com/OXID-eSales/graphql-storefront-module.git --branch=b-6.5.x source/source/modules/oe/graphql-storefront
 
 # Start all containers
 make up
 
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git git@github.com:OXID-eSales/oxideshop_pe.git
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git git@github.com:OXID-eSales/oxideshop_ee.git
+docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
+docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
 docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.5.x --no-update
 docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.5.x --no-plugins --no-scripts
 

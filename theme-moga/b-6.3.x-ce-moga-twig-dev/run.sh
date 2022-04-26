@@ -4,7 +4,7 @@ SCRIPT_PATH=$(dirname ${BASH_SOURCE[0]})
 
 cd $SCRIPT_PATH/../../../../ || exit
 
-git clone git@github.com:OXID-eSales/oxideshop_ce.git --branch=b-6.3.x source
+git clone https://github.com/OXID-eSales/oxideshop_ce.git --branch=b-6.3.x source
 
 # Prepare services configuration
 make setup
@@ -12,7 +12,7 @@ make addbasicservices
 
 #change php version to 7.4
 perl -pi\
-  -e 's#PHP_VERSION=.*#PHP_VERSION="7.4"#g;'\
+  -e 's#PHP_VERSION=.*#PHP_VERSION=7.4#g;'\
   .env
 
 # Configure containers
@@ -43,7 +43,7 @@ perl -pi\
   source/source/config.inc.php
 
 # Clone Moga twig theme to themes directory
-git clone git@github.com:OXID-eSales/moga-twig-theme.git --branch=main source/source/Application/views/moga-twig
+git clone https://github.com/OXID-eSales/moga-twig-theme.git --branch=main source/source/Application/views/moga-twig
 
 # Start all containers
 make up
@@ -54,8 +54,8 @@ docker-compose exec -T \
   --json '{"type":"path", "url":"./source/Application/views/moga-twig", "options": {"symlink": true}}'
 
 # Add twig-component and themes
-docker-compose exec -T php composer require oxid-esales/twig-component
-docker-compose exec -T php composer require oxid-esales/twig-admin-theme
+docker-compose exec -T php composer require oxid-esales/twig-component --no-update
+docker-compose exec -T php composer require oxid-esales/twig-admin-theme --no-update
 docker-compose exec -T php composer require oxid-esales/moga-twig-theme:* --no-update
 
 # Run dependencies installation and reset the shop to development state

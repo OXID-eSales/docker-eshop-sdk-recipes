@@ -34,13 +34,13 @@ perl -pi\
   source/source/config.inc.php
 
 # Clone Payone module to modules directory
-git clone git@github.com:PAYONE-GmbH/oxid-6.git --branch=v1.6.2 source/source/modules/fc/fcpayone
+git clone https://github.com/PAYONE-GmbH/oxid-6.git --branch=v1.6.2 source/source/modules/fc/fcpayone
 
 # Start all containers
 make up
 
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git git@github.com:OXID-eSales/oxideshop_pe.git
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git git@github.com:OXID-eSales/oxideshop_ee.git
+docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
+docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
 docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.4.x --no-update
 docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.4.x --no-plugins --no-scripts
 

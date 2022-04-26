@@ -34,13 +34,13 @@ perl -pi\
   source/source/config.inc.php
 
 # Clone GDPR opt-in module to modules directory
-git clone git@github.com:OXID-eSales/gdpr-optin-module.git --branch=b-6.x source/source/modules/oe/gdproptin
+git clone https://github.com/OXID-eSales/gdpr-optin-module.git --branch=b-6.x source/source/modules/oe/gdproptin
 
 # Start all containers
 make up
 
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git git@github.com:OXID-eSales/oxideshop_pe.git
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git git@github.com:OXID-eSales/oxideshop_ee.git
+docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
+docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
 docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.4.x --no-update
 docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.4.x --no-plugins --no-scripts
 
