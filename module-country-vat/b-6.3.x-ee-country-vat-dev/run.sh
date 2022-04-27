@@ -43,6 +43,7 @@ git clone https://github.com/OXID-eSales/country-vat-module.git --branch=b-6.x s
 # Start all containers
 make up
 
+docker-compose exec php composer config github-protocols https
 docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
 docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
 docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.3.x --no-update

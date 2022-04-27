@@ -38,8 +38,8 @@ perl -pi\
   source/source/config.inc.php
 
 # Clone GraphQL modules to modules directory
-git clone git@github.com:OXID-eSales/graphql-base-module.git --branch=b-6.4.x source/source/modules/oe/graphql-base
-git clone git@github.com:OXID-eSales/graphql-storefront-module.git --branch=b-6.4.x source/source/modules/oe/graphql-storefront
+git clone https://github.com/OXID-eSales/graphql-base-module.git --branch=b-6.4.x source/source/modules/oe/graphql-base
+git clone https://github.com/OXID-eSales/graphql-storefront-module.git --branch=b-6.4.x source/source/modules/oe/graphql-storefront
 
 # Start all containers
 make up
