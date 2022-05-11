@@ -70,6 +70,7 @@ ln -s ../Application/views/apex/out/apex/ ../../out/apex
 
 docker-compose exec -T php bin/oe-console oe:admin:create --admin-email='admin@admin.com' --admin-password='admin'
 
-echo "Done! Admin login: admin@admin.com Password: admin"
-
 echo "Done!"
+echo "Admin login: admin@admin.com Password: admin"
+echo "Activate APEX theme in admin"
+

@@ -91,9 +91,8 @@ docker-compose exec \
 php vendor/bin/runtests-codeception
 ```
 
-### Moga themes
+### Apex theme
 
 Additional action required after the recipe is done:
-* Activate the moga theme in admin.
+* Activate Apex theme in admin.
 
-The 7.0.x shop is not yet working with moga theme.
