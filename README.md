@@ -24,7 +24,7 @@ git config --global credential.helper cache
 ### Windows
 
 - Windows Subsystem for Linux:
-  - Install with `wsl --install`, reboot and add your Linux user
+  - Install with `wsl --install -d Ubuntu`, reboot and add your Linux user
   - Update with `sudo apt update && apt upgrade`
   - Install Makefile with `sudo apt install make`
 - Docker Desktop for Windows with WSL2 backend enabled
