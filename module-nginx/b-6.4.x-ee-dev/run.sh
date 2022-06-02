@@ -61,6 +61,11 @@ docker-compose exec -T php composer update --no-interaction
 docker-compose exec -T php php vendor/bin/reset-shop
 
 docker-compose exec -T php bin/oe-console oe:module:install-configuration source/modules/oe/nginx/
+
+mkdir -p ./source/var/configuration/environment
+cp $SCRIPT_PATH/environment/1.yaml ./source/var/configuration/environment/1.yaml
+docker-compose exec -T php bin/oe-console oe:module:apply-configuration
+
 docker-compose exec -T php bin/oe-console oe:module:activate oenginx
 
 echo "Done!"
