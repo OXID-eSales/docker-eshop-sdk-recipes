@@ -43,7 +43,7 @@ perl -pi\
   source/source/config.inc.php
 
 # Clone Usercentrics module to modules directory
-git clone https://github.com/OXID-eSales/nginx-module --branch=b-6.5.x source/source/modules/oe/nginx
+git clone https://github.com/OXID-eSales/nginx-module --branch=b-6.4.x source/source/modules/oe/nginx
 
 # Start all containers
 make up
