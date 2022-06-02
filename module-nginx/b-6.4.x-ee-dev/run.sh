@@ -16,6 +16,9 @@ perl -pi\
   docker-compose.yml
 make file=services/nginx-rp.yml addservice
 
+# Add elasticsearch and kibana services
+make file=services/elasticsearch.yml addservice
+
 # Configure containers
 perl -pi\
   -e 's#/var/www/#/var/www/source/#g;'\
