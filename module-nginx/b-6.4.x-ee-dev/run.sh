@@ -49,6 +49,7 @@ perl -pi\
   -e 's#<sShopURL>#http://localhost.local/#g;'\
   -e 's#<sShopDir>#/var/www/source/#g;'\
   -e 's#<sCompileDir>#/var/www/source/tmp/#g;'\
+  -e 's#iDebug = 0;#iDebug = -1;#g;'\
   source/source/config.inc.php
 
 # Clone NGINX module to modules directory
