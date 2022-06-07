@@ -63,6 +63,8 @@ docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee gi
 docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.4.x --no-update
 docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.4.x --no-plugins --no-scripts
 
+docker-compose exec php composer require oxid-esales/wave-theme:dev-b-1.x --no-update
+
 # Configure modules in composer
 docker-compose exec -T \
   php composer config repositories.oxid-esales/nginx-module \
