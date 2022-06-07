@@ -9,10 +9,12 @@ git clone https://github.com/OXID-eSales/oxideshop_ce.git --branch=b-6.5.x sourc
 # Prepare services configuration
 make setup
 make addbasicservices
+make file=services/selenium-chrome.yml addservice
 
 # Change Apache port and add nginx container
 perl -pi\
   -e 's#- 80:80#- 8000:80#g;'\
+  -e 's#apache:localhost.local#nginx:localhost.local#g;'\
   docker-compose.yml
 make file=services/nginx-rp.yml addservice
 
@@ -23,6 +25,13 @@ make file=services/elasticsearch.yml addservice
 perl -pi\
   -e 's#/var/www/#/var/www/source/#g;'\
   containers/httpd/project.conf
+
+perl -pi\
+  -e 's#display_errors = .*#display_errors = false#g;'\
+  containers/php/custom.ini
+perl -pi\
+  -e "s#'display_errors', '1'#'display_errors', '0'#g;"\
+  source/source/bootstrap.php
 
 # Configure shop
 cp source/source/config.inc.php.dist source/source/config.inc.php
@@ -42,7 +51,7 @@ perl -pi\
   -e 's#<sCompileDir>#/var/www/source/tmp/#g;'\
   source/source/config.inc.php
 
-# Clone Usercentrics module to modules directory
+# Clone NGINX module to modules directory
 git clone https://github.com/OXID-eSales/nginx-module --branch=b-6.5.x source/source/modules/oe/nginx
 
 # Start all containers
@@ -53,6 +62,8 @@ docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe gi
 docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
 docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.5.x --no-update
 docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.5.x --no-plugins --no-scripts
+
+docker-compose exec php composer require oxid-esales/wave-theme:dev-b-1.x --no-update
 
 # Configure modules in composer
 docker-compose exec -T \
