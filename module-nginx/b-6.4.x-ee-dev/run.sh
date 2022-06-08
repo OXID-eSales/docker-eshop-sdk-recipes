@@ -37,10 +37,6 @@ perl -pi\
 cp source/source/config.inc.php.dist source/source/config.inc.php
 
 perl -pi\
-  -e 'print "SetEnvIf Authorization \"(.*)\" HTTP_AUTHORIZATION=\$1\n\n" if $. == 1'\
-  source/source/.htaccess
-
-perl -pi\
   -e 's#<dbHost>#mysql#g;'\
   -e 's#<dbUser>#root#g;'\
   -e 's#<dbName>#example#g;'\
@@ -65,6 +61,7 @@ docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.4.x --
 docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.4.x --no-plugins --no-scripts
 
 docker-compose exec php composer require oxid-esales/wave-theme:dev-b-1.x --no-update
+docker-compose exec php composer require oxid-esales/testing-library:dev-b-6.4.x_phpunit9 --no-update --dev
 
 # Configure modules in composer
 docker-compose exec -T \
