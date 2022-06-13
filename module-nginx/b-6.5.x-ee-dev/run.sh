@@ -10,6 +10,7 @@ git clone https://github.com/OXID-eSales/oxideshop_ce.git --branch=b-6.5.x sourc
 make setup
 make addbasicservices
 make file=services/selenium-chrome.yml addservice
+make file=services/selenium-firefox.yml addservice
 
 # Change Apache port and add nginx container
 perl -pi\
