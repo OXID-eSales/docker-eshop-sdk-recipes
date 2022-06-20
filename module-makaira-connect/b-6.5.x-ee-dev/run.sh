@@ -42,8 +42,8 @@ make up
 docker-compose exec php composer config github-protocols https
 docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
 docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
-docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.4.x --no-update
-docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.4.x --no-plugins --no-scripts
+docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.5.x --no-update
+docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.5.x --no-plugins --no-scripts
 
 # Configure modules in composer
 docker-compose exec -T \
