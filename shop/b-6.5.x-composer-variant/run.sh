@@ -22,7 +22,7 @@ make up
 
 docker-compose exec php sudo composer self-update --2.2
 docker-compose exec php composer config github-protocols https
-docker-compose exec php composer update
+docker-compose exec php composer update --no-interaction
 
 # Configure shop
 cp source/source/config.inc.php.dist source/source/config.inc.php
@@ -38,6 +38,13 @@ perl -pi\
   -e 's#<sCompileDir>#/var/www/source/tmp/#g;'\
   source/source/config.inc.php
 
+docker-compose exec -T php php vendor/bin/reset-shop
+docker-compose exec -T php rm -rf source/tmp
+docker-compose exec -T php mkdir source/tmp
+
+if [ -f $SCRIPT_PATH/shops_1.yaml ]; then cp -f $SCRIPT_PATH/shops_1.yaml source/var/configuration/shops/1.yaml; fi
+mkdir source/var/configuration/environment
+if [ -f $SCRIPT_PATH/environment_1.yaml ]; then cp -fp $SCRIPT_PATH/environment_1.yaml source/var/configuration/environment/1.yaml; fi
 docker-compose exec -T php php vendor/bin/reset-shop
 
 echo "Done!"
