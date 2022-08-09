@@ -12,3 +12,6 @@ Preparations required:
 Afterward:
 
 5. Run the ``run.sh`` script
+
+## NOTES
+- The most commonly needed repositories are registered by ``run.sh`` script 
