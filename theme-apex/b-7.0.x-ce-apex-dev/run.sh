@@ -9,6 +9,8 @@ git clone https://github.com/OXID-eSales/oxideshop_ce.git --branch=b-7.0.x sourc
 # Prepare services configuration
 make setup
 make addbasicservices
+make file=services/selenium-chrome.yml addservice
+make file=recipes/oxid-esales/services/selenium-firefox-old.yml addservice
 
 #change php version to 8.1
 perl -pi\
@@ -73,4 +75,3 @@ docker-compose exec -T php bin/oe-console oe:admin:create --admin-email='admin@a
 echo "Done!"
 echo "Admin login: admin@admin.com Password: admin"
 echo "Activate APEX theme in admin"
-
