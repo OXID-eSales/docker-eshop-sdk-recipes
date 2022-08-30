@@ -4,7 +4,8 @@ SCRIPT_PATH=$(dirname ${BASH_SOURCE[0]})
 
 cd $SCRIPT_PATH/../../../../ || exit
 
-mkdir source
+git clone https://github.com/OXID-eSales/oxideshop_ce.git --branch=b-6.5.x source
+
 cp $SCRIPT_PATH/composer.json source/
 
 make setup
@@ -21,34 +22,35 @@ perl -pi\
 make up
 
 #register repositories
-docker-compose exec -T \
+docker-compose exec php sudo composer self-update --2 --stable
+docker-compose exec php composer config github-protocols https
+
+docker-compose exec \
   php composer config repositories.oxid-esales/oxideshop-demodata-ee \
   --json '{"type":"vcs", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee.git"}'
-docker-compose exec -T \
+docker-compose exec \
   php composer config repositories.oxid-esales/oxideshop-demodata-pe \
   --json '{"type":"vcs", "url":"https://github.com/OXID-eSales/oxideshop_demodata_pe.git"}'
-docker-compose exec -T \
+docker-compose exec \
   php composer config repositories.oxid-esales/oxideshop-ee \
   --json '{"type":"vcs", "url":"https://github.com/OXID-eSales/oxideshop_ee.git"}'
-docker-compose exec -T \
+docker-compose exec \
   php composer config repositories.oxid-esales/oxideshop-pe \
   --json '{"type":"vcs", "url":"https://github.com/OXID-eSales/oxideshop_pe.git"}'
-docker-compose exec -T \
+docker-compose exec \
   php composer config repositories.oxid-esales/oxideshop-metapackage-ee \
   --json '{"type":"vcs", "url":"https://github.com/OXID-eSales/oxideshop_metapackage_ee.git"}'
-docker-compose exec -T \
+docker-compose exec \
   php composer config repositories.oxid-esales/oxideshop-metapackage-pe \
   --json '{"type":"vcs", "url":"https://github.com/OXID-eSales/oxideshop_metapackage_pe.git"}'
-docker-compose exec -T \
+docker-compose exec \
   php composer config repositories.ddoe/visualcms-module \
   --json '{"type":"vcs", "url":"https://github.com/OXID-eSales/visual_cms_module.git"}'
-docker-compose exec -T \
+docker-compose exec \
   php composer config repositories.oxid-solution-catalysts/unzer \
   --json '{"type":"vcs", "url":"https://github.com/OXID-eSales/unzer-module.git"}'
 
-docker-compose exec php sudo composer self-update --2.2
-docker-compose exec php composer config github-protocols https
-docker-compose exec php composer update --no-interaction
+docker-compose exec php composer update
 
 # Configure shop
 cp source/source/config.inc.php.dist source/source/config.inc.php
