@@ -63,7 +63,7 @@ docker-compose exec -T php composer require oxid-esales/apex-theme:* --no-update
 
 # Run dependencies installation and reset the shop to development state
 docker-compose exec -T php composer update --no-interaction
-bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root
+docker-compose exec bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root
 
 #Symlink /out/apex
 cd source/source/Application/views
