@@ -44,6 +44,9 @@ git clone https://github.com/OXID-eSales/module-template.git --branch=b-7.0.x so
 # Start all containers
 make up
 
+# Update composer to 2.4+
+docker-compose exec php sudo composer self-update --2
+
 docker-compose exec php composer config github-protocols https
 docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
 docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
@@ -56,10 +59,15 @@ docker-compose exec -T \
   --json '{"type":"path", "url":"./source/modules/oe/moduletemplate", "options": {"symlink": true}}'
 docker-compose exec -T php composer require oxid-esales/module-template:* --no-update
 
+docker-compose exec -T \
+  php composer config repositories.oxid-esales/oxideshop-demodata-ee \
+  --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee"}'
+docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-master --no-update
+
 docker-compose exec -T php composer update --no-interaction
-docker-compose exec -T php php vendor/bin/reset-shop
 
 docker-compose exec -T php bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
+docker-compose exec -T php bin/oe-console oe:setup:demodata
 docker-compose exec -T php bin/oe-console oe:admin:create --admin-email='admin@admin.com' --admin-password='admin'
 
 # Install and activate modules
