@@ -42,8 +42,19 @@ perl -pi\
 # Start all containers
 make up
 
+# Update composer to 2.4+
+docker-compose exec php sudo composer self-update --2
+
+docker-compose exec -T \
+  php composer config repositories.oxid-esales/oxideshop-demodata-ce \
+  --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ce"}'
+docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ce:dev-master --no-update
+
 # Update shop dependencies and reset to development state
 docker-compose exec -T php composer update --no-interaction
-docker-compose exec -T php php vendor/bin/reset-shop
+docker-compose exec -T php bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
+docker-compose exec -T php bin/oe-console oe:setup:demodata
 
-echo "Done!"
+docker-compose exec -T php bin/oe-console oe:admin:create --admin-email='admin@admin.com' --admin-password='admin'
+
+echo "Done! Admin login: admin@admin.com Password: admin"
