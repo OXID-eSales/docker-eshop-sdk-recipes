@@ -61,9 +61,15 @@ docker-compose exec -T php composer require oxid-esales/twig-component:dev-b-7.0
 docker-compose exec -T php composer require oxid-esales/twig-admin-theme:dev-b-7.0.x --no-update
 docker-compose exec -T php composer require oxid-esales/apex-theme:* --no-update
 
+docker-compose exec -T \
+  php composer config repositories.oxid-esales/oxideshop-demodata-ce \
+  --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ce"}'
+docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ce:dev-master --no-update
+
 # Run dependencies installation and reset the shop to development state
 docker-compose exec -T php composer update --no-interaction
-docker-compose exec bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root
+docker-compose exec -T php bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
+docker-compose exec -T php bin/oe-console oe:setup:demodata
 
 #Symlink /out/apex
 cd source/source/Application/views
