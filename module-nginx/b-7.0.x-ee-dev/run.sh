@@ -68,8 +68,13 @@ docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee gi
 docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-7.0.x --no-update
 docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-7.0.x --no-plugins --no-scripts
 
+docker-compose exec php composer config repositories.oxid-esales/smarty-component-pe git https://github.com/OXID-eSales/smarty-component-pe.git
+docker-compose exec php composer config repositories.oxid-esales/smarty-component-ee git https://github.com/OXID-eSales/smarty-component-ee.git
 docker-compose exec php composer require oxid-esales/smarty-component:dev-b-7.0.x-remove-deprecated-methods-OXDEV-1682 --no-update
+docker-compose exec php composer require oxid-esales/smarty-component-pe:dev-b-7.0.x-remove-deprecated-methods-OXDEV-1682 --no-update
+docker-compose exec php composer require oxid-esales/smarty-component-ee:dev-b-7.0.x-remove-deprecated-methods-OXDEV-1682 --no-update
 docker-compose exec php composer require oxid-esales/smarty-admin-theme:dev-b-7.0.x --no-update
+docker-compose exec php composer require oxid-esales/flow-theme:dev-master --no-update
 docker-compose exec php composer require oxid-esales/wave-theme:dev-master --no-update
 
 # Configure modules in composer
