@@ -68,6 +68,13 @@ docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee gi
 docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-7.0.x --no-update
 docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-7.0.x --no-plugins --no-scripts
 
+## deprecated tests
+docker-compose exec php composer config repositories.oxid-esales/tests-deprecated-pe git https://github.com/OXID-eSales/tests-deprecated-pe.git
+docker-compose exec php composer config repositories.oxid-esales/tests-deprecated-ee git https://github.com/OXID-eSales/tests-deprecated-ee.git
+docker-compose exec php composer require oxid-esales/tests-deprecated-ce:dev-b-7.0.x --no-update
+docker-compose exec php composer require oxid-esales/tests-deprecated-pe:dev-b-7.0.x --no-update
+docker-compose exec php composer require oxid-esales/tests-deprecated-ee:dev-b-7.0.x --no-update
+
 docker-compose exec php composer config repositories.oxid-esales/smarty-component-pe git https://github.com/OXID-eSales/smarty-component-pe.git
 docker-compose exec php composer config repositories.oxid-esales/smarty-component-ee git https://github.com/OXID-eSales/smarty-component-ee.git
 docker-compose exec php composer require oxid-esales/smarty-component:dev-b-7.0.x-remove-deprecated-methods-OXDEV-1682 --no-update
