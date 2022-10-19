@@ -48,6 +48,18 @@ docker-compose exec php composer config github-protocols https
 docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
 docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
 
+docker-compose exec php composer config repositories.oxid-esales/flow-theme git https://github.com/OXID-eSales/flow_theme.git
+docker-compose exec php composer config repositories.oxid-esales/smarty-admin-theme git https://github.com/OXID-eSales/smarty-admin-theme.git
+docker-compose exec php composer config repositories.oxid-esales/smarty-component git https://github.com/OXID-eSales/smarty-component.git
+docker-compose exec php composer config repositories.oxid-esales/smarty-component-pe git https://github.com/OXID-eSales/smarty-component-pe.git
+docker-compose exec php composer config repositories.oxid-esales/smarty-component-ee git https://github.com/OXID-eSales/smarty-component-ee.git
+
+docker-compose exec php composer require oxid-esales/flow-theme:dev-master --no-update
+docker-compose exec php composer require oxid-esales/smarty-admin-theme:dev-b-7.0.x --no-update
+docker-compose exec php composer require oxid-esales/smarty-component:dev-b-7.0.x --no-update
+docker-compose exec php composer require oxid-esales/smarty-component-pe:dev-b-7.0.x --no-update
+docker-compose exec php composer require oxid-esales/smarty-component-ee:dev-b-7.0.x --no-update
+
 docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-7.0.x --no-update
 docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-7.0.x --no-plugins --no-scripts
 
