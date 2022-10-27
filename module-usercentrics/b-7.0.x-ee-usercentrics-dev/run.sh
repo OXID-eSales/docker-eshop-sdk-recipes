@@ -6,6 +6,7 @@ cd $SCRIPT_PATH/../../../../ || exit
 
 git clone https://github.com/OXID-eSales/oxideshop_ce.git --branch=b-7.0.x source
 
+# Prepare services configuration
 make setup
 make addbasicservices
 make file=services/selenium-chrome.yml addservice
@@ -36,7 +37,10 @@ perl -pi\
   -e 's#<sShopURL>#http://localhost.local/#g;'\
   -e 's#<sShopDir>#/var/www/source/#g;'\
   -e 's#<sCompileDir>#/var/www/source/tmp/#g;'\
-  source/source/config.inc.php
+  source/source/config.inc.phpp
+
+# Clone Usercentrics module to modules directory
+git clone https://github.com/OXID-eSales/usercentrics.git --branch=b-7.0.x source/source/modules/oxps/usercentrics
 
 # Start all containers
 make up
@@ -63,6 +67,21 @@ docker-compose exec php composer require oxid-esales/twig-component-ee:dev-b-7.0
 docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-7.0.x --no-update
 docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-7.0.x --no-plugins --no-scripts
 
+---
+
+## deprecated tests TODO DO i EVEN NEED THIS ?
+docker-compose exec php composer config repositories.oxid-esales/tests-deprecated-pe git https://github.com/OXID-eSales/tests-deprecated-pe.git
+docker-compose exec php composer config repositories.oxid-esales/tests-deprecated-ee git https://github.com/OXID-eSales/tests-deprecated-ee.git
+docker-compose exec php composer require oxid-esales/tests-deprecated-ce:dev-b-7.0.x --no-update
+docker-compose exec php composer require oxid-esales/tests-deprecated-pe:dev-b-7.0.x --no-update
+docker-compose exec php composer require oxid-esales/tests-deprecated-ee:dev-b-7.0.x --no-update
+
+# Configure modules in composer
+docker-compose exec -T \
+  php composer config repositories.oxid-professional-services/usercentrics \
+  --json '{"type":"path", "url":"./source/modules/oxps/usercentrics", "options": {"symlink": true}}'
+docker-compose exec -T php composer require oxid-professional-services/usercentrics:* --no-update
+
 docker-compose exec -T \
   php composer config repositories.oxid-esales/oxideshop-demodata-ee \
   --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee"}'
@@ -72,8 +91,9 @@ docker-compose exec -T php composer update --no-interaction
 docker-compose exec -T php bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
 docker-compose exec -T php bin/oe-console oe:setup:demodata
 
-docker-compose exec -T php bin/oe-console oe:module:install-configuration source/modules/oxps/usercentrics/
-docker-compose exec -T php bin/oe-console oe:module:activate oxps_usercentrics
+docker-compose exec -T php composer update --no-interaction
+docker-compose exec -T php bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
+docker-compose exec -T php bin/oe-console oe:setup:demodata
 
 docker-compose exec -T php bin/oe-console oe:admin:create --admin-email='admin@admin.com' --admin-password='admin'
 
