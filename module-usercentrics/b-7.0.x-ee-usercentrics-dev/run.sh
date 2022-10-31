@@ -88,11 +88,7 @@ docker-compose exec -T \
 docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-master --no-update
 
 docker-compose exec -T php composer update --no-interaction
-docker-compose exec -T php bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
-docker-compose exec -T php bin/oe-console oe:setup:demodata
-
-docker-compose exec -T php composer update --no-interaction
-docker-compose exec -T php bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
+docker-compose exec -T php bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --shop-id=1 --force
 docker-compose exec -T php bin/oe-console oe:setup:demodata
 
 docker-compose exec -T php bin/oe-console oe:admin:create --admin-email='admin@admin.com' --admin-password='admin'
