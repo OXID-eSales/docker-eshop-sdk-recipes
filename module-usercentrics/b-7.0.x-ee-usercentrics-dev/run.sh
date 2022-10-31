@@ -60,9 +60,9 @@ docker-compose exec php composer config repositories.oxid-esales/twig-component-
 
 docker-compose exec php composer require oxid-esales/twig-theme:dev-b-7.0.x --no-update
 docker-compose exec php composer require oxid-esales/twig-admin-theme:dev-b-7.0.x --no-update
-docker-compose exec php composer require oxid-esales/twig-component:dev-b-7.0.x --no-update
-docker-compose exec php composer require oxid-esales/twig-component-pe:dev-b-7.0.x --no-update
-docker-compose exec php composer require oxid-esales/twig-component-ee:dev-b-7.0.x --no-update
+docker-compose exec php composer require oxid-esales/twig-component:"^v2.0" --no-update
+docker-compose exec php composer require oxid-esales/twig-component-pe:"^v2.0" --no-update
+docker-compose exec php composer require oxid-esales/twig-component-ee:"^v2.0" --no-update
 
 docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-7.0.x --no-update
 docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-7.0.x --no-plugins --no-scripts
