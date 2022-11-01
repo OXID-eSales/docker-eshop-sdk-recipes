@@ -54,7 +54,7 @@ perl -pi\
   source/source/config.inc.php
 
 # Clone NGINX module to modules directory
-git clone https://github.com/OXID-eSales/nginx-module --branch=master-7.0_compatibility-OXDEV-6051 source/source/modules/oe/nginx
+git clone https://github.com/OXID-eSales/nginx-module --branch=master source/source/modules/oe/nginx
 
 # Start all containers
 make up
@@ -83,6 +83,7 @@ docker-compose exec php composer require oxid-esales/smarty-component-ee:dev-b-7
 docker-compose exec php composer require oxid-esales/smarty-admin-theme:dev-b-7.0.x --no-update
 docker-compose exec php composer require oxid-esales/flow-theme:dev-b-7.0.x --no-update
 docker-compose exec php composer require oxid-esales/wave-theme:dev-b-7.0.x --no-update
+docker-compose exec -T php composer require symfony/dotenv:^5.1 --no-update
 
 # Configure modules in composer
 docker-compose exec -T \
