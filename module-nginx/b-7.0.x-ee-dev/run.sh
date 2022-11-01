@@ -81,8 +81,8 @@ docker-compose exec php composer require oxid-esales/smarty-component:dev-b-7.0.
 docker-compose exec php composer require oxid-esales/smarty-component-pe:dev-b-7.0.x --no-update
 docker-compose exec php composer require oxid-esales/smarty-component-ee:dev-b-7.0.x --no-update
 docker-compose exec php composer require oxid-esales/smarty-admin-theme:dev-b-7.0.x --no-update
-docker-compose exec php composer require oxid-esales/flow-theme:dev-master --no-update
-docker-compose exec php composer require oxid-esales/wave-theme:dev-master --no-update
+docker-compose exec php composer require oxid-esales/flow-theme:dev-b-7.0.x --no-update
+docker-compose exec php composer require oxid-esales/wave-theme:dev-b-7.0.x --no-update
 
 # Configure modules in composer
 docker-compose exec -T \
