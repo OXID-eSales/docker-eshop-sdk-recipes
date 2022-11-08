@@ -12,8 +12,8 @@ $SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
 $SCRIPT_PATH/../../parts/b-7.0.x/require_twig_components.sh -eEE
 
 # Clone GraphQL modules to modules directory
-git clone https://github.com/OXID-eSales/graphql-base-module.git --branch=master source/source/modules/oe/graphql-base
-git clone https://github.com/OXID-eSales/graphql-storefront-module.git --branch=master source/source/modules/oe/graphql-storefront
+git clone https://github.com/OXID-eSales/graphql-base-module.git --branch=b-7.0.x source/source/modules/oe/graphql-base
+git clone https://github.com/OXID-eSales/graphql-storefront-module.git --branch=b-7.0.x source/source/modules/oe/graphql-storefront
 
 # Configure modules in composer
 docker-compose exec -T \
