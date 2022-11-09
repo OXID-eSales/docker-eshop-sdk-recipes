@@ -47,6 +47,28 @@ git clone https://github.com/OXID-eSales/docker-eshop-sdk-recipes recipes/oxid-e
 ./recipes/oxid-esales/shop/b-6.4.x-ce-dev/run.sh
 ```
 
+## Synchronize parts
+
+The ``parts`` directory is organized as a subtree component. It has its own repository for easier reuse between
+different recipes.
+
+Before manipulating the parts, navigate to this repository root and add parts repository link:
+
+```
+git remote add parts https://github.com/OXID-eSales/docker-eshop-sdk-recipe-parts && git fetch parts
+```
+
+To pull and merge the latest version of parts:
+```
+git subtree pull --prefix=parts parts master
+```
+
+To push your updated parts, first make a commit as regularly
+```
+git commit -a -m"some commit"
+git subtree push --prefix=parts parts master
+```
+
 ## Recipe Specifics
 
 Any recipe outcome can have its own specifics. Read carefully before breaking your leg :)
