@@ -45,7 +45,7 @@ docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.5.x --
 git clone https://github.com/OXID-eSales/wave-theme --branch=b-1.x source/source/Application/views/wave
 docker-compose exec -T \
   php composer config repositories.oxid-esales/wave-theme \
-  --json '{"type":"path", "url":"./source/Application/views/wave", "options": {"symlink": true}}'
+  --json '{"type":"path", "url":"./source/Application/views/wave", "options": {"symlink": false}}'
 docker-compose exec -T php composer require oxid-esales/wave-theme:* --no-update
 
 #Symlink theme out directory
