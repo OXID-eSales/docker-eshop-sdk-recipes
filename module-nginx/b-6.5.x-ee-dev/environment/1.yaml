@@ -1,8 +1,0 @@
-modules:
-  oenginx:
-    moduleSettings:
-      oeNginxCacheInvalidationUrl:
-        value: 'http://nginx/nginx-clear-cache'
-      oeNginxNodes:
-        value:
-          - 'http://elasticsearch:9200'
