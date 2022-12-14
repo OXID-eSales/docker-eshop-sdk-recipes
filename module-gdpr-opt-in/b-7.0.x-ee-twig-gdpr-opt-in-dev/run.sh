@@ -9,7 +9,7 @@ make setup
 make addbasicservices
 
 $SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
-$SCRIPT_PATH/../../parts/b-7.0.x/require_smarty_components.sh -eEE
+$SCRIPT_PATH/../../parts/b-7.0.x/require_twig_components.sh -eEE
 
 # Require demodata package
 docker-compose exec -T \
