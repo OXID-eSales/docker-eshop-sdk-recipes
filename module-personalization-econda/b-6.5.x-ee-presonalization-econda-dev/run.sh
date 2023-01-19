@@ -36,7 +36,7 @@ perl -pi\
   source/source/config.inc.php
 
 # Clone Econda Analytics module to modules directory
-git clone git@github.com:OXID-eSales/personalization-module.git --branch=b-6.3.x source/source/modules/oe/personalization
+git clone https://github.com/OXID-eSales/personalization-module.git --branch=b-6.3.x source/source/modules/oe/personalization
 
 # Start all containers
 make up
