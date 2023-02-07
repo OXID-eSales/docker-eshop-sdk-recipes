@@ -7,6 +7,7 @@ cd $SCRIPT_PATH/../../../../ || exit
 # Prepare services configuration
 make setup
 make addbasicservices
+make docpath=./source addsphinxservice
 
 $SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
 $SCRIPT_PATH/../../parts/b-7.0.x/require_twig_components.sh -eEE
