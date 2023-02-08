@@ -9,12 +9,14 @@ make setup
 make addbasicservices
 make docpath=./source/source/modules/oe/graphql-base/docs addsphinxservice
 
-$SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
-$SCRIPT_PATH/../../parts/b-7.0.x/require_twig_components.sh -eEE
+$SCRIPT_PATH/../../parts/b-7.0.x/configure_shop.sh
 
 # Clone GraphQL modules to modules directory
 git clone https://github.com/OXID-eSales/graphql-base-module.git --branch=b-7.0.x source/source/modules/oe/graphql-base
 git clone https://github.com/OXID-eSales/graphql-storefront-module.git --branch=b-7.0.x source/source/modules/oe/graphql-storefront
+
+$SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
+$SCRIPT_PATH/../../parts/b-7.0.x/require_twig_components.sh -eEE
 
 # Configure modules in composer
 docker-compose exec -T \
