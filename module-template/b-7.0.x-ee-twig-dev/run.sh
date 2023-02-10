@@ -32,5 +32,6 @@ docker-compose exec -T php bin/oe-console oe:setup:demodata
 docker-compose exec -T php bin/oe-console oe:admin:create --admin-email='admin@admin.com' --admin-password='admin'
 
 docker-compose exec -T php bin/oe-console oe:module:activate oe_moduletemplate
+docker-compose exec -T php bin/oe-console oe:theme:activate twig
 
 echo "Done! Admin login: admin@admin.com Password: admin"

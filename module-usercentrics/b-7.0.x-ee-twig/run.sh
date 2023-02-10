@@ -32,5 +32,6 @@ $SCRIPT_PATH/../../parts/b-7.0.x/reset_database.sh -eEE
 docker-compose exec -T php bin/oe-console oe:admin:create --admin-email='admin@admin.com' --admin-password='admin'
 
 docker-compose exec -T php bin/oe-console oe:module:activate oxps_usercentrics
+docker-compose exec -T php bin/oe-console oe:theme:activate twig
 
 echo "Done! Admin login: admin@admin.com Password: admin"

@@ -39,5 +39,6 @@ docker-compose exec -T php bin/oe-console oe:module:reset-configurations --shop-
 docker-compose exec -T php bin/oe-console oe:module:install-assets
 docker-compose exec -T php bin/oe-console oe:module:install source/modules/oe/gdproptin --shop-id=1
 docker-compose exec -T php bin/oe-console oe:module:activate oegdproptin
+docker-compose exec -T php bin/oe-console oe:theme:activate twig
 
 echo "Done! Admin login: admin@admin.com Password: admin"

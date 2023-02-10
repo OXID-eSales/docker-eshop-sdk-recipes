@@ -52,6 +52,7 @@ docker-compose exec -T php bin/oe-console oe:module:install vendor/oxid-esales/g
 docker-compose exec -T php bin/oe-console oe:module:install vendor/oxid-esales/graphql-storefront
 docker-compose exec -T php bin/oe-console oe:module:activate oe_graphql_base
 docker-compose exec -T php bin/oe-console oe:module:activate oe_graphql_storefront
+docker-compose exec -T php bin/oe-console oe:theme:activate twig
 
 docker-compose exec -T php bin/oe-console oe:admin:create --admin-email='admin@admin.com' --admin-password='admin'
 
