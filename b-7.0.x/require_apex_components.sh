@@ -42,13 +42,13 @@ docker-compose exec -T \
   --json '{"type":"path", "url":"./source/Application/views/admin_twig", "options": {"symlink": false}}'
 docker-compose exec -T php composer require oxid-esales/twig-admin-theme:dev-b-7.0.x --no-update
 
-git clone https://github.com/OXID-eSales/twig-theme --branch=b-7.0.x source/source/Application/views/twig
+git clone https://github.com/OXID-eSales/apex-theme.git --branch=main source/source/Application/views/apex
 docker-compose exec -T \
-  php composer config repositories.oxid-esales/twig-theme \
-  --json '{"type":"path", "url":"./source/Application/views/twig", "options": {"symlink": false}}'
-docker-compose exec -T php composer require oxid-esales/twig-theme:dev-b-7.0.x --no-update
+  php composer config repositories.oxid-esales/apex-theme \
+  --json '{"type":"path", "url":"./source/Application/views/apex", "options": {"symlink": true}}'
+docker-compose exec -T php composer require oxid-esales/apex-theme:* --no-update
 
 #Symlink theme out directory
 cd source/source/out/
-ln -s ../Application/views/twig/out/twig twig
+ln -s ../Application/views/apex/out/apex/  apex
 cd -
