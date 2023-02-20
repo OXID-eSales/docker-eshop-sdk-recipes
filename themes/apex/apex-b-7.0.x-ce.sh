@@ -11,18 +11,6 @@ make addbasicservices
 $SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eCE
 $SCRIPT_PATH/../../parts/b-7.0.x/require_twig_components.sh -eCE
 
-# Clone apex theme to themes directory and configure in composer
-git clone https://github.com/OXID-eSales/apex-theme --branch=main source/source/Application/views/apex
-docker-compose exec -T \
-  php composer config repositories.oxid-esales/apex-theme \
-  --json '{"type":"path", "url":"./source/Application/views/apex", "options": {"symlink": false}}'
-docker-compose exec -T php composer require oxid-esales/apex-theme:* --no-update
-
-#Symlink theme out directory
-cd source/source/out/
-ln -s ../Application/views/apex/out/apex apex
-cd -
-
 # Require demodata package
 docker-compose exec -T \
   php composer config repositories.oxid-esales/oxideshop-demodata-ce \
