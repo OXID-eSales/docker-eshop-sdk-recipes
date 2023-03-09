@@ -11,7 +11,7 @@ make file=services/selenium-chrome.yml addservice
 make file=services/node.yml addservice
 
 $SCRIPT_PATH/../parts/b-7.0.x/start_shop.sh -eEE
-$SCRIPT_PATH/../parts/b-7.0.x/require_twig_components.sh -eEE -ttwig
+$SCRIPT_PATH/../parts/b-7.0.x/require_twig_components.sh -eEE -tapex
 
 # Require demodata package
 docker-compose exec -T \
@@ -26,6 +26,6 @@ $SCRIPT_PATH/../parts/b-7.0.x/reset_database.sh -eEE
 docker-compose exec -T php bin/oe-console oe:setup:demodata
 docker-compose exec -T php bin/oe-console oe:admin:create --admin-email='admin@admin.com' --admin-password='admin'
 
-docker-compose exec -T php bin/oe-console oe:theme:activate twig
+docker-compose exec -T php bin/oe-console oe:theme:activate apex
 
 echo "Done! Admin login: admin@admin.com Password: admin"
