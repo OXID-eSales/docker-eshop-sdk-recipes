@@ -22,6 +22,13 @@ docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:de
 # Clone eVat module to modules directory
 git clone https://github.com/OXID-eSales/vat_tbe_services.git --branch=b-7.0.x source/source/modules/oe/oevattbe
 
+# Clone eVat documentation to source directory
+git clone https://github.com/OXID-eSales/vat-tbe-services-documentation.git --branch=2.1-en source/docs
+
+# Add Sphinx container
+make docpath=./source/docs addsphinxservice
+make up
+
 # Configure module in composer
 docker-compose exec -T \
   php composer config repositories.oxid-esales/evat-module \
