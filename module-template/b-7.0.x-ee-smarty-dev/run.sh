@@ -19,6 +19,13 @@ docker-compose exec -T \
   --json '{"type":"path", "url":"./source/modules/oe/moduletemplate", "options": {"symlink": true}}'
 docker-compose exec -T php composer require oxid-esales/module-template:* --no-update
 
+# Reconfigure the tests config to run smarty tests
+perl -pi \
+  -e 's#admin_twig#admin_smarty#g;' \
+  -e 's#visualcms-module#visualcms-smarty-module#g;' \
+  -e 's#views/apex#views/flow/translations#g;' \
+  source/source/modules/oe/moduletemplate/tests/Codeception/acceptance.suite.yml
+
 docker-compose exec -T \
   php composer config repositories.oxid-esales/oxideshop-demodata-ee \
   --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee"}'
