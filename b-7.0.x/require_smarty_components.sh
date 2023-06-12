@@ -10,11 +10,14 @@ while getopts e: flag; do
   esac
 done
 
-# Configure twig themes in composer
+# Configure smarty components in composer
 docker-compose exec -T \
   php composer config repositories.oxid-esales/smarty-component \
   --json '{"type":"git", "url":"https://github.com/OXID-eSales/smarty-component"}'
 docker-compose exec -T php composer require oxid-esales/smarty-component:dev-b-7.0.x --no-update
+
+# Smarty page objects
+docker-compose exec -T php composer require oxid-esales/codeception-page-objects:dev-b-7.0.x-SMARTY --no-update --dev
 
 if [ $edition = "EE" ]; then
   docker-compose exec -T \
@@ -28,7 +31,7 @@ if [ $edition = "EE" ]; then
   docker-compose exec -T php composer require oxid-esales/smarty-component-ee:dev-b-7.0.x --no-update
 fi
 
-# Clone twig theme development versions
+# Clone smarty admin theme development versions
 git clone https://github.com/OXID-eSales/smarty-admin-theme --branch=b-7.0.x source/source/Application/views/admin_smarty
 docker-compose exec -T \
   php composer config repositories.oxid-esales/smarty-admin-theme \
