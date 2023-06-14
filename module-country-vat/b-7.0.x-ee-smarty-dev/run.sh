@@ -13,8 +13,8 @@ make file=services/node.yml addservice
 $SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
 $SCRIPT_PATH/../../parts/b-7.0.x/require_smarty_components.sh -eEE
 
-# Clone eVat module to modules directory
-git clone git@github.com:OXID-eSales/country-vat-module.git --branch=b-7.0.x-country_vat-OXDEV-6376 source/source/modules/oe/countryvat
+# Clone Country vat module to modules directory
+git clone https://github.com/OXID-eSales/country-vat-module.git --branch=b-7.0.x source/source/modules/oe/countryvat
 
 # Configure module in composer
 docker-compose exec -T \
