@@ -9,6 +9,7 @@ git clone https://github.com/OXID-eSales/oxideshop_ce.git --branch=b-6.5.x sourc
 # Prepare services configuration
 make setup
 make addbasicservices
+make file=services/adminer.yml addservice
 make file=services/selenium-chrome.yml addservice
 
 # Configure containers

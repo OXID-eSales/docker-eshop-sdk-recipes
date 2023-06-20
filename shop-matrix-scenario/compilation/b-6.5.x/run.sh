@@ -10,6 +10,7 @@ cp $SCRIPT_PATH/composer.json source/
 
 make setup
 make addbasicservices
+make file=services/adminer.yml addservice
 make file=services/selenium-chrome.yml addservice
 make file=recipes/oxid-esales/services/selenium-firefox-old.yml addservice
 

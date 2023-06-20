@@ -8,6 +8,7 @@ git clone https://github.com/OXID-eSales/oxideshop_ce.git --branch=b-6.5.x sourc
 
 make setup
 make addbasicservices
+make file=services/adminer.yml addservice
 
 # Configure containers
 perl -pi\

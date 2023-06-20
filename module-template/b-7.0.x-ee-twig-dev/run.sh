@@ -7,6 +7,7 @@ cd $SCRIPT_PATH/../../../../ || exit
 # Prepare services configuration
 make setup
 make addbasicservices
+make file=services/adminer.yml addservice
 make file=services/selenium-chrome.yml addservice
 
 $SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
