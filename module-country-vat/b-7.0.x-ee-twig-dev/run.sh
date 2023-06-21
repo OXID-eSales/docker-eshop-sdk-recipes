@@ -9,10 +9,9 @@ make setup
 make addbasicservices
 make file=services/adminer.yml addservice
 make file=services/selenium-chrome.yml addservice
-make file=services/node.yml addservice
 
 $SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
-$SCRIPT_PATH/../../parts/b-7.0.x/require_twig_components.sh -eEE
+$SCRIPT_PATH/../../parts/b-7.0.x/require_twig_components.sh -eEE -tapex
 
 # Clone Country vat module to modules directory
 git clone https://github.com/OXID-eSales/country-vat-module.git --branch=b-7.0.x source/source/modules/oe/countryvat
@@ -36,7 +35,6 @@ $SCRIPT_PATH/../../parts/b-7.0.x/reset_database.sh -eEE
 docker-compose exec -T php bin/oe-console oe:setup:demodata
 docker-compose exec -T php bin/oe-console oe:admin:create --admin-email='admin@admin.com' --admin-password='admin'
 
-docker-compose exec -T php bin/oe-console oe:module:install source/modules/oe/countryvat --shop-id=1
 docker-compose exec -T php bin/oe-console oe:module:activate oecountryvat
 docker-compose exec -T php bin/oe-console oe:theme:activate apex
 
