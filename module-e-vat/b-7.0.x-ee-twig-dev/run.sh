@@ -18,7 +18,7 @@ $SCRIPT_PATH/../../parts/b-7.0.x/require_twig_components.sh -eEE
 docker-compose exec -T \
   php composer config repositories.oxid-esales/oxideshop-demodata-ee \
   --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee"}'
-docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-master --no-update
+docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x --no-update
 
 # Clone eVat module to modules directory
 git clone https://github.com/OXID-eSales/vat_tbe_services.git --branch=b-7.0.x source/source/modules/oe/oevattbe

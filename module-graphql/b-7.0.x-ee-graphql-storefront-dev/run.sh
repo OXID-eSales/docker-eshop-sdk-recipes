@@ -35,7 +35,7 @@ docker-compose exec -T \
 
 docker-compose exec -T php composer require oxid-esales/graphql-base:* --no-update
 docker-compose exec -T php composer require oxid-esales/graphql-storefront:* --no-update
-docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-master --no-update
+docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x --no-update
 
 # Configure Tests dependencies
 docker-compose exec -T php composer require codeception/module-rest ^3.3.0 --dev --no-update

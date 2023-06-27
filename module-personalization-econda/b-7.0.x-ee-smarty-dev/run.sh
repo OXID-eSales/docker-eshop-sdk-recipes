@@ -16,7 +16,7 @@ $SCRIPT_PATH/../../parts/b-7.0.x/require_smarty_components.sh -eEE
 docker-compose exec -T \
   php composer config repositories.oxid-esales/oxideshop-demodata-ee \
   --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee"}'
-docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-master --no-update
+docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x-SMARTY --no-update
 
 # Clone Econda Analytics module to modules directory
 git clone https://github.com/OXID-eSales/personalization-module.git --branch=master source/source/modules/oe/personalization

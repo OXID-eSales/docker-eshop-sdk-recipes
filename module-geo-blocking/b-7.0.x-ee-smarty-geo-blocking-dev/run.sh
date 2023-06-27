@@ -17,7 +17,7 @@ $SCRIPT_PATH/../../parts/b-7.0.x/require_smarty_components.sh -eEE
 docker-compose exec -T \
   php composer config repositories.oxid-esales/oxideshop-demodata-ee \
   --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee"}'
-docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-master --no-update
+docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x-SMARTY --no-update
 
 # Clone GDPR opt-in module to modules directory
 git clone git@github.com:OXID-eSales/geo-blocking-module.git --branch=b-7.0.x source/source/modules/oe/geoblocking

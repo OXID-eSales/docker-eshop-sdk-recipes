@@ -18,7 +18,7 @@ $SCRIPT_PATH/../parts/b-7.0.x/require_twig_components.sh -eEE -ttwig
 docker-compose exec -T \
   php composer config repositories.oxid-esales/oxideshop-demodata-ee \
   --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee"}'
-docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-master --no-update
+docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x --no-update
 
 # Install all preconfigured dependencies
 docker-compose exec -T php composer update --no-interaction
