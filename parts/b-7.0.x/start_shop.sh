@@ -3,10 +3,13 @@
 # Flags possible: -e for edition. Example: -eEE
 
 edition="CE"
+update="true"
 
-while getopts e: flag; do
+while getopts e:u: flag; do
   case "${flag}" in
   e) edition=${OPTARG} ;;
+  u) update=${OPTARG} ;;
+  *) ;;
   esac
 done
 
@@ -64,5 +67,6 @@ if [ $edition = "EE" ]; then
   docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-7.0.x --no-update
 fi
 
-# Install editions
-docker-compose exec php composer update --no-plugins --no-scripts
+if [ $update = true ]; then
+  docker-compose exec php composer update --no-plugins --no-scripts
+fi
