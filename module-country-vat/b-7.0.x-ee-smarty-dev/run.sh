@@ -14,13 +14,13 @@ $SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
 $SCRIPT_PATH/../../parts/b-7.0.x/require_smarty_components.sh -eEE
 
 # Clone Country vat module to modules directory
-git clone https://github.com/OXID-eSales/country-vat-module.git --branch=b-7.0.x source/source/modules/oe/countryvat
+git clone https://github.com/OXID-eSales/country-vat-module.git --branch=b-7.0.x source/source/modules/oxps/countryvatadministration
 
 # Configure module in composer
 docker-compose exec -T \
-  php composer config repositories.oxid-esales/country-vat-module \
-  --json '{"type":"path", "url":"./source/modules/oe/countryvat", "options": {"symlink": true}}'
-docker-compose exec -T php composer require oxid-esales/country-vat-module:* --no-update
+  php composer config repositories.oxid-professional-services/countryvatadministration \
+  --json '{"type":"path", "url":"./source/modules/oxps/countryvatadministration", "options": {"symlink": true}}'
+docker-compose exec -T php composer require oxid-professional-services/countryvatadministration:* --no-update
 
 docker-compose exec -T \
   php composer config repositories.oxid-esales/oxideshop-demodata-ee \
