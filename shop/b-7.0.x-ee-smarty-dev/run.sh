@@ -72,7 +72,6 @@ docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:de
 docker-compose exec -T php composer update --no-interaction
 docker-compose exec -T php bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
 docker-compose exec -T php bin/oe-console oe:setup:demodata
+$SCRIPT_PATH/../../parts/shared/create_admin.sh
 
-docker-compose exec -T php bin/oe-console oe:admin:create --admin-email='admin@admin.com' --admin-password='admin'
-
-echo "Done! Admin login: admin@admin.com Password: admin"
+echo "Done!"

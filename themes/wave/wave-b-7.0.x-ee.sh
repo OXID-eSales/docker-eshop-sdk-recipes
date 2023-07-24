@@ -34,7 +34,7 @@ docker-compose exec -T php composer update --no-interaction
 
 $SCRIPT_PATH/../../parts/b-7.0.x/reset_database.sh -eEE
 docker-compose exec -T php bin/oe-console oe:setup:demodata
-docker-compose exec -T php bin/oe-console oe:admin:create --admin-email='admin@admin.com' --admin-password='admin'
+$SCRIPT_PATH/../../parts/shared/create_admin.sh
 
-echo "Done! Admin login: admin@admin.com Password: admin"
+echo "Done!"
 echo "Warning! - Activate Wave theme in Admin!!"

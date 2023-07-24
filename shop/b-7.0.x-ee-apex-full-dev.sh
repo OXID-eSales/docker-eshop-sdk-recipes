@@ -25,11 +25,10 @@ docker-compose exec -T php composer update --no-interaction
 "${SCRIPT_PATH}/../parts/shared/reset_database.sh"
 
 docker-compose exec -T php bin/oe-console oe:setup:demodata
-docker-compose exec -T php bin/oe-console oe:admin:create --admin-email='admin@admin.com' --admin-password='admin'
-
 docker-compose exec -T php bin/oe-console oe:theme:activate apex
+$SCRIPT_PATH/../../parts/shared/create_admin.sh
 
 # Install old testing library config required for running old tests
 cp source/vendor/oxid-esales/testing-library/test_config.yml.dist source/test_config.yml
 
-echo "Done! Admin login: admin@admin.com Password: admin"
+echo "Done!"

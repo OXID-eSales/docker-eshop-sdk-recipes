@@ -43,7 +43,6 @@ docker-compose exec -T php composer update
 docker-compose exec -T php vendor/bin/oe-console oe:setup:shop --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --shop-url=http://localhost.local --shop-directory=/var/www/source --compile-directory=/var/www/source/tmp
 docker-compose exec -T php vendor/bin/oe-console oe:setup:demodata
 
-docker-compose exec -T php vendor/bin/oe-console oe:admin:create --admin-email='admin@admin.com' --admin-password='admin'
 
 docker-compose exec -T php vendor/bin/oe-console oe:theme:activate apex
 
@@ -53,5 +52,7 @@ docker-compose exec -T php vendor/bin/oe-console oe:module:activate oxps_usercen
 docker-compose exec -T php vendor/bin/oe-console oe:module:activate ddoewysiwyg
 docker-compose exec -T php vendor/bin/oe-console oe:module:activate ddoevisualcms
 
+$SCRIPT_PATH/../../parts/shared/create_admin.sh
+
 echo "Warning! Activate theme in the Admin!"
-echo "Done! Admin login: admin@admin.com Password: admin"
+echo "Done!"

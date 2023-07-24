@@ -30,8 +30,9 @@ docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:de
 docker-compose exec -T php composer update --no-interaction
 
 $SCRIPT_PATH/../../parts/b-7.0.x/reset_database.sh -eEE
-docker-compose exec -T php bin/oe-console oe:admin:create --admin-email='admin@admin.com' --admin-password='admin'
 
 docker-compose exec -T php bin/oe-console oe:module:activate oxps_usercentrics
 
-echo "Done! Admin login: admin@admin.com Password: admin"
+$SCRIPT_PATH/../../parts/shared/create_admin.sh
+
+echo "Done!"

@@ -55,6 +55,6 @@ docker-compose exec -T php bin/oe-console oe:module:activate oe_graphql_base
 docker-compose exec -T php bin/oe-console oe:module:activate oe_graphql_storefront
 docker-compose exec -T php bin/oe-console oe:theme:activate twig
 
-docker-compose exec -T php bin/oe-console oe:admin:create --admin-email='admin@admin.com' --admin-password='admin'
+$SCRIPT_PATH/../../parts/shared/create_admin.sh
 
-echo "Done! Admin login: admin@admin.com Password: admin"
+echo "Done!"
