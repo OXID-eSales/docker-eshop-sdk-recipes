@@ -69,57 +69,9 @@ git commit -a -m"some commit"
 git subtree push --prefix=parts parts master
 ```
 
-## Recipe Specifics
+## 6.4 recipes
 
-Any recipe outcome can have its own specifics. Read carefully before breaking your leg :)
+The recipes for 6.4 modules are available in recipes b-6.4.x-branch. Please check it out, if you want to use those
+recipes.
 
-### b-6.4.x-Xe-dev instructions
-
-Running old selenium tests examples:
-
-```
-# docker default run:
-docker-compose exec -e SELENIUM_SERVER_IP=seleniumfirefox php vendor/bin/runtests-selenium
-
-# run from the php container:
-SELENIUM_SERVER_IP=seleniumfirefox vendor/bin/runtests-selenium
-
-#run from the php container with specific group:
-SELENIUM_SERVER_IP=seleniumfirefox vendor/bin/runtests-selenium AllTestsSelenium --group=sieg
-
-#run single test file from the php container:
-SELENIUM_SERVER_IP=seleniumfirefox php vendor/bin/runtests-selenium --filter MyTest:: AllTestsSelenium
-```
-
-Running codeception tests examples:
-
-```
-# docker default run:
-docker-compose exec -e SELENIUM_SERVER_HOST=selenium -e BROWSER_NAME=chrome php vendor/bin/runtests-codeception
-
-# run from the php container:
-SELENIUM_SERVER_HOST=selenium BROWSER_NAME=chrome vendor/bin/runtests-codeception
-
-#run from the php container with specific group:
-SELENIUM_SERVER_HOST=selenium BROWSER_NAME=chrome vendor/bin/runtests-codeception --group=sieg
-```
-
-### b-6.4.x-ce-graphql-storefront-dev instructions
-
-Running codeception tests examples:
-
-```
-# docker default run:
-docker-compose exec \
--e ADDITIONAL_TEST_PATHS=vendor/oxid-esales/graphql-storefront/tests \
--e ACTIVATE_ALL_MODULES=1 \
--e RUN_TESTS_FOR_SHOP=0 \
--e RUN_TESTS_FOR_MODULES=0 \
-php vendor/bin/runtests-codeception
-```
-
-### Apex theme
-
-Additional action required after the recipe is done:
-* Activate Apex theme in admin.
-
+> **_NOTE:_** Don not forget that version 6.4 is not supported anymore.
