@@ -21,12 +21,12 @@ docker-compose exec -T \
 docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x --no-update
 
 # Clone WYSIWYG module to modules directory
-git clone https://github.com/OXID-eSales/ddoe-wysiwyg-editor-module.git --branch=b-7.0.x source/source/modules/ddoe/wysiwyg
+git clone https://github.com/OXID-eSales/ddoe-wysiwyg-editor-module.git --branch=b-7.0.x source/dev-packages/wysiwyg
 
 # Configure module in composer
 docker-compose exec -T \
   php composer config repositories.ddoe/wysiwyg-editor-module \
-  --json '{"type":"path", "url":"./source/modules/ddoe/wysiwyg", "options": {"symlink": true}}'
+  --json '{"type":"path", "url":"./dev-packages/wysiwyg", "options": {"symlink": true}}'
 docker-compose exec -T php composer require ddoe/wysiwyg-editor-module:* --no-update
 
 # Install all preconfigured dependencies

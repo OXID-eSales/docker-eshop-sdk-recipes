@@ -20,11 +20,11 @@ docker-compose exec -T \
   --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee"}'
 docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x --no-update
 
-git clone https://github.com/MakairaIO/oxid-connect-essential.git source/source/modules/makaira/oxid-connect-essential
+git clone https://github.com/MakairaIO/oxid-connect-essential.git source/dev-packages/oxid-connect-essential
 
 docker-compose exec -T \
   php composer config repositories.makaira/oxid-connect-essential \
-  --json '{"type":"path", "url":"./source/modules/makaira/oxid-connect-essential", "options": {"symlink": true}}'
+  --json '{"type":"path", "url":"./dev-packages/oxid-connect-essential", "options": {"symlink": true}}'
 docker-compose exec -T php composer require makaira/oxid-connect-essential:* --no-update
 
 # Install all preconfigured dependencies

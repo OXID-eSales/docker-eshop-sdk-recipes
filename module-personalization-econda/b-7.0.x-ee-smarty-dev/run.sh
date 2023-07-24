@@ -19,12 +19,12 @@ docker-compose exec -T \
 docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x-SMARTY --no-update
 
 # Clone Econda Analytics module to modules directory
-git clone https://github.com/OXID-eSales/personalization-module.git --branch=master source/source/modules/oe/personalization
+git clone https://github.com/OXID-eSales/personalization-module.git --branch=master source/dev-packages/personalization
 
 # Configure module in composer
 docker-compose exec -T \
   php composer config repositories.oxid-esales/personalization-module \
-  --json '{"type":"path", "url":"./source/modules/oe/personalization", "options": {"symlink": true}}'
+  --json '{"type":"path", "url":"./dev-packages/personalization", "options": {"symlink": true}}'
 docker-compose exec -T php composer require oxid-esales/personalization-module:* --no-update
 
 # Install all preconfigured dependencies

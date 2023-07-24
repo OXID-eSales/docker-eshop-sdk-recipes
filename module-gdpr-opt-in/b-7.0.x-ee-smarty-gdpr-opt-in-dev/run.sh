@@ -19,12 +19,12 @@ docker-compose exec -T \
 docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x-SMARTY --no-update
 
 # Clone GDPR opt-in module to modules directory
-git clone https://github.com/OXID-eSales/gdpr-optin-module.git --branch=b-7.0.x source/source/modules/oe/gdproptin
+git clone https://github.com/OXID-eSales/gdpr-optin-module.git --branch=b-7.0.x source/dev-packages/gdproptin
 
 # Configure module in composer
 docker-compose exec -T \
   php composer config repositories.oxid-esales/gdpr-optin-module \
-  --json '{"type":"path", "url":"./source/modules/oe/gdproptin", "options": {"symlink": true}}'
+  --json '{"type":"path", "url":"./dev-packages/gdproptin", "options": {"symlink": true}}'
 docker-compose exec -T php composer require oxid-esales/gdpr-optin-module:* --no-update
 
 # Install all preconfigured dependencies

@@ -14,10 +14,10 @@ $SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
 $SCRIPT_PATH/../../parts/b-7.0.x/require_smarty_components.sh -eEE
 
 # Configure modules in composer
-git clone https://github.com/OXID-eSales/module-template.git --branch=b-7.0.x source/source/modules/oe/moduletemplate
+git clone https://github.com/OXID-eSales/module-template.git --branch=b-7.0.x source/dev-packages/moduletemplate
 docker-compose exec -T \
   php composer config repositories.oxid-esales/module-template \
-  --json '{"type":"path", "url":"./source/modules/oe/moduletemplate", "options": {"symlink": true}}'
+  --json '{"type":"path", "url":"./dev-packages/moduletemplate", "options": {"symlink": true}}'
 docker-compose exec -T php composer require oxid-esales/module-template:* --no-update
 
 # Reconfigure the tests config to run smarty tests
@@ -25,7 +25,7 @@ perl -pi \
   -e 's#admin_twig#admin_smarty#g;' \
   -e 's#visualcms-module#visualcms-smarty-module#g;' \
   -e 's#views/apex#views/flow/translations#g;' \
-  source/source/modules/oe/moduletemplate/tests/Codeception/acceptance.suite.yml
+  source/dev-packages/moduletemplate/tests/Codeception/acceptance.suite.yml
 
 docker-compose exec -T \
   php composer config repositories.oxid-esales/oxideshop-demodata-ee \

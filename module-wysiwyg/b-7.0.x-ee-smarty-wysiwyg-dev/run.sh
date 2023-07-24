@@ -15,12 +15,12 @@ $SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
 $SCRIPT_PATH/../../parts/b-7.0.x/require_smarty_components.sh -eEE
 
 # Clone WYSIWYG module to modules directory
-git clone https://github.com/OXID-eSales/ddoe-wysiwyg-editor-module.git --branch=b-7.0.x source/source/modules/ddoe/wysiwyg
+git clone https://github.com/OXID-eSales/ddoe-wysiwyg-editor-module.git --branch=b-7.0.x source/dev-packages/wysiwyg
 
 # Configure module in composer
 docker-compose exec -T \
   php composer config repositories.ddoe/wysiwyg-editor-module \
-  --json '{"type":"path", "url":"./source/modules/ddoe/wysiwyg", "options": {"symlink": true}}'
+  --json '{"type":"path", "url":"./dev-packages/wysiwyg", "options": {"symlink": true}}'
 docker-compose exec -T php composer require ddoe/wysiwyg-editor-module:* --no-update
 
 docker-compose exec -T \

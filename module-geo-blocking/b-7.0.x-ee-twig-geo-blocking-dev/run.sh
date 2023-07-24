@@ -20,12 +20,12 @@ docker-compose exec -T \
 docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x --no-update
 
 # Clone GDPR opt-in module to modules directory
-git clone git@github.com:OXID-eSales/geo-blocking-module.git --branch=b-7.0.x source/source/modules/oe/geoblocking
+git clone git@github.com:OXID-eSales/geo-blocking-module.git --branch=b-7.0.x source/dev-packages/geoblocking
 
 # Configure module in composer
 docker-compose exec -T \
   php composer config repositories.oxid-esales/geo-blocking-module \
-  --json '{"type":"path", "url":"./source/modules/oe/geoblocking", "options": {"symlink": true}}'
+  --json '{"type":"path", "url":"./dev-packages/geoblocking", "options": {"symlink": true}}'
 docker-compose exec -T php composer require oxid-esales/geo-blocking-module:* --no-update
 
 # Install all preconfigured dependencies

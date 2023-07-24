@@ -14,10 +14,10 @@ $SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
 $SCRIPT_PATH/../../parts/b-7.0.x/require_twig_components.sh -eEE
 
 # Clone Usercentrics module to modules directory and Configure modules in composer
-git clone https://github.com/OXID-eSales/usercentrics.git --branch=b-7.0.x source/source/modules/oxps/usercentrics
+git clone https://github.com/OXID-eSales/usercentrics.git --branch=b-7.0.x source/dev-packages/usercentrics
 docker-compose exec -T \
   php composer config repositories.oxid-professional-services/usercentrics \
-  --json '{"type":"path", "url":"./source/modules/oxps/usercentrics", "options": {"symlink": true}}'
+  --json '{"type":"path", "url":"./dev-packages/usercentrics", "options": {"symlink": true}}'
 docker-compose exec -T php composer require oxid-professional-services/usercentrics:* --no-update
 
 # Require demodata package
