@@ -44,9 +44,7 @@ docker-compose exec -T php composer require codeception/module-phpbrowser ^3.0.0
 # Run dependencies installation and reset the shop to development state
 docker-compose exec -T php composer update --no-interaction
 
-$SCRIPT_PATH/../../parts/b-7.0.x/reset_database.sh -eEE
-
-docker-compose exec -T php bin/oe-console oe:setup:demodata
+$SCRIPT_PATH/../../parts/shared/setup_database.sh
 
 # Install and activate modules
 docker-compose exec -T php bin/oe-console oe:module:install vendor/oxid-esales/graphql-base

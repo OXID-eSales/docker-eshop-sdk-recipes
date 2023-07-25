@@ -21,13 +21,12 @@ make file=services/node.yml addservice
 # Install all preconfigured dependencies
 docker-compose exec -T php composer update --no-interaction
 
-# Reset the database
-"${SCRIPT_PATH}/../parts/shared/reset_database.sh"
+# Setup the database
+"${SCRIPT_PATH}/../parts/shared/setup_database.sh"
 
-docker-compose exec -T php bin/oe-console oe:setup:demodata
 
 docker-compose exec -T php bin/oe-console oe:theme:activate apex
-$SCRIPT_PATH/../../parts/shared/create_admin.sh
+"{$SCRIPT_PATH}/../parts/shared/create_admin.sh"
 
 # Install old testing library config required for running old tests
 cp source/vendor/oxid-esales/testing-library/test_config.yml.dist source/test_config.yml

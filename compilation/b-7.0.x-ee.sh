@@ -42,7 +42,7 @@ docker-compose exec -T php vendor/bin/oe-console oe:module:activate oxps_usercen
 docker-compose exec -T php vendor/bin/oe-console oe:module:activate ddoewysiwyg
 docker-compose exec -T php vendor/bin/oe-console oe:module:activate ddoevisualcms
 
-$SCRIPT_PATH/../../parts/shared/create_admin.sh
+$SCRIPT_PATH/../parts/shared/create_admin.sh
 
 echo "Warning! Activate theme in the Admin!"
 echo "Done!"

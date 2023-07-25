@@ -30,11 +30,10 @@ docker-compose exec -T php composer require oxid-esales/gdpr-optin-module:* --no
 # Install all preconfigured dependencies
 docker-compose exec -T php composer update --no-interaction
 
-# ensure database
-$SCRIPT_PATH/../../parts/b-7.0.x/reset_database.sh -eEE
+# ensure database, add demodata
+$SCRIPT_PATH/../../parts/shared/setup_database.sh
 
-# add demodata, create admin, activate module
-docker-compose exec -T php bin/oe-console oe:setup:demodata
+# activate module, create admin
 docker-compose exec -T php bin/oe-console oe:module:reset-configurations --shop-id=1
 docker-compose exec -T php bin/oe-console oe:module:install-assets
 docker-compose exec -T php bin/oe-console oe:module:install source/modules/oe/gdproptin --shop-id=1

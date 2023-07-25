@@ -29,7 +29,7 @@ docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:de
 # Install all preconfigured dependencies
 docker-compose exec -T php composer update --no-interaction
 
-$SCRIPT_PATH/../../parts/b-7.0.x/reset_database.sh -eEE
+$SCRIPT_PATH/../../parts/shared/setup_database.sh --no-demodata
 
 docker-compose exec -T php bin/oe-console oe:module:activate oxps_usercentrics
 docker-compose exec -T php bin/oe-console oe:theme:activate twig
