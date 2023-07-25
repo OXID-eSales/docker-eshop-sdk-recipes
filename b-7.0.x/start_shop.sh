@@ -31,16 +31,6 @@ perl -pi\
   -e 'print "SetEnvIf Authorization \"(.*)\" HTTP_AUTHORIZATION=\$1\n\n" if $. == 1'\
   source/source/.htaccess
 
-perl -pi\
-  -e 's#<dbHost>#mysql#g;'\
-  -e 's#<dbUser>#root#g;'\
-  -e 's#<dbName>#example#g;'\
-  -e 's#<dbPwd>#root#g;'\
-  -e 's#<dbPort>#3306#g;'\
-  -e 's#<sShopURL>#http://localhost.local/#g;'\
-  -e 's#<sShopDir>#/var/www/source/#g;'\
-  -e 's#<sCompileDir>#/var/www/source/tmp/#g;'\
-  source/source/config.inc.php
 
 # Start all containers
 make up
