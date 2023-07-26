@@ -10,7 +10,8 @@ make addbasicservices
 make file=services/adminer.yml addservice
 
 $SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
-$SCRIPT_PATH/../../parts/b-7.0.x/require_twig_components.sh -eEE
+$SCRIPT_PATH/../../parts/shared/require_twig_components.sh -e"EE" -b"b-7.0.x" -d
+$SCRIPT_PATH/../../parts/shared/require_theme_dev.sh -t"twig" -b"b-7.0.x" -d
 
 # Twig theme is installed by twig part.
 

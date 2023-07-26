@@ -11,7 +11,8 @@ make file=services/adminer.yml addservice
 make file=services/selenium-chrome.yml addservice
 
 $SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
-$SCRIPT_PATH/../../parts/b-7.0.x/require_twig_components.sh -eEE
+$SCRIPT_PATH/../../parts/shared/require_twig_components.sh -e"EE" -b"b-7.0.x" -d
+$SCRIPT_PATH/../../parts/shared/require_theme_dev.sh -t"apex" -b"b-7.0.x" -d
 
 # Require demodata package
 docker-compose exec -T \

@@ -12,7 +12,8 @@ make file=services/selenium-chrome.yml addservice
 make file=services/node.yml addservice
 
 $SCRIPT_PATH/../parts/b-7.0.x/start_shop.sh -eCE
-$SCRIPT_PATH/../parts/b-7.0.x/require_twig_components.sh -eCE -ttwig
+$SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"CE" -b"b-7.0.x"
+$SCRIPT_PATH/../parts/shared/require_theme_dev.sh -t"twig" -b"b-7.0.x"
 
 # Require demodata package
 docker-compose exec -T \

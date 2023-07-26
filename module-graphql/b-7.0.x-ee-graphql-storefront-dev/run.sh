@@ -10,7 +10,8 @@ make addbasicservices
 make file=services/adminer.yml addservice
 
 $SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
-$SCRIPT_PATH/../../parts/b-7.0.x/require_twig_components.sh -eEE
+$SCRIPT_PATH/../../parts/shared/require_twig_components.sh -e"EE" -b"b-7.0.x"
+$SCRIPT_PATH/../../parts/shared/require_theme_dev.sh -t"apex" -b"b-7.0.x"
 
 # Clone GraphQL modules to modules directory
 git clone https://github.com/OXID-eSales/graphql-base-module.git --branch=b-7.0.x source/dev-packages/graphql-base
