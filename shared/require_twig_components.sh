@@ -3,11 +3,13 @@
 # Flags possible:
 # -e for edition. Possible values: CE/PE/EE
 # -b for theme repository branch
+# -d for dev environment (repo will be cloned)
 
-while getopts e:b: flag; do
+while getopts e:b:d flag; do
   case "${flag}" in
   e) edition=${OPTARG} ;;
   b) branch=${OPTARG} ;;
+  d) dev=1 ;;
   *) ;;
   esac
 done
@@ -37,4 +39,9 @@ if [ $edition = "EE" ]; then
   docker-compose exec -T php composer require oxid-esales/twig-component-ee:dev-${branch} --no-update
 fi
 
-"$(dirname $0)/require_theme.sh" -t"twig-admin" -b${branch}
+if [[ "$dev" -eq "1" ]]; then
+  "$(dirname $0)/require_theme_dev.sh" -t"twig-admin" -b"${branch}"
+else
+  "$(dirname $0)/require_theme.sh" -t"twig-admin" -b"${branch}"
+fi
+
