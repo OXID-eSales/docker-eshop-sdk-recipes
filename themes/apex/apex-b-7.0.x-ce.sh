@@ -15,16 +15,16 @@ $SCRIPT_PATH/../../parts/shared/require_twig_components.sh -e"CE" -b"b-7.0.x" -d
 $SCRIPT_PATH/../../parts/shared/require_theme_dev.sh -t"apex" -b"b-7.0.x" -d
 
 # Require demodata package
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.oxid-esales/oxideshop-demodata-ce \
   --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ce"}'
-docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ce:dev-b-7.0.x --no-update
+docker compose exec -T php composer require oxid-esales/oxideshop-demodata-ce:dev-b-7.0.x --no-update
 
 # Install all preconfigured dependencies
-docker-compose exec -T php composer update --no-interaction
+docker compose exec -T php composer update --no-interaction
 
 $SCRIPT_PATH/../../parts/shared/setup_database.sh
-docker-compose exec -T php bin/oe-console oe:theme:activate apex
+docker compose exec -T php bin/oe-console oe:theme:activate apex
 $SCRIPT_PATH/../../parts/shared/create_admin.sh
 
 echo "Done!"

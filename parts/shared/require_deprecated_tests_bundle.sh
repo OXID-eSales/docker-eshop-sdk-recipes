@@ -17,14 +17,14 @@ if [ -z ${edition+x} ] || [ -z ${branch+x} ]; then
   exit 1
 fi
 
-docker-compose exec php composer require oxid-esales/tests-deprecated-ce:dev-${branch} --with-all-dependencies --no-update
+docker compose exec php composer require oxid-esales/tests-deprecated-ce:dev-${branch} --with-all-dependencies --no-update
 
 if [ $edition = "PE" ] || [ $edition = "EE" ]; then
-  docker-compose exec php composer config repositories.oxid-esales/tests-deprecated-pe git https://github.com/OXID-eSales/tests-deprecated-pe.git
-  docker-compose exec php composer require oxid-esales/tests-deprecated-pe:dev-${branch} --with-all-dependencies --no-update
+  docker compose exec php composer config repositories.oxid-esales/tests-deprecated-pe git https://github.com/OXID-eSales/tests-deprecated-pe.git
+  docker compose exec php composer require oxid-esales/tests-deprecated-pe:dev-${branch} --with-all-dependencies --no-update
 fi
 
 if [ $edition = "EE" ]; then
-  docker-compose exec php composer config repositories.oxid-esales/tests-deprecated-ee git https://github.com/OXID-eSales/tests-deprecated-ee.git
-  docker-compose exec php composer require oxid-esales/tests-deprecated-ee:dev-${branch} --with-all-dependencies --no-update
+  docker compose exec php composer config repositories.oxid-esales/tests-deprecated-ee git https://github.com/OXID-eSales/tests-deprecated-ee.git
+  docker compose exec php composer require oxid-esales/tests-deprecated-ee:dev-${branch} --with-all-dependencies --no-update
 fi

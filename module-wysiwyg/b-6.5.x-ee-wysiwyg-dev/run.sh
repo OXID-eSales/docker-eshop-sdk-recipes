@@ -40,22 +40,22 @@ git clone https://github.com/OXID-eSales/ddoe-wysiwyg-editor-module.git --branch
 # Start all containers
 make up
 
-docker-compose exec php composer config github-protocols https
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
-docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.5.x --no-update
-docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.5.x --no-plugins --no-scripts
+docker compose exec php composer config github-protocols https
+docker compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
+docker compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
+docker compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.5.x --no-update
+docker compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.5.x --no-plugins --no-scripts
 
 # Configure modules in composer
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.ddoe/wysiwyg-editor-module \
   --json '{"type":"path", "url":"./source/modules/ddoe/wysiwyg", "options": {"symlink": true}}'
-docker-compose exec -T php composer require ddoe/wysiwyg-editor-module:* --no-update
+docker compose exec -T php composer require ddoe/wysiwyg-editor-module:* --no-update
 
-docker-compose exec -T php composer update --no-interaction
-docker-compose exec -T php php vendor/bin/reset-shop
+docker compose exec -T php composer update --no-interaction
+docker compose exec -T php php vendor/bin/reset-shop
 
-docker-compose exec -T php bin/oe-console oe:module:install-configuration source/modules/ddoe/wysiwyg/
-docker-compose exec -T php bin/oe-console oe:module:activate ddoewysiwyg
+docker compose exec -T php bin/oe-console oe:module:install-configuration source/modules/ddoe/wysiwyg/
+docker compose exec -T php bin/oe-console oe:module:activate ddoewysiwyg
 
 echo "Done!"

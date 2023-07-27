@@ -43,22 +43,22 @@ git clone https://github.com/FATCHIP-GmbH/OXID-Klarna-6.git --branch=master sour
 # Start all containers
 make up
 
-docker-compose exec php composer config github-protocols https
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
-docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.5.x --no-update
-docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.5.x --no-plugins --no-scripts
+docker compose exec php composer config github-protocols https
+docker compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
+docker compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
+docker compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.5.x --no-update
+docker compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.5.x --no-plugins --no-scripts
 
 # Configure modules in composer
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.fatchip-gmbh/oxid-klarna-6 \
   --json '{"type":"path", "url":"./source/modules/tc/tcklarna", "options": {"symlink": true}}'
-docker-compose exec -T php composer require fatchip-gmbh/oxid-klarna-6:* --no-update
+docker compose exec -T php composer require fatchip-gmbh/oxid-klarna-6:* --no-update
 
-docker-compose exec -T php composer update --no-interaction
-docker-compose exec -T php php vendor/bin/reset-shop
+docker compose exec -T php composer update --no-interaction
+docker compose exec -T php php vendor/bin/reset-shop
 
-docker-compose exec -T php bin/oe-console oe:module:install-configuration source/modules/tc/tcklarna/
-docker-compose exec -T php bin/oe-console oe:module:activate tcklarna
+docker compose exec -T php bin/oe-console oe:module:install-configuration source/modules/tc/tcklarna/
+docker compose exec -T php bin/oe-console oe:module:activate tcklarna
 
 echo "Done!"

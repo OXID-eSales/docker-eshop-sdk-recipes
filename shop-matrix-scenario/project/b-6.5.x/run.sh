@@ -26,36 +26,36 @@ perl -pi\
 make up
 
 #register repositories
-docker-compose exec php sudo composer self-update --2 --stable
-docker-compose exec php composer config github-protocols https
+docker compose exec php sudo composer self-update --2 --stable
+docker compose exec php composer config github-protocols https
 
-docker-compose exec \
+docker compose exec \
   php composer config repositories.oxid-esales/oxideshop-demodata-ee \
   --json '{"type":"vcs", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee.git"}'
-docker-compose exec \
+docker compose exec \
   php composer config repositories.oxid-esales/oxideshop-demodata-pe \
   --json '{"type":"vcs", "url":"https://github.com/OXID-eSales/oxideshop_demodata_pe.git"}'
-docker-compose exec \
+docker compose exec \
   php composer config repositories.oxid-esales/oxideshop-ee \
   --json '{"type":"vcs", "url":"https://github.com/OXID-eSales/oxideshop_ee.git"}'
-docker-compose exec \
+docker compose exec \
   php composer config repositories.oxid-esales/oxideshop-pe \
   --json '{"type":"vcs", "url":"https://github.com/OXID-eSales/oxideshop_pe.git"}'
-docker-compose exec \
+docker compose exec \
   php composer config repositories.oxid-esales/oxideshop-metapackage-ee \
   --json '{"type":"vcs", "url":"https://github.com/OXID-eSales/oxideshop_metapackage_ee.git"}'
-docker-compose exec \
+docker compose exec \
   php composer config repositories.oxid-esales/oxideshop-metapackage-pe \
   --json '{"type":"vcs", "url":"https://github.com/OXID-eSales/oxideshop_metapackage_pe.git"}'
-docker-compose exec \
+docker compose exec \
   php composer config repositories.ddoe/visualcms-module \
   --json '{"type":"vcs", "url":"https://github.com/OXID-eSales/visual_cms_module.git"}'
-docker-compose exec \
+docker compose exec \
   php composer config repositories.oxid-solution-catalysts/unzer \
   --json '{"type":"vcs", "url":"https://github.com/OXID-eSales/unzer-module.git"}'
 
-docker-compose exec php composer update --working-dir=oxideshop_metapackage_ce
-docker-compose exec php composer update
+docker compose exec php composer update --working-dir=oxideshop_metapackage_ce
+docker compose exec php composer update
 
 # Configure shop
 cp source/source/config.inc.php.dist source/source/config.inc.php
@@ -71,14 +71,14 @@ perl -pi\
   -e 's#<sCompileDir>#/var/www/source/tmp/#g;'\
   source/source/config.inc.php
 
-docker-compose exec -T php rm -rf source/tmp
-docker-compose exec -T php mkdir source/tmp
+docker compose exec -T php rm -rf source/tmp
+docker compose exec -T php mkdir source/tmp
 
 if [ -f $SCRIPT_PATH/shops_1.yaml ]; then cp -f $SCRIPT_PATH/shops_1.yaml source/var/configuration/shops/1.yaml; fi
 if [ -f $SCRIPT_PATH/environment_1.yaml ]; then
   mkdir source/var/configuration/environment;
   cp -fp $SCRIPT_PATH/environment_1.yaml source/var/configuration/environment/1.yaml;
 fi
-docker-compose exec -T php php vendor/bin/reset-shop
+docker compose exec -T php php vendor/bin/reset-shop
 
 echo "Done!"

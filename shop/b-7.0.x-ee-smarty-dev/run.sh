@@ -43,35 +43,35 @@ perl -pi\
 make up
 
 # Update composer to 2.4+
-docker-compose exec php sudo composer self-update --2
+docker compose exec php sudo composer self-update --2
 
-docker-compose exec php composer config github-protocols https
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
+docker compose exec php composer config github-protocols https
+docker compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
+docker compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
 
-docker-compose exec php composer config repositories.oxid-esales/flow-theme git https://github.com/OXID-eSales/flow_theme.git
-docker-compose exec php composer config repositories.oxid-esales/smarty-admin-theme git https://github.com/OXID-eSales/smarty-admin-theme.git
-docker-compose exec php composer config repositories.oxid-esales/smarty-component git https://github.com/OXID-eSales/smarty-component.git
-docker-compose exec php composer config repositories.oxid-esales/smarty-component-pe git https://github.com/OXID-eSales/smarty-component-pe.git
-docker-compose exec php composer config repositories.oxid-esales/smarty-component-ee git https://github.com/OXID-eSales/smarty-component-ee.git
+docker compose exec php composer config repositories.oxid-esales/flow-theme git https://github.com/OXID-eSales/flow_theme.git
+docker compose exec php composer config repositories.oxid-esales/smarty-admin-theme git https://github.com/OXID-eSales/smarty-admin-theme.git
+docker compose exec php composer config repositories.oxid-esales/smarty-component git https://github.com/OXID-eSales/smarty-component.git
+docker compose exec php composer config repositories.oxid-esales/smarty-component-pe git https://github.com/OXID-eSales/smarty-component-pe.git
+docker compose exec php composer config repositories.oxid-esales/smarty-component-ee git https://github.com/OXID-eSales/smarty-component-ee.git
 
-docker-compose exec php composer require oxid-esales/flow-theme:dev-b-7.0.x --no-update
-docker-compose exec php composer require oxid-esales/smarty-admin-theme:dev-b-7.0.x --no-update
-docker-compose exec php composer require oxid-esales/smarty-component:dev-b-7.0.x --no-update
-docker-compose exec php composer require oxid-esales/smarty-component-pe:dev-b-7.0.x --no-update
-docker-compose exec php composer require oxid-esales/smarty-component-ee:dev-b-7.0.x --no-update
+docker compose exec php composer require oxid-esales/flow-theme:dev-b-7.0.x --no-update
+docker compose exec php composer require oxid-esales/smarty-admin-theme:dev-b-7.0.x --no-update
+docker compose exec php composer require oxid-esales/smarty-component:dev-b-7.0.x --no-update
+docker compose exec php composer require oxid-esales/smarty-component-pe:dev-b-7.0.x --no-update
+docker compose exec php composer require oxid-esales/smarty-component-ee:dev-b-7.0.x --no-update
 
-docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-7.0.x --no-update
-docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-7.0.x --no-plugins --no-scripts
+docker compose exec php composer require oxid-esales/oxideshop-pe:dev-b-7.0.x --no-update
+docker compose exec php composer require oxid-esales/oxideshop-ee:dev-b-7.0.x --no-plugins --no-scripts
 
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.oxid-esales/oxideshop-demodata-ee \
   --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee"}'
-docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x-SMARTY --no-update
+docker compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x-SMARTY --no-update
 
-docker-compose exec -T php composer update --no-interaction
-docker-compose exec -T php bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
-docker-compose exec -T php bin/oe-console oe:setup:demodata
+docker compose exec -T php composer update --no-interaction
+docker compose exec -T php bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
+docker compose exec -T php bin/oe-console oe:setup:demodata
 $SCRIPT_PATH/../../parts/shared/create_admin.sh
 
 echo "Done!"

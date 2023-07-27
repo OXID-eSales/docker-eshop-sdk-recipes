@@ -40,22 +40,22 @@ git clone https://github.com/MakairaIO/oxid-connect-essential.git source/source/
 # Start all containers
 make up
 
-docker-compose exec php composer config github-protocols https
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
-docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.5.x --no-update
-docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.5.x --no-plugins --no-scripts
+docker compose exec php composer config github-protocols https
+docker compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
+docker compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
+docker compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.5.x --no-update
+docker compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.5.x --no-plugins --no-scripts
 
 # Configure modules in composer
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.makaira/oxid-connect-essential \
   --json '{"type":"path", "url":"./source/modules/makaira/oxid-connect-essential", "options": {"symlink": true}}'
-docker-compose exec -T php composer require makaira/oxid-connect-essential:* --no-update
+docker compose exec -T php composer require makaira/oxid-connect-essential:* --no-update
 
-docker-compose exec -T php composer update --no-interaction
-docker-compose exec -T php php vendor/bin/reset-shop
+docker compose exec -T php composer update --no-interaction
+docker compose exec -T php php vendor/bin/reset-shop
 
-docker-compose exec -T php bin/oe-console oe:module:install-configuration source/modules/makaira/oxid-connect-essential
-docker-compose exec -T php bin/oe-console oe:module:activate makaira_oxid-connect-essential
+docker compose exec -T php bin/oe-console oe:module:install-configuration source/modules/makaira/oxid-connect-essential
+docker compose exec -T php bin/oe-console oe:module:activate makaira_oxid-connect-essential
 
 echo "Done!"

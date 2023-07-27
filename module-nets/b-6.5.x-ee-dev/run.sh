@@ -40,22 +40,22 @@ git clone https://github.com/Nets-eCom/Oxid6_netseasy_beta source/source/modules
 # Start all containers
 make up
 
-docker-compose exec php composer config github-protocols https
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
-docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.5.x --no-update
-docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.5.x --no-plugins --no-scripts
+docker compose exec php composer config github-protocols https
+docker compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
+docker compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
+docker compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.5.x --no-update
+docker compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.5.x --no-plugins --no-scripts
 
 # Configure modules in composer
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.nets-ecom/oxid6_netseasy_beta \
   --json '{"type":"path", "url":"./source/modules/es/esnetseasy", "options": {"symlink": true}}'
-docker-compose exec -T php composer require nets-ecom/oxid6_netseasy_beta:* --no-update
+docker compose exec -T php composer require nets-ecom/oxid6_netseasy_beta:* --no-update
 
-docker-compose exec -T php composer update --no-interaction
-docker-compose exec -T php php vendor/bin/reset-shop
+docker compose exec -T php composer update --no-interaction
+docker compose exec -T php php vendor/bin/reset-shop
 
-docker-compose exec -T php bin/oe-console oe:module:install-configuration source/modules/es/esnetseasy
-docker-compose exec -T php bin/oe-console oe:module:activate esnetseasy
+docker compose exec -T php bin/oe-console oe:module:install-configuration source/modules/es/esnetseasy
+docker compose exec -T php bin/oe-console oe:module:activate esnetseasy
 
 echo "Done!"

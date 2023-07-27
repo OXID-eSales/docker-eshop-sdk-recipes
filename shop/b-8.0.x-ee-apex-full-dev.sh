@@ -19,13 +19,13 @@ make file=services/node.yml addservice
 "${SCRIPT_PATH}/../parts/shared/require_demodata_package.sh" -e"EE" -b"b-8.0.x"
 
 # Install all preconfigured dependencies
-docker-compose exec -T php composer update --no-interaction
+docker compose exec -T php composer update --no-interaction
 
 # Setup the database
 "${SCRIPT_PATH}/../parts/shared/setup_database.sh"
 
 
-docker-compose exec -T php bin/oe-console oe:theme:activate apex
+docker compose exec -T php bin/oe-console oe:theme:activate apex
 "{$SCRIPT_PATH}/../parts/shared/create_admin.sh"
 
 # Install old testing library config required for running old tests

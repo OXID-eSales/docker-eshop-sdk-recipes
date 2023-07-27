@@ -18,15 +18,15 @@ if [ -z ${branch+x} ] || [ -z ${theme+x} ]; then
 fi
 
 if [ $theme = "twig-admin" ]; then
-  docker-compose exec -T php composer require "oxid-esales/twig-admin-theme:dev-${branch}" --no-update
+  docker compose exec -T php composer require "oxid-esales/twig-admin-theme:dev-${branch}" --no-update
 fi
 
 # Prepare APEX theme
 if [ $theme = "apex" ]; then
-  docker-compose exec -T php composer require "oxid-esales/apex-theme:dev-${branch}" --no-update
+  docker compose exec -T php composer require "oxid-esales/apex-theme:dev-${branch}" --no-update
 fi
 
 # Prepare Twig theme
 if [ $theme = "twig" ]; then
-  docker-compose exec -T php composer require "oxid-esales/twig-theme:dev-${branch}" --no-update
+  docker compose exec -T php composer require "oxid-esales/twig-theme:dev-${branch}" --no-update
 fi

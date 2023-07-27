@@ -13,10 +13,10 @@ $SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
 $SCRIPT_PATH/../../parts/b-7.0.x/require_smarty_components.sh -eEE
 
 git clone https://github.com/OXID-eSales/wave-theme --branch=b-7.0.x source/source/Application/views/wave
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.oxid-esales/wave-theme \
   --json '{"type":"path", "url":"./source/Application/views/wave", "options": {"symlink": false}}'
-docker-compose exec -T php composer require oxid-esales/wave-theme:dev-b-7.0.x --no-update
+docker compose exec -T php composer require oxid-esales/wave-theme:dev-b-7.0.x --no-update
 
 #Symlink theme out directory
 cd source/source/out/
@@ -24,13 +24,13 @@ ln -s ../Application/views/wave/out/wave wave
 cd -
 
 # Require demodata package
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.oxid-esales/oxideshop-demodata-ee \
   --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee"}'
-docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x-SMARTY --no-update
+docker compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x-SMARTY --no-update
 
 # Install all preconfigured dependencies
-docker-compose exec -T php composer update --no-interaction
+docker compose exec -T php composer update --no-interaction
 
 $SCRIPT_PATH/../../parts/shared/setup_database.sh
 $SCRIPT_PATH/../../parts/shared/create_admin.sh

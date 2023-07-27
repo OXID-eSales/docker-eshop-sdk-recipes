@@ -18,22 +18,22 @@ $SCRIPT_PATH/../../parts/b-7.0.x/require_smarty_components.sh -eEE
 git clone https://github.com/OXID-eSales/ddoe-wysiwyg-editor-module.git --branch=b-7.0.x source/dev-packages/wysiwyg
 
 # Configure module in composer
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.ddoe/wysiwyg-editor-module \
   --json '{"type":"path", "url":"./dev-packages/wysiwyg", "options": {"symlink": true}}'
-docker-compose exec -T php composer require ddoe/wysiwyg-editor-module:* --no-update
+docker compose exec -T php composer require ddoe/wysiwyg-editor-module:* --no-update
 
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.oxid-esales/oxideshop-demodata-ee \
   --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee"}'
-docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x-SMARTY --no-update
+docker compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x-SMARTY --no-update
 
 # Install all preconfigured dependencies
-docker-compose exec -T php composer update --no-interaction
+docker compose exec -T php composer update --no-interaction
 
 $SCRIPT_PATH/../../parts/shared/setup_database.sh
 
-docker-compose exec -T php bin/oe-console oe:module:activate ddoewysiwyg
+docker compose exec -T php bin/oe-console oe:module:activate ddoewysiwyg
 
 $SCRIPT_PATH/../../parts/shared/create_admin.sh
 

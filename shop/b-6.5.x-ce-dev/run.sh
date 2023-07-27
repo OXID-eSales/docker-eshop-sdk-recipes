@@ -38,9 +38,9 @@ perl -pi\
 # Start all containers
 make up
 
-docker-compose exec php composer config github-protocols https
+docker compose exec php composer config github-protocols https
 
-docker-compose exec -T php composer update --no-interaction
-docker-compose exec -T php php vendor/bin/reset-shop
+docker compose exec -T php composer update --no-interaction
+docker compose exec -T php php vendor/bin/reset-shop
 
 echo "Done!"

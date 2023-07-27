@@ -15,23 +15,23 @@ $SCRIPT_PATH/../../parts/b-7.0.x/require_smarty_components.sh -eEE
 
 # Clone Usercentrics module to modules directory and Configure modules in composer
 git clone https://github.com/OXID-eSales/usercentrics.git --branch=b-7.0.x source/dev-packages/usercentrics
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.oxid-professional-services/usercentrics \
   --json '{"type":"path", "url":"./dev-packages/usercentrics", "options": {"symlink": true}}'
-docker-compose exec -T php composer require oxid-professional-services/usercentrics:* --no-update
+docker compose exec -T php composer require oxid-professional-services/usercentrics:* --no-update
 
 # Require demodata package
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.oxid-esales/oxideshop-demodata-ee \
   --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee"}'
-docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x-SMARTY --no-update
+docker compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x-SMARTY --no-update
 
 # Install all preconfigured dependencies
-docker-compose exec -T php composer update --no-interaction
+docker compose exec -T php composer update --no-interaction
 
 $SCRIPT_PATH/../../parts/shared/setup_database.sh --no-demodata
 
-docker-compose exec -T php bin/oe-console oe:module:activate oxps_usercentrics
+docker compose exec -T php bin/oe-console oe:module:activate oxps_usercentrics
 
 $SCRIPT_PATH/../../parts/shared/create_admin.sh
 

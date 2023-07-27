@@ -22,37 +22,37 @@ make docpath=./source/dev-packages/graphql-base/docs addsphinxservice
 make up
 
 # Configure modules in composer
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.oxid-esales/grapqhl-base \
   --json '{"type":"path", "url":"./dev-packages/graphql-base", "options": {"symlink": true}}'
 
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.oxid-esales/grapqhl-storefront \
   --json '{"type":"path", "url":"./dev-packages/graphql-storefront", "options": {"symlink": true}}'
 
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.oxid-esales/oxideshop-demodata-ee \
   --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee"}'
 
-docker-compose exec -T php composer require oxid-esales/graphql-base:* --no-update
-docker-compose exec -T php composer require oxid-esales/graphql-storefront:* --no-update
-docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x --no-update
+docker compose exec -T php composer require oxid-esales/graphql-base:* --no-update
+docker compose exec -T php composer require oxid-esales/graphql-storefront:* --no-update
+docker compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x --no-update
 
 # Configure Tests dependencies
-docker-compose exec -T php composer require codeception/module-rest ^3.3.0 --dev --no-update
-docker-compose exec -T php composer require codeception/module-phpbrowser ^3.0.0 --dev --no-update
+docker compose exec -T php composer require codeception/module-rest ^3.3.0 --dev --no-update
+docker compose exec -T php composer require codeception/module-phpbrowser ^3.0.0 --dev --no-update
 
 # Run dependencies installation and reset the shop to development state
-docker-compose exec -T php composer update --no-interaction
+docker compose exec -T php composer update --no-interaction
 
 $SCRIPT_PATH/../../parts/shared/setup_database.sh
 
 # Install and activate modules
-docker-compose exec -T php bin/oe-console oe:module:install vendor/oxid-esales/graphql-base
-docker-compose exec -T php bin/oe-console oe:module:install vendor/oxid-esales/graphql-storefront
-docker-compose exec -T php bin/oe-console oe:module:activate oe_graphql_base
-docker-compose exec -T php bin/oe-console oe:module:activate oe_graphql_storefront
-docker-compose exec -T php bin/oe-console oe:theme:activate twig
+docker compose exec -T php bin/oe-console oe:module:install vendor/oxid-esales/graphql-base
+docker compose exec -T php bin/oe-console oe:module:install vendor/oxid-esales/graphql-storefront
+docker compose exec -T php bin/oe-console oe:module:activate oe_graphql_base
+docker compose exec -T php bin/oe-console oe:module:activate oe_graphql_storefront
+docker compose exec -T php bin/oe-console oe:theme:activate twig
 
 $SCRIPT_PATH/../../parts/shared/create_admin.sh
 

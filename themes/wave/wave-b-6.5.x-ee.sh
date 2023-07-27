@@ -36,26 +36,26 @@ perl -pi\
 # Start all containers
 make up
 
-docker-compose exec php composer config github-protocols https
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
+docker compose exec php composer config github-protocols https
+docker compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
+docker compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
 
-docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.5.x --no-update
-docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.5.x --no-plugins --no-scripts
+docker compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.5.x --no-update
+docker compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.5.x --no-plugins --no-scripts
 
 git clone https://github.com/OXID-eSales/wave-theme --branch=b-1.x source/source/Application/views/wave
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.oxid-esales/wave-theme \
   --json '{"type":"path", "url":"./source/Application/views/wave", "options": {"symlink": false}}'
-docker-compose exec -T php composer require oxid-esales/wave-theme:* --no-update
+docker compose exec -T php composer require oxid-esales/wave-theme:* --no-update
 
 #Symlink theme out directory
 cd source/source/out/
 ln -s ../Application/views/wave/out/wave wave
 cd -
 
-docker-compose exec -T php composer update --no-interaction
-docker-compose exec -T php php vendor/bin/reset-shop
+docker compose exec -T php composer update --no-interaction
+docker compose exec -T php php vendor/bin/reset-shop
 
 echo "Warning! - Activate Wave theme in Admin!!"
 echo "Done!"

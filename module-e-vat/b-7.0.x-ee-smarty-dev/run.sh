@@ -18,22 +18,22 @@ $SCRIPT_PATH/../../parts/b-7.0.x/require_smarty_components.sh -eEE
 git clone https://github.com/OXID-eSales/vat_tbe_services.git --branch=b-7.0.x source/dev-packages/oevattbe
 
 # Configure module in composer
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.oxid-esales/evat-module \
   --json '{"type":"path", "url":"./dev-packages/oevattbe", "options": {"symlink": true}}'
-docker-compose exec -T php composer require oxid-esales/evat-module:* --no-update
+docker compose exec -T php composer require oxid-esales/evat-module:* --no-update
 
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.oxid-esales/oxideshop-demodata-ee \
   --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee"}'
-docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x-SMARTY --no-update
+docker compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x-SMARTY --no-update
 
 # Install all preconfigured dependencies
-docker-compose exec -T php composer update --no-interaction
+docker compose exec -T php composer update --no-interaction
 
 $SCRIPT_PATH/../../parts/shared/setup_database.sh
 
-docker-compose exec -T php bin/oe-console oe:module:activate oevattbe
+docker compose exec -T php bin/oe-console oe:module:activate oevattbe
 
 $SCRIPT_PATH/../../parts/shared/create_admin.sh
 
