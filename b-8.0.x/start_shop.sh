@@ -34,27 +34,27 @@ perl -pi -e 'print "SetEnvIf Authorization \"(.*)\" HTTP_AUTHORIZATION=\$1\n\n" 
 make up
 
 # Update composer to 2.4+
-docker-compose exec php sudo composer self-update --2
+docker compose exec php sudo composer self-update --2
 
 if [ $edition = "PE" ]; then
-  docker-compose exec \
+  docker compose exec \
     php composer config repositories.oxid-esales/oxideshop-pe \
     --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_pe"}'
-  docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-8.0.x --no-update
+  docker compose exec php composer require oxid-esales/oxideshop-pe:dev-b-8.0.x --no-update
 fi
 
 if [ $edition = "EE" ]; then
-  docker-compose exec \
+  docker compose exec \
     php composer config repositories.oxid-esales/oxideshop-pe \
     --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_pe"}'
-  docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-8.0.x --no-update
+  docker compose exec php composer require oxid-esales/oxideshop-pe:dev-b-8.0.x --no-update
 
-  docker-compose exec \
+  docker compose exec \
     php composer config repositories.oxid-esales/oxideshop-ee \
     --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_ee"}'
-  docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-8.0.x --no-update
+  docker compose exec php composer require oxid-esales/oxideshop-ee:dev-b-8.0.x --no-update
 fi
 
 if [ $update = true ]; then
-  docker-compose exec php composer update --no-plugins --no-scripts
+  docker compose exec php composer update --no-plugins --no-scripts
 fi

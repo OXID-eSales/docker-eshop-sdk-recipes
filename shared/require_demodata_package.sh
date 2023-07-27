@@ -18,23 +18,23 @@ if [ -z ${edition+x} ] || [ -z ${branch+x} ]; then
 fi
 
 if [ $edition = "CE" ]; then
-  docker-compose exec -T \
+  docker compose exec -T \
     php composer config repositories.oxid-esales/oxideshop-demodata-ce \
     --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ce"}'
-  docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ce:dev-${branch} --no-update
+  docker compose exec -T php composer require oxid-esales/oxideshop-demodata-ce:dev-${branch} --no-update
 fi
 
 if [ $edition = "PE" ]; then
-  docker-compose exec -T \
+  docker compose exec -T \
     php composer config repositories.oxid-esales/oxideshop-demodata-pe \
     --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_pe"}'
-  docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-pe:dev-${branch} --no-update
+  docker compose exec -T php composer require oxid-esales/oxideshop-demodata-pe:dev-${branch} --no-update
 fi
 
 
 if [ $edition = "EE" ]; then
-  docker-compose exec -T \
+  docker compose exec -T \
     php composer config repositories.oxid-esales/oxideshop-demodata-ee \
     --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee"}'
-  docker-compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-${branch} --no-update
+  docker compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-${branch} --no-update
 fi

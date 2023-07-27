@@ -20,23 +20,23 @@ if [ -z ${edition+x} ] || [ -z ${branch+x} ]; then
 fi
 
 # Configure twig themes in composer
-docker-compose exec -T \
+docker compose exec -T \
   php composer config repositories.oxid-esales/twig-component \
   --json '{"type":"git", "url":"https://github.com/OXID-eSales/twig-component"}'
-docker-compose exec -T php composer require oxid-esales/twig-component:dev-${branch} --no-update
+docker compose exec -T php composer require oxid-esales/twig-component:dev-${branch} --no-update
 
 if [ $edition = "PE" ] || [ $edition = "EE" ]; then
-  docker-compose exec -T \
+  docker compose exec -T \
     php composer config repositories.oxid-esales/twig-component-pe \
     --json '{"type":"git", "url":"https://github.com/OXID-eSales/twig-component-pe"}'
-  docker-compose exec -T php composer require oxid-esales/twig-component-pe:dev-${branch} --no-update
+  docker compose exec -T php composer require oxid-esales/twig-component-pe:dev-${branch} --no-update
 fi
 
 if [ $edition = "EE" ]; then
-  docker-compose exec -T \
+  docker compose exec -T \
     php composer config repositories.oxid-esales/twig-component-ee \
     --json '{"type":"git", "url":"https://github.com/OXID-eSales/twig-component-ee"}'
-  docker-compose exec -T php composer require oxid-esales/twig-component-ee:dev-${branch} --no-update
+  docker compose exec -T php composer require oxid-esales/twig-component-ee:dev-${branch} --no-update
 fi
 
 if [[ "$dev" -eq "1" ]]; then

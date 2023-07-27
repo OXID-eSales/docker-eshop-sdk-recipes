@@ -18,12 +18,12 @@ flags()
 }
 flags "$@"
 
-docker-compose exec php bin/oe-console oe:setup:shop --db-host=mysql --db-port=3306 --db-name=example --db-user=root \
+docker compose exec php bin/oe-console oe:setup:shop --db-host=mysql --db-port=3306 --db-name=example --db-user=root \
   --db-password=root --shop-url=http://localhost.local/ --shop-directory=/var/www/source/ \
   --compile-directory=/var/www/source/tmp/
 
 $SHARED_SCRIPT_PATH/reset_database.sh
 
 if [[ $DEMODATA -eq 1 ]]; then
-  docker-compose exec -T php bin/oe-console oe:setup:demodata
+  docker compose exec -T php bin/oe-console oe:setup:demodata
 fi
