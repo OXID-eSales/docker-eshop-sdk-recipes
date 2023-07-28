@@ -16,7 +16,7 @@ perl -pi\
 
 $SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eCE
 $SCRIPT_PATH/../../parts/shared/require_twig_components.sh -e"CE" -b"b-7.0.x"
-$SCRIPT_PATH/../../parts/shared/require_theme_dev.sh -t"apex" -b"b-7.0.x"
+$SCRIPT_PATH/../../parts/shared/require_theme.sh -t"apex" -b"b-7.0.x"
 
 # Configure modules in composer
 git clone https://github.com/OXID-eSales/module-template.git --branch=b-7.0.x source/dev-packages/moduletemplate
