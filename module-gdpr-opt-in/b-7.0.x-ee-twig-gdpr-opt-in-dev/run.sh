@@ -35,9 +35,6 @@ docker compose exec -T php composer update --no-interaction
 $SCRIPT_PATH/../../parts/shared/setup_database.sh
 
 # activate module, create admin
-docker compose exec -T php bin/oe-console oe:module:reset-configurations --shop-id=1
-docker compose exec -T php bin/oe-console oe:module:install-assets
-docker compose exec -T php bin/oe-console oe:module:install source/modules/oe/gdproptin --shop-id=1
 docker compose exec -T php bin/oe-console oe:module:activate oegdproptin
 docker compose exec -T php bin/oe-console oe:theme:activate twig
 

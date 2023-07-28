@@ -48,8 +48,6 @@ docker compose exec -T php composer update --no-interaction
 $SCRIPT_PATH/../../parts/shared/setup_database.sh
 
 # Install and activate modules
-docker compose exec -T php bin/oe-console oe:module:install vendor/oxid-esales/graphql-base
-docker compose exec -T php bin/oe-console oe:module:install vendor/oxid-esales/graphql-storefront
 docker compose exec -T php bin/oe-console oe:module:activate oe_graphql_base
 docker compose exec -T php bin/oe-console oe:module:activate oe_graphql_storefront
 docker compose exec -T php bin/oe-console oe:theme:activate twig
