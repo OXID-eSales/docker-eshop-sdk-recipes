@@ -11,7 +11,7 @@ make file=services/adminer.yml addservice
 
 $SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
 $SCRIPT_PATH/../../parts/shared/require_twig_components.sh -e"EE" -b"b-7.0.x"
-$SCRIPT_PATH/../../parts/shared/require_theme.sh -t"apex" -b"b-7.0.x"
+$SCRIPT_PATH/../../parts/shared/require_theme.sh -t"twig" -b"b-7.0.x"
 
 # Require demodata package
 docker compose exec -T \
