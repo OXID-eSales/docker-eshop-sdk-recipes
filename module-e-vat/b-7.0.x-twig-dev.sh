@@ -22,11 +22,11 @@ make file=services/adminer.yml addservice
 make file=services/selenium-chrome.yml addservice
 make file=services/node.yml addservice
 
-$SCRIPT_PATH/../parts/b-7.0.x/start_shop.sh -e"{$edition}"
-$SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"{$edition}" -b"b-7.0.x"
+$SCRIPT_PATH/../parts/b-7.0.x/start_shop.sh -e"${edition}"
+$SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"${edition}" -b"b-7.0.x"
 $SCRIPT_PATH/../parts/shared/require_theme_dev.sh -t"apex" -b"b-7.0.x"
 
-$SCRIPT_PATH/../parts/shared/require_demodata_package.sh -e"{$edition}" -b"b-7.0.x"
+$SCRIPT_PATH/../parts/shared/require_demodata_package.sh -e"${edition}" -b"b-7.0.x"
 
 # Configure eVat documentation
 git clone https://github.com/OXID-eSales/vat-tbe-services-documentation.git --branch=2.1-en source/docs
@@ -47,7 +47,7 @@ docker compose exec -T php composer update --no-interaction
 $SCRIPT_PATH/../parts/shared/setup_database.sh
 
 docker compose exec -T php bin/oe-console oe:module:activate oevattbe
-docker compose exec -T php bin/oe-console oe:theme:activate twig
+docker compose exec -T php bin/oe-console oe:theme:activate apex
 
 $SCRIPT_PATH/../parts/shared/create_admin.sh
 
