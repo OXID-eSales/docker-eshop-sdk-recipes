@@ -18,6 +18,8 @@ flags()
 }
 flags "$@"
 
+echo -e "\033[1;37m\033[1;42mSetup shop\033[0m\n"
+
 docker compose exec php bin/oe-console oe:setup:shop --db-host=mysql --db-port=3306 --db-name=example --db-user=root \
   --db-password=root --shop-url=http://localhost.local/ --shop-directory=/var/www/source/ \
   --compile-directory=/var/www/source/tmp/

@@ -12,6 +12,8 @@ while getopts b:t:u: flag; do
   esac
 done
 
+echo -e "\033[1;37m\033[1;42mRequire theme package (Not dev installation): Theme: ${theme}, Branch: ${branch}\033[0m\n"
+
 if [ -z ${branch+x} ] || [ -z ${theme+x} ]; then
   echo -e "\e[1;31mThe theme (-t) and theme branch (-b) are required for require_theme.sh\e[0m"
   exit 1
