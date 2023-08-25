@@ -30,8 +30,7 @@ make up
 docker compose exec -T php composer require oxid-esales/developer-tools:dev-b-7.0.x --no-update
 docker compose exec -T php composer update
 
-docker compose exec -T php vendor/bin/oe-console oe:setup:shop --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --shop-url=http://localhost.local --shop-directory=/var/www/source --compile-directory=/var/www/source/tmp
-docker compose exec -T php vendor/bin/oe-console oe:setup:demodata
+$SCRIPT_PATH/../parts/shared/setup_database.sh
 
 
 docker compose exec -T php vendor/bin/oe-console oe:theme:activate apex
