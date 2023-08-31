@@ -17,8 +17,9 @@ $SCRIPT_PATH/../../parts/shared/require_theme.sh -t"twig" -b"b-7.0.x"
 git clone https://github.com/OXID-eSales/graphql-base-module.git --branch=b-7.0.x source/dev-packages/graphql-base
 git clone https://github.com/OXID-eSales/graphql-storefront-module.git --branch=b-7.0.x source/dev-packages/graphql-storefront
 
-# Add Sphinx container
-make docpath=./source/dev-packages/graphql-base/docs addsphinxservice
+# Clone documentation and add Sphinx container
+git clone https://github.com/OXID-eSales/oxapi-documentation source/graphql-docs
+make docpath=./source/graphql-docs addsphinxservice
 make up
 
 # Configure modules in composer
