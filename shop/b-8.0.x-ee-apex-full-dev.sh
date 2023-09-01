@@ -26,7 +26,7 @@ docker compose exec -T php composer update --no-interaction
 
 
 docker compose exec -T php bin/oe-console oe:theme:activate apex
-"{$SCRIPT_PATH}/../parts/shared/create_admin.sh"
+"${SCRIPT_PATH}/../parts/shared/create_admin.sh"
 
 # Install old testing library config required for running old tests
 cp source/vendor/oxid-esales/testing-library/test_config.yml.dist source/test_config.yml
