@@ -19,6 +19,8 @@ if [ -z ${edition+x} ] || [ -z ${branch+x} ]; then
   exit 1
 fi
 
+echo -e "\033[1;37m\033[1;42mEdition: ${edition}, Branch: ${branch}, Dev: ${dev}\033[0m\n"
+
 # Configure twig themes in composer
 docker compose exec -T \
   php composer config repositories.oxid-esales/twig-component \

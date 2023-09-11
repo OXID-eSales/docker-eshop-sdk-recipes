@@ -12,6 +12,8 @@ while getopts e:b:u: flag; do
   esac
 done
 
+echo -e "\033[1;37m\033[1;42mRequire demodata package: Edition: ${edition}, Branch: ${branch}\033[0m\n"
+
 if [ -z ${edition+x} ] || [ -z ${branch+x} ]; then
   echo -e "\e[1;31mThe edition (-e) and branch (-b) are required for require_demodata_package.sh\e[0m"
   exit 1
