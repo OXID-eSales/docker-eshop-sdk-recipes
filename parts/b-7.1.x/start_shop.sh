@@ -35,9 +35,6 @@ perl -pi\
 # Start all containers
 make up
 
-# Update composer to 2.4+
-docker compose exec php sudo composer self-update --2
-
 if [ $edition = "PE" ]; then
   docker compose exec \
     php composer config repositories.oxid-esales/oxideshop-pe \
