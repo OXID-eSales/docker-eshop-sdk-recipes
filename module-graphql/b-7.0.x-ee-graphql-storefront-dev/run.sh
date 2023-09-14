@@ -16,6 +16,7 @@ $SCRIPT_PATH/../../parts/shared/require_theme.sh -t"twig" -b"b-7.0.x"
 # Clone GraphQL modules to modules directory
 git clone https://github.com/OXID-eSales/graphql-base-module.git --branch=b-7.0.x source/dev-packages/graphql-base
 git clone https://github.com/OXID-eSales/graphql-storefront-module.git --branch=b-7.0.x source/dev-packages/graphql-storefront
+git clone https://github.com/OXID-eSales/graphql-configuration-access.git --branch=b-7.0.x source/dev-packages/graphql-configuration-access
 
 # Add Sphinx container
 make docpath=./source/dev-packages/graphql-base/docs addsphinxservice
@@ -25,10 +26,12 @@ make up
 docker compose exec -T \
   php composer config repositories.oxid-esales/grapqhl-base \
   --json '{"type":"path", "url":"./dev-packages/graphql-base", "options": {"symlink": true}}'
-
 docker compose exec -T \
   php composer config repositories.oxid-esales/grapqhl-storefront \
   --json '{"type":"path", "url":"./dev-packages/graphql-storefront", "options": {"symlink": true}}'
+docker compose exec -T \
+  php composer config repositories.oxid-esales/graphql-configuration-access \
+  --json '{"type":"path", "url":"./dev-packages/graphql-configuration-access", "options": {"symlink": true}}'
 
 docker compose exec -T \
   php composer config repositories.oxid-esales/oxideshop-demodata-ee \
@@ -36,6 +39,7 @@ docker compose exec -T \
 
 docker compose exec -T php composer require oxid-esales/graphql-base:* --no-update
 docker compose exec -T php composer require oxid-esales/graphql-storefront:* --no-update
+docker compose exec -T php composer require oxid-esales/graphql-configuration-access:* --no-update
 docker compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.0.x --no-update
 
 # Configure Tests dependencies
