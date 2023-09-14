@@ -1,7 +1,6 @@
 #!/bin/bash
 
 SCRIPT_PATH=$(dirname ${BASH_SOURCE[0]})
-
 cd $SCRIPT_PATH/../../../ || exit
 
 # Prepare services configuration
@@ -11,22 +10,20 @@ make file=services/adminer.yml addservice
 make file=services/selenium-chrome.yml addservice
 make file=services/node.yml addservice
 
-$SCRIPT_PATH/../parts/b-7.0.x/start_shop.sh -eCE
+$SCRIPT_PATH/../parts/b-7.0.x/start_shop.sh -e"CE"
 $SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"CE" -b"b-7.0.x"
-$SCRIPT_PATH/../parts/shared/require_theme.sh -t"twig" -b"b-7.0.x"
 
-# Require demodata package
-docker compose exec -T \
-  php composer config repositories.oxid-esales/oxideshop-demodata-ce \
-  --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ce"}'
-docker compose exec -T php composer require oxid-esales/oxideshop-demodata-ce:dev-b-7.0.x --no-update
+$SCRIPT_PATH/../parts/shared/require_theme.sh -t"apex" -b"b-7.0.x"
+
+${SCRIPT_PATH}/../parts/shared/require_demodata_package.sh -e"CE" -b"b-7.0.x"
 
 # Install all preconfigured dependencies
 docker compose exec -T php composer update --no-interaction
 
+# Setup the database
 $SCRIPT_PATH/../parts/shared/setup_database.sh
 
-docker compose exec -T php bin/oe-console oe:theme:activate twig
+docker compose exec -T php bin/oe-console oe:theme:activate apex
 $SCRIPT_PATH/../parts/shared/create_admin.sh
 
 echo "Done!"

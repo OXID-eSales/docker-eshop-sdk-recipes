@@ -18,8 +18,9 @@ git clone https://github.com/OXID-eSales/graphql-base-module.git --branch=b-7.0.
 git clone https://github.com/OXID-eSales/graphql-storefront-module.git --branch=b-7.0.x source/dev-packages/graphql-storefront
 git clone https://github.com/OXID-eSales/graphql-configuration-access.git --branch=b-7.0.x source/dev-packages/graphql-configuration-access
 
-# Add Sphinx container
-make docpath=./source/dev-packages/graphql-base/docs addsphinxservice
+# Clone documentation and add Sphinx container
+git clone https://github.com/OXID-eSales/oxapi-documentation source/dev-packages/oxapi-documentation
+make docpath=./source/dev-packages/oxapi-documentation addsphinxservice
 make up
 
 # Configure modules in composer
