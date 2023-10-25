@@ -32,3 +32,8 @@ fi
 if [ $theme = "twig" ]; then
   docker compose exec -T php composer require "oxid-esales/twig-theme:dev-${branch}" --no-update
 fi
+
+# Prepare Flow theme
+if [ $theme = "flow" ]; then
+  docker compose exec -T php composer require "oxid-esales/flow-theme:dev-${branch}" --no-update
+fi

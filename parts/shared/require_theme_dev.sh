@@ -48,3 +48,13 @@ if [ $theme = "twig" ]; then
   docker compose exec -T php composer require oxid-esales/twig-theme:* --no-update
   ln -s ../Application/views/twig/out/twig/ source/source/out/twig
 fi
+
+# Prepare Flow theme
+if [ $theme = "flow" ]; then
+  git clone https://github.com/OXID-eSales/flow_theme --branch="$branch" source/source/Application/views/flow
+  docker compose exec -T \
+    php composer config repositories.oxid-esales/flow-theme \
+    --json '{"type":"path", "url":"./source/Application/views/flow", "options": {"symlink": false}}'
+  docker compose exec -T php composer require oxid-esales/flow-theme:* --no-update
+  ln -s ../Application/views/flow/out/flow source/source/out/flow
+fi
