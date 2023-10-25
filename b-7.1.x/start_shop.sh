@@ -13,7 +13,7 @@ while getopts e:u: flag; do
   esac
 done
 
-git clone https://github.com/OXID-eSales/oxideshop_ce.git --branch=b-7.0.x source
+git clone https://github.com/OXID-eSales/oxideshop_ce.git --branch=b-7.1.x source
 
 # Configure containers
 perl -pi\
@@ -39,19 +39,19 @@ if [ $edition = "PE" ]; then
   docker compose exec \
     php composer config repositories.oxid-esales/oxideshop-pe \
     --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_pe"}'
-  docker compose exec php composer require oxid-esales/oxideshop-pe:dev-b-7.0.x --no-update
+  docker compose exec php composer require oxid-esales/oxideshop-pe:dev-b-7.1.x --no-update
 fi
 
 if [ $edition = "EE" ]; then
   docker compose exec \
     php composer config repositories.oxid-esales/oxideshop-pe \
     --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_pe"}'
-  docker compose exec php composer require oxid-esales/oxideshop-pe:dev-b-7.0.x --no-update
+  docker compose exec php composer require oxid-esales/oxideshop-pe:dev-b-7.1.x --no-update
 
   docker compose exec \
     php composer config repositories.oxid-esales/oxideshop-ee \
     --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_ee"}'
-  docker compose exec php composer require oxid-esales/oxideshop-ee:dev-b-7.0.x --no-update
+  docker compose exec php composer require oxid-esales/oxideshop-ee:dev-b-7.1.x --no-update
 fi
 
 if [ $update = true ]; then
