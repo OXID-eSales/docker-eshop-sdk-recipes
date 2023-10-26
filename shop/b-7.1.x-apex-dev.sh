@@ -21,6 +21,11 @@ make file=services/adminer.yml addservice
 make file=services/selenium-chrome.yml addservice
 make file=services/node.yml addservice
 
+# Configure containers
+perl -pi\
+  -e 's#error_reporting = .*#error_reporting = E_ALL ^ E_WARNING ^ E_DEPRECATED#g;'\
+  containers/php/custom.ini
+
 "${SCRIPT_PATH}/../parts/shared/prepare_shop_package.sh" -e"${edition}" -b"b-7.1.x"
 "${SCRIPT_PATH}/../parts/shared/require_twig_components.sh" -e"${edition}" -b"b-7.1.x"
 
