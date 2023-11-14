@@ -9,6 +9,7 @@ make setup
 make addbasicservices
 make file=services/adminer.yml addservice
 make file=services/selenium-chrome.yml addservice
+make file=services/node.yml addservice
 
 $SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
 $SCRIPT_PATH/../../parts/shared/require_twig_components.sh -e"EE" -b"b-7.0.x" -d
