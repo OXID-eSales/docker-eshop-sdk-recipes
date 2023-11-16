@@ -1,0 +1,56 @@
+  apache:
+    platform: linux/x86_64
+    build:
+      context: containers/httpd
+    working_dir: /var/www/
+    volumes:
+      - ./source:/var/www:cached
+    ports:
+      - 80
+      - 443
+
+  php:
+    platform: linux/x86_64
+    build:
+      context: containers/php
+      args:
+        PHP_VERSION: ${PHP_VERSION}
+        HOST_USER_ID: ${HOST_USER_ID}
+        HOST_GROUP_ID: ${HOST_GROUP_ID}
+        HOST_USER_NAME: ${HOST_USER_NAME}
+        HOST_GROUP_NAME: ${HOST_GROUP_NAME}
+    links:
+      - "apache:localhost.local"
+      - "apache:oxideshop.local"
+    volumes:
+      - ./source:/var/www:cached
+      - ./data/php:/var/sync:cached
+      - ./data/composer:/home/${HOST_USER_NAME}/.composer/:cached
+    user: ${HOST_USER_ID}:${HOST_GROUP_ID}
+    depends_on:
+      mailhog:
+        condition: service_started
+      apache:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  mailhog:
+    image: mailhog/mailhog
+    logging:
+      driver: 'none'  # disable saving logs
+    ports:
+      - 1025:1025 # smtp server
+      - 8025:8025 # web ui
+
+  loadbalancer:
+    build:
+      context: containers/loadbalancer
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - apache
+<FRONTEND-APACHE-CONTAINERS>
