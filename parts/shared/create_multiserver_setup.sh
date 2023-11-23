@@ -35,14 +35,9 @@ for number in $( seq 1 $containers )
 do
   cp -rn containers/httpd/ "containers/httpd-frontend-${number}"
 
-  if [ ! -f containers/httpd-frontend-${number}/project.conf ]
-    then
-    cp -n "containers/httpd-frontend-${number}/project.conf.dist" "containers/httpd-frontend-${number}/project.conf"
-
-    perl -pi\
-      -e "s#/var/www/#/var/www/source/#g;"\
-      "containers/httpd-frontend-${number}/project.conf"
-  fi
+  perl -pi\
+    -e "s#/var/www/#/var/www/source/#g;"\
+    "containers/httpd-frontend-${number}/project.conf"
 
   perl -pi\
     -e "s#proxy:fcgi://php#proxy:fcgi://php-frontend-${number}#g;"\
