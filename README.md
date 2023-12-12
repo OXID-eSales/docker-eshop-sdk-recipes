@@ -69,6 +69,12 @@ git commit -a -m"some commit"
 git subtree push --prefix=parts parts master
 ```
 
+## Multiserver configuration
+
+To experiment with multiserver configuration locally you can run either the full recipe example - ``shop/b-7.0.x-apex-multiserver.sh`` - or add the load balancing setup to an existing docker-compose.yml using ``parts/shared/create_multiserver_setup.sh``. This script will accept the ``-c=<some number>`` argument if you want to specify a number of frontend php containers. It will create two by default.
+
+If you wish to run the part script on an existing docker configuration, you will need to manually cleanup the blocks for all services included in ``services/loadbalancer.yml`` as well as any numbered frontend containers if it has been run before in your setup.
+
 ## 6.4 recipes
 
 The recipes for 6.4 modules are available in recipes b-6.4.x-branch. Please check it out, if you want to use those
