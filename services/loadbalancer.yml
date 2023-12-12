@@ -19,9 +19,6 @@
         HOST_GROUP_ID: ${HOST_GROUP_ID}
         HOST_USER_NAME: ${HOST_USER_NAME}
         HOST_GROUP_NAME: ${HOST_GROUP_NAME}
-    links:
-      - "apache:localhost.local"
-      - "apache:oxideshop.local"
     volumes:
       - ./source:/var/www:cached
       - ./data/php:/var/sync:cached
@@ -45,12 +42,30 @@
       - 1025:1025 # smtp server
       - 8025:8025 # web ui
 
+  selenium:
+    platform: linux/x86_64
+    image: 'selenium/standalone-chrome-debug:3.141.59'
+    restart: always
+    shm_size: 500M
+    depends_on:
+      - php
+    ports:
+      - 4444:4444
+      - 5900:5900
+    volumes:
+      - ./source:/var/www:cached
+
   loadbalancer:
     build:
       context: containers/loadbalancer
     restart: always
     ports:
       - 80:80
+    networks:
+      default:
+        aliases:
+          - 'localhost.local'
+          - 'oxideshop.local'
     depends_on:
       - apache
 <FRONTEND-APACHE-CONTAINERS>

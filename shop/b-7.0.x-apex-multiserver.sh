@@ -17,7 +17,6 @@ cd $SCRIPT_PATH/../../../ || exit
 # Prepare services configuration
 make setup
 make file=services/adminer.yml addservice
-make file=services/selenium-chrome.yml addservice
 
 # Configure containers
 perl -pi\
