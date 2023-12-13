@@ -21,6 +21,15 @@ for dir in containers/httpd-frontend-*; do
     fi
 done
 
+# Recreate shared tmp dir to avoid issues with wrong permissions from volume
+# mounts by docker running as root and old session files
+
+if [ -d data/php/tmp ]; then
+  rm -rf data/php/sharedtmp
+fi
+
+mkdir data/php/sharedtmp
+
 # Add new configuration
 
 cp -n containers/loadbalancer/loadbalancer.conf.dist containers/loadbalancer/loadbalancer.conf
