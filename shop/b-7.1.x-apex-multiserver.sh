@@ -26,13 +26,13 @@ perl -pi\
 
 "${SCRIPT_PATH}/../parts/shared/create_multiserver_setup.sh"
 
-"${SCRIPT_PATH}/../parts/shared/prepare_shop_package.sh" -e"${edition}" -b"b-7.0.x"
-"${SCRIPT_PATH}/../parts/shared/require_twig_components.sh" -e"${edition}" -b"b-7.0.x"
+"${SCRIPT_PATH}/../parts/shared/prepare_shop_package.sh" -e"${edition}" -b"b-7.1.x"
+"${SCRIPT_PATH}/../parts/shared/require_twig_components.sh" -e"${edition}" -b"b-7.1.x"
 
-"${SCRIPT_PATH}/../parts/shared/require_theme_dev.sh" -t"apex" -b"b-7.0.x"
+"${SCRIPT_PATH}/../parts/shared/require_theme_dev.sh" -t"apex" -b"b-7.1.x"
 
-"${SCRIPT_PATH}/../parts/shared/require_deprecated_tests_bundle.sh" -e"${edition}" -b"b-7.0.x"
-"${SCRIPT_PATH}/../parts/shared/require_demodata_package.sh" -e"${edition}" -b"b-7.0.x"
+"${SCRIPT_PATH}/../parts/shared/require_deprecated_tests_bundle.sh" -e"${edition}" -b"b-7.1.x"
+"${SCRIPT_PATH}/../parts/shared/require_demodata_package.sh" -e"${edition}" -b"b-7.1.x"
 
 # Install all preconfigured dependencies
 docker compose exec -T php composer update --no-interaction
