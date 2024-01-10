@@ -31,7 +31,6 @@ perl -pi\
 
 "${SCRIPT_PATH}/../parts/shared/require_theme_dev.sh" -t"apex" -b"b-7.1.x"
 
-"${SCRIPT_PATH}/../parts/shared/require_deprecated_tests_bundle.sh" -e"${edition}" -b"b-7.1.x"
 "${SCRIPT_PATH}/../parts/shared/require_demodata_package.sh" -e"${edition}" -b"b-7.1.x"
 
 # Install all preconfigured dependencies
@@ -42,8 +41,5 @@ docker compose exec -T php composer update --no-interaction
 
 docker compose exec -T php bin/oe-console oe:theme:activate apex
 "${SCRIPT_PATH}/../parts/shared/create_admin.sh"
-
-# Install old testing library config required for running old tests
-cp source/vendor/oxid-esales/testing-library/test_config.yml.dist source/test_config.yml
 
 echo "Done!"
