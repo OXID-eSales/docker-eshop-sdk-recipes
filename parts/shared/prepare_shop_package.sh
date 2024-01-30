@@ -54,6 +54,8 @@ if [ $edition = "EE" ]; then
   docker compose exec php composer require oxid-esales/oxideshop-ee:dev-${branch} --no-update
 fi
 
+docker compose exec -T php composer config preferred-install.oxid-esales/* source
+
 if [ $update = true ]; then
   docker compose exec php composer update --no-plugins --no-scripts
 fi
