@@ -3,8 +3,7 @@
     "minimum-stability": "dev",
     "require": {
     },
-    "autoload-dev": {
-    },
+    <autoloadDev>
     "config": {
         "github-protocols": ["https"],
         "allow-plugins": {
