@@ -41,6 +41,8 @@ perl -pi\
 docker compose exec php composer config repositories.oxid-esales/oxideshop-ce git https://github.com/OXID-eSales/oxideshop_ce.git
 docker compose exec php composer require oxid-esales/oxideshop-ce:dev-b-7.0.x --no-update
 $SCRIPT_PATH/../parts/shared/require_theme.sh -t"twig" -b"b-7.0.x"
+docker compose exec php composer require oxid-esales/developer-tools:dev-b-7.0.x --no-update
+
 docker compose exec php composer update --no-interaction
 
 make up
