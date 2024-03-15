@@ -21,18 +21,22 @@ perl -pi\
 
 docker compose up --build -d php
 
-AUTOLOAD_DEV='"autoload-dev": {
+AUTOLOAD_DEV='
       "psr-4": {
-        "OxidEsales\\EshopCommunity\\Tests\\": "./vendor/oxid-esales/oxideshop-ce/tests"
-      }
-    },'
+        "OxidEsales\\\\EshopCommunity\\\\Tests\\\\": "./vendor/oxid-esales/oxideshop-ce/tests"
+      }'
 
-# Escape it for use as a Sed replacement string.
-# (https://stackoverflow.com/questions/29613304/is-it-possible-to-escape-regex-metacharacters-reliably-with-sed)
-IFS= read -d '' -r < <(sed -e ':a' -e '$!{N;ba' -e '}' -e 's/[&/\]/\\&/g; s/\n/\\&/g' <<<"$AUTOLOAD_DEV")
-AUTOLOAD_DEV_ESCAPED=${REPLY%$'\n'}
+cp ${SCRIPT_PATH}/../parts/shared/composer.json.base ./source/composer.json
+perl -pi\
+  -e "s#\"autoload-dev\": {#\"autoload-dev\":{${AUTOLOAD_DEV}#g;"\
+  ./source/composer.json
 
-sed -e "s/\<autoloadDev>/${AUTOLOAD_DEV_ESCAPED}/" ${SCRIPT_PATH}/../parts/shared/composer.json.base > ./source/composer.json
+## Escape it for use as a Sed replacement string.
+## (https://stackoverflow.com/questions/29613304/is-it-possible-to-escape-regex-metacharacters-reliably-with-sed)
+#IFS= read -d '' -r < <(sed -e ':a' -e '$!{N;ba' -e '}' -e 's/[&/\]/\\&/g; s/\n/\\&/g' <<<"$AUTOLOAD_DEV")
+#AUTOLOAD_DEV_ESCAPED=${REPLY%$'\n'}
+#
+#sed -e "s/\<autoloadDev>/${AUTOLOAD_DEV_ESCAPED}/" ${SCRIPT_PATH}/../parts/shared/composer.json.base > ./source/composer.json
 
 docker compose exec php composer config repositories.oxid-esales/oxideshop-ce git https://github.com/OXID-eSales/oxideshop_ce.git
 docker compose exec php composer require oxid-esales/oxideshop-ce:dev-b-7.0.x --no-update
@@ -40,3 +44,9 @@ $SCRIPT_PATH/../parts/shared/require_theme.sh -t"twig" -b"b-7.0.x"
 docker compose exec php composer update --no-interaction
 
 make up
+
+docker compose exec php vendor/bin/oe-console oe:setup:shop --db-host=mysql --db-port=3306 --db-name=example --db-user=root \
+  --db-password=root --shop-url=http://localhost.local/ --shop-directory=/var/www/source/ \
+  --compile-directory=/var/www/source/tmp/
+
+docker compose exec -T php vendor/bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
