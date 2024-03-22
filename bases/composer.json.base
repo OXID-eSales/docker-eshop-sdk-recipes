@@ -1,6 +1,8 @@
 {
     "name": "oxid-esales/oxideshop-project",
     "minimum-stability": "dev",
+    "prefer-stable": true,
+    "version": "1.0.0",
     "require": {
     },
     "autoload-dev": {
