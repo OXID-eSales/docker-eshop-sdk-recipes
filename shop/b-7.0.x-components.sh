@@ -36,9 +36,9 @@ docker compose exec php composer config repositories.oxid-esales/oxideshop-ce gi
 docker compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
 docker compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
 
-docker compose exec php composer require oxid-esales/oxideshop-ce:dev-b-7.0.x --no-update
-docker compose exec php composer require oxid-esales/oxideshop-pe:dev-b-7.0.x --no-update
-docker compose exec php composer require oxid-esales/oxideshop-ee:dev-b-7.0.x --no-update
+docker compose exec php composer require oxid-esales/oxideshop-ce:dev-b-7.0.x-components_recipe-OXDEV-7845 --no-update
+docker compose exec php composer require oxid-esales/oxideshop-pe:dev-b-7.0.x-components_recipe-OXDEV-7845 --no-update
+docker compose exec php composer require oxid-esales/oxideshop-ee:dev-b-7.0.x-components_recipe-OXDEV-7845 --no-update
 docker compose exec php composer require oxid-esales/developer-tools:dev-b-7.0.x --no-update
 
 $SCRIPT_PATH/../parts/shared/require_theme.sh -t"twig-admin" -b"b-7.0.x"
