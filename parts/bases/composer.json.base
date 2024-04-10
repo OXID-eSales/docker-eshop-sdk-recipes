@@ -1,0 +1,20 @@
+{
+    "name": "oxid-esales/oxideshop-project",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "version": "1.0.0",
+    "require": {
+    },
+    "autoload-dev": {
+    },
+    "config": {
+        "github-protocols": ["https"],
+        "allow-plugins": {
+            "oxid-esales/oxideshop-composer-plugin": true,
+            "oxid-esales/oxideshop-unified-namespace-generator": true
+        },
+        "preferred-install": {
+            "oxid-esales/*": "source"
+        }
+    }
+}
