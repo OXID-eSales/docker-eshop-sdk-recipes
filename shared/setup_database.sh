@@ -1,6 +1,6 @@
 SHARED_SCRIPT_PATH=$(dirname $0)
 DEMODATA=1
-CONSOLE_PATH=$( [ -e "bin/oe-console" ] && echo "bin/oe-console" || echo "vendor/bin/oe-console" )
+CONSOLE_PATH=$( [ -e "source/bin/oe-console" ] && echo "bin/oe-console" || echo "vendor/bin/oe-console" )
 
 #Pass arguments to the script
 flags()
