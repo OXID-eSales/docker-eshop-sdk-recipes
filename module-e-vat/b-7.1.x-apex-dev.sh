@@ -22,7 +22,7 @@ make file=services/adminer.yml addservice
 make file=services/selenium-chrome.yml addservice
 make file=services/node.yml addservice
 
-$SCRIPT_PATH/../parts/b-7.1.x/start_shop.sh -e"${edition}"
+$SCRIPT_PATH/../parts/b-7.1.x/start_shop.sh -e"${edition}" -u"false"
 $SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"${edition}" -b"b-7.1.x"
 $SCRIPT_PATH/../parts/shared/require_theme_dev.sh -t"apex" -b"b-7.1.x"
 
