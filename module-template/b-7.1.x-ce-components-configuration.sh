@@ -59,8 +59,13 @@ docker compose exec -T php vendor/bin/oe-console oe:admin:create --admin-email="
 echo -e "\033[1;37m\033[1;42mCreate admin: Admin login: noreply@oxid-esales.com Password: admin\033[0m\n"
 
 # Register all related project packages git repositories
-cp ${SCRIPT_PATH}/../parts/bases/vcs.xml.base .idea/vcs.xml
-perl -pi\
-  -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/oxideshop-ce" vcs="Git" />\n  </component>#g;'\
-  -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/module-template" vcs="Git" />\n  </component>#g;'\
-  .idea/vcs.xml
+if [ -f "${SCRIPT_PATH}/../parts/bases/vcs.xml.base" ]; then
+    cp "${SCRIPT_PATH}/../parts/bases/vcs.xml.base" .idea/vcs.xml
+    perl -pi\
+      -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/oxideshop-ce" vcs="Git" />\n  </component>#g;'\
+      -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/module-template" vcs="Git" />\n  </component>#g;'\
+      .idea/vcs.xml
+    echo "File vcs.xml copied successfully."
+else
+    echo "Error: vcs.xml.base file not found."
+fi
