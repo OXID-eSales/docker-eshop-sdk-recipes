@@ -5,7 +5,10 @@
     "version": "1.0.0",
     "require": {
     },
-    "autoload-dev": {
+    "autoload-dev":{
+      "psr-4": {
+        "OxidEsales\\EshopCommunity\\Tests\\": "./vendor/oxid-esales/oxideshop-ce/tests"
+      }
     },
     "config": {
         "github-protocols": ["https"],
