@@ -9,13 +9,11 @@ make setup
 make addbasicservices
 make file=services/adminer.yml addservice
 
-$SCRIPT_PATH/../../parts/b-7.0.x/start_shop.sh -eEE
+$SCRIPT_PATH/../../parts/b-7.1.x/start_shop.sh -e"EE"
 $SCRIPT_PATH/../../parts/shared/require_twig_components.sh -e"EE" -b"b-7.1.x"
 $SCRIPT_PATH/../../parts/shared/require_theme.sh -t"twig" -b"b-7.1.x"
 
-# Clone GraphQL modules to modules directory
-git clone https://github.com/OXID-eSales/graphql-base-module.git --branch=b-7.1.x source/dev-packages/graphql-base
-git clone https://github.com/OXID-eSales/graphql-storefront-module.git --branch=b-7.1.x source/dev-packages/graphql-storefront
+$SCRIPT_PATH/../parts/shared/require_demodata_package.sh -e"EE" -b"b-7.1.x"
 
 # Clone documentation and add Sphinx container
 git clone https://github.com/OXID-eSales/oxapi-documentation source/dev-packages/oxapi-documentation
@@ -23,21 +21,18 @@ make docpath=./source/dev-packages/oxapi-documentation addsphinxservice
 make up
 
 # Configure modules in composer
+git clone https://github.com/OXID-eSales/graphql-base-module.git --branch=b-7.1.x source/dev-packages/graphql-base
 docker compose exec -T \
   php composer config repositories.oxid-esales/grapqhl-base \
   --json '{"type":"path", "url":"./dev-packages/graphql-base", "options": {"symlink": true}}'
+docker compose exec -T php composer require oxid-esales/graphql-base:* --no-update
 
+# Clone GraphQL modules to modules directory
+git clone https://github.com/OXID-eSales/graphql-storefront-module.git --branch=b-7.1.x source/dev-packages/graphql-storefront
 docker compose exec -T \
   php composer config repositories.oxid-esales/grapqhl-storefront \
   --json '{"type":"path", "url":"./dev-packages/graphql-storefront", "options": {"symlink": true}}'
-
-docker compose exec -T \
-  php composer config repositories.oxid-esales/oxideshop-demodata-ee \
-  --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee"}'
-
-docker compose exec -T php composer require oxid-esales/graphql-base:* --no-update
 docker compose exec -T php composer require oxid-esales/graphql-storefront:* --no-update
-docker compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-b-7.1.x --no-update
 
 # Configure Tests dependencies
 docker compose exec -T php composer require codeception/module-rest ^3.3.0 --dev --no-update
