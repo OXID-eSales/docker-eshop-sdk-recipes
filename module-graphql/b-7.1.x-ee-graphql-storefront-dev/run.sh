@@ -13,7 +13,7 @@ $SCRIPT_PATH/../../parts/b-7.1.x/start_shop.sh -e"EE"
 $SCRIPT_PATH/../../parts/shared/require_twig_components.sh -e"EE" -b"b-7.1.x"
 $SCRIPT_PATH/../../parts/shared/require_theme.sh -t"twig" -b"b-7.1.x"
 
-$SCRIPT_PATH/../parts/shared/require_demodata_package.sh -e"EE" -b"b-7.1.x"
+$SCRIPT_PATH/../../parts/shared/require_demodata_package.sh -e"EE" -b"b-7.1.x"
 
 # Clone documentation and add Sphinx container
 git clone https://github.com/OXID-eSales/oxapi-documentation source/dev-packages/oxapi-documentation
