@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Deprecated. Use compilation style installation instead of this.
+
 # Flags possible: -e for edition. Example: -eEE
 
 update="false"
