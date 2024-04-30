@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# Flags possible:
+# -e for shop edition. Possible values: CE/PE/EE
+
+edition='CE'
+while getopts e: flag; do
+  case "${flag}" in
+  e) edition=${OPTARG} ;;
+  *) ;;
+  esac
+done
+
 SCRIPT_PATH=$(dirname ${BASH_SOURCE[0]})
 
 cd $SCRIPT_PATH/../../../ || exit
@@ -19,53 +30,43 @@ perl -pi\
   -e 's#/var/www/#/var/www/source/#g;'\
   containers/httpd/project.conf
 
+perl -pi\
+  -e 's#PHP_VERSION=.*#PHP_VERSION=8.1#g;'\
+  .env
+
 mkdir source
 docker compose up --build -d php
 
-AUTOLOAD_DEV='
-      "psr-4": {
-        "OxidEsales\\\\EshopCommunity\\\\Tests\\\\": "./vendor/oxid-esales/oxideshop-ce/tests"
-      }'
-
 cp ${SCRIPT_PATH}/../parts/bases/composer.json.base ./source/composer.json
-perl -pi\
-  -e "s#\"autoload-dev\": {#\"autoload-dev\":{${AUTOLOAD_DEV}#g;"\
-  ./source/composer.json
 
-docker compose exec php composer config repositories.oxid-esales/oxideshop-ce git https://github.com/OXID-eSales/oxideshop_ce.git
-docker compose exec php composer require oxid-esales/oxideshop-ce:dev-b-7.0.x --no-update
-docker compose exec php composer require oxid-esales/developer-tools:dev-b-7.0.x --no-update
+$SCRIPT_PATH/../parts/shared/require_shop_edition_packages.sh -e"${edition}" -v"dev-b-7.0.x"
+$SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"${edition}" -b"b-7.0.x"
+$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/developer-tools" -v"dev-b-7.0.x"
+$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/apex-theme" -v"dev-b-7.0.x"
 
-docker compose exec php composer require oxid-esales/graphql-configuration-access:dev-b-7.0.x-new_dev_recipes-OXDEV-7845
+$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/graphql-base" -g"https://github.com/OXID-eSales/graphql-base-module" -v"dev-b-7.0.x"
+$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/graphql-configuration-access" -g"https://github.com/OXID-eSales/graphql-configuration-access.git" -v"dev-b-7.0.x-new_dev_recipes-OXDEV-7845"
 
-$SCRIPT_PATH/../parts/shared/require_theme.sh -t"twig-admin" -b"b-7.0.x"
-$SCRIPT_PATH/../parts/shared/require_theme.sh -t"apex" -b"b-7.0.x"
 docker compose exec php composer update --no-interaction
 
 make up
 
-docker compose exec php vendor/bin/oe-console oe:setup:shop --db-host=mysql --db-port=3306 --db-name=example --db-user=root \
-  --db-password=root --shop-url=http://localhost.local/ --shop-directory=/var/www/source/ \
-  --compile-directory=/var/www/source/tmp/
-
-docker compose exec -T php vendor/bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
+$SCRIPT_PATH/../parts/shared/setup_database.sh
 
 docker compose exec -T php vendor/bin/oe-console oe:module:activate oe_graphql_base
 docker compose exec -T php vendor/bin/oe-console oe:module:activate oe_graphql_configuration_access
+
 docker compose exec -T php vendor/bin/oe-console oe:theme:activate apex
 
-docker compose exec -T php vendor/bin/oe-console oe:admin:create --admin-email="noreply@oxid-esales.com" --admin-password="admin"
-echo -e "\033[1;37m\033[1;42mCreate admin: Admin login: noreply@oxid-esales.com Password: admin\033[0m\n"
-
-# Add the php-fps fix for Graphql authorization
-perl -pi\
-  -e 'print "SetEnvIf Authorization \"(.*)\" HTTP_AUTHORIZATION=\$1\n\n" if $. == 1'\
-  source/source/.htaccess
+$SCRIPT_PATH/../parts/shared/create_admin.sh
 
 # Register all related project packages git repositories
-cp ${SCRIPT_PATH}/../parts/bases/vcs.xml.base .idea/vcs.xml
+mkdir -p .idea; mkdir -p source/.idea; cp "${SCRIPT_PATH}/../parts/bases/vcs.xml.base" .idea/vcs.xml
 perl -pi\
   -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/oxideshop-ce" vcs="Git" />\n  </component>#g;'\
+  -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/oxideshop-pe" vcs="Git" />\n  </component>#g;'\
+  -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/oxideshop-ee" vcs="Git" />\n  </component>#g;'\
   -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/graphql-base" vcs="Git" />\n  </component>#g;'\
   -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/graphql-configuration-access" vcs="Git" />\n  </component>#g;'\
   .idea/vcs.xml
+cp .idea/vcs.xml source/.idea/vcs.xml; perl -pi -e 's#/source/vendor/#/vendor/#g;' source/.idea/vcs.xml
