@@ -34,6 +34,10 @@ perl -pi\
   -e 's#PHP_VERSION=.*#PHP_VERSION=8.1#g;'\
   .env
 
+perl -pi\
+  -e 'print "SetEnvIf Authorization \"(.*)\" HTTP_AUTHORIZATION=\$1\n\n" if $. == 1'\
+  source/source/.htaccess
+
 mkdir source
 docker compose up --build -d php
 
