@@ -34,10 +34,6 @@ perl -pi\
   -e 's#PHP_VERSION=.*#PHP_VERSION=8.1#g;'\
   .env
 
-perl -pi\
-  -e 'print "SetEnvIf Authorization \"(.*)\" HTTP_AUTHORIZATION=\$1\n\n" if $. == 1'\
-  source/source/.htaccess
-
 mkdir source
 docker compose up --build -d php
 
@@ -52,6 +48,10 @@ $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/graphql-base" -g"https://
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/graphql-configuration-access" -g"https://github.com/OXID-eSales/graphql-configuration-access.git" -v"dev-b-7.0.x-new_dev_recipes-OXDEV-7845"
 
 docker compose exec php composer update --no-interaction
+
+perl -pi\
+  -e 'print "SetEnvIf Authorization \"(.*)\" HTTP_AUTHORIZATION=\$1\n\n" if $. == 1'\
+  source/source/.htaccess
 
 make up
 
