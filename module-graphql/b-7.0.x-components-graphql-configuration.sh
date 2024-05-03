@@ -55,7 +55,7 @@ perl -pi\
 
 make up
 
-$SCRIPT_PATH/../parts/shared/setup_database.sh
+$SCRIPT_PATH/../parts/shared/setup_database.sh --no-demodata
 
 docker compose exec -T php vendor/bin/oe-console oe:module:activate oe_graphql_base
 docker compose exec -T php vendor/bin/oe-console oe:module:activate oe_graphql_configuration_access
