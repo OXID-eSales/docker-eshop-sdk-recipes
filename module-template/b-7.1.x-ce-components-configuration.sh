@@ -36,7 +36,7 @@ docker compose exec php composer config repositories.oxid-esales/oxideshop-ce gi
 docker compose exec php composer require oxid-esales/oxideshop-ce:dev-b-7.1.x --no-update
 docker compose exec php composer require oxid-esales/developer-tools:dev-b-7.1.x --no-update
 
-docker compose exec php composer require oxid-esales/module-template:dev-b-7.1.x_compilation_installation
+docker compose exec php composer require oxid-esales/module-template:dev-b-7.1.x
 
 $SCRIPT_PATH/../parts/shared/require_theme.sh -t"twig-admin" -b"b-7.1.x"
 $SCRIPT_PATH/../parts/shared/require_theme.sh -t"apex" -b"b-7.1.x"
