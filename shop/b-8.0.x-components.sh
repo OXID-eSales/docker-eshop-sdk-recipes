@@ -19,6 +19,7 @@ cd $SCRIPT_PATH/../../../ || exit
 make setup
 make addbasicservices
 make file=services/adminer.yml addservice
+make file=services/node.yml addservice
 make file=services/selenium-chrome.yml addservice
 
 perl -pi\
@@ -38,12 +39,12 @@ docker compose up --build -d php
 
 cp ${SCRIPT_PATH}/../parts/bases/composer.json.base ./source/composer.json
 
-$SCRIPT_PATH/../parts/shared/require_shop_edition_packages.sh -e"${edition}" -v"dev-b-7.0.x"
-$SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"${edition}" -b"b-7.0.x"
-$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/developer-tools" -v"dev-b-7.0.x"
-$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/apex-theme" -v"dev-b-7.0.x"
+$SCRIPT_PATH/../parts/shared/require_shop_edition_packages.sh -e"${edition}" -v"dev-b-8.0.x"
+$SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"${edition}" -b"b-8.0.x"
+$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/developer-tools" -v"dev-b-8.0.x"
+$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/apex-theme" -v"dev-b-8.0.x"
 
-$SCRIPT_PATH/../parts/shared/require_demodata_package.sh -e"${edition}" -b"b-7.0.x"
+$SCRIPT_PATH/../parts/shared/require_demodata_package.sh -e"${edition}" -b"b-8.0.x"
 
 docker compose exec php composer update --no-interaction
 make up
