@@ -44,7 +44,7 @@ $SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"${edition}" -b"b-7.1.
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/developer-tools" -v"dev-b-7.1.x"
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/apex-theme" -v"dev-b-7.1.x"
 
-$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/graphql-base" -g"https://github.com/OXID-eSales/graphql-base-module" -v"dev-b-7.1.x-cleanup-workflow-OXDEV-8287"
+$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/graphql-base" -g"https://github.com/OXID-eSales/graphql-base-module" -v"dev-b-7.1.x"
 
 docker compose exec php composer update --no-interaction
 
