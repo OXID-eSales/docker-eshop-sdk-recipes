@@ -33,7 +33,7 @@ $SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"CE" -b"b-7.1.x"
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/developer-tools" -v"dev-b-7.1.x"
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/apex-theme" -v"dev-b-7.1.x"
 
-$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/geo-blocking-module" -g"https://github.com/OXID-eSales/geo-blocking-module.git" -v"dev-b-7.0.x"
+$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/geo-blocking-module" -g"https://github.com/OXID-eSales/geo-blocking-module.git" -v"dev-b-7.1.x-compatible-to-7.1-OXDEV-8234"
 
 docker compose exec php composer update --no-interaction
 
