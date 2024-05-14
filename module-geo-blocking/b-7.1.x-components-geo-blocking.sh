@@ -1,4 +1,14 @@
 #!/bin/bash
+# Flags possible:
+# -e for shop edition. Possible values: CE/EE
+
+edition='CE'
+while getopts e: flag; do
+  case "${flag}" in
+  e) edition=${OPTARG} ;;
+  *) ;;
+  esac
+done
 
 SCRIPT_PATH=$(dirname ${BASH_SOURCE[0]})
 
@@ -28,12 +38,11 @@ docker compose up --build -d php
 
 cp ${SCRIPT_PATH}/../parts/bases/composer.json.base ./source/composer.json
 
-$SCRIPT_PATH/../parts/shared/require_shop_edition_packages.sh -e"CE" -v"dev-b-7.1.x"
-$SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"CE" -b"b-7.1.x"
+$SCRIPT_PATH/../parts/shared/require_shop_edition_packages.sh -e"${edition}" -v"dev-b-7.1.x"
+$SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"${edition}" -b"b-7.1.x"
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/developer-tools" -v"dev-b-7.1.x"
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/apex-theme" -v"dev-b-7.1.x"
-
-$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/geo-blocking-module" -g"https://github.com/OXID-eSales/geo-blocking-module.git" -v"dev-b-7.1.x-compatible-to-7.1-OXDEV-8234"
+$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/geo-blocking-module" -g"https://github.com/OXID-eSales/geo-blocking-module.git" -v"dev-b-7.1.x"
 
 docker compose exec php composer update --no-interaction
 
@@ -43,10 +52,9 @@ perl -pi\
 
 make up
 
-$SCRIPT_PATH/../parts/shared/setup_database.sh
+$SCRIPT_PATH/../parts/shared/setup_database.sh --no-demodata
 
 docker compose exec -T php vendor/bin/oe-console oe:module:activate oegeoblocking
-
 docker compose exec -T php vendor/bin/oe-console oe:theme:activate apex
 
 $SCRIPT_PATH/../parts/shared/create_admin.sh
@@ -55,6 +63,8 @@ $SCRIPT_PATH/../parts/shared/create_admin.sh
 mkdir -p .idea; mkdir -p source/.idea; cp "${SCRIPT_PATH}/../parts/bases/vcs.xml.base" .idea/vcs.xml
 perl -pi\
   -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/oxideshop-ce" vcs="Git" />\n  </component>#g;'\
+  -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/oxideshop-pe" vcs="Git" />\n  </component>#g;'\
+  -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/oxideshop-ee" vcs="Git" />\n  </component>#g;'\
   -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/geo-blocking-module" vcs="Git" />\n  </component>#g;'\
   .idea/vcs.xml
 cp .idea/vcs.xml source/.idea/vcs.xml; perl -pi -e 's#/source/vendor/#/vendor/#g;' source/.idea/vcs.xml
