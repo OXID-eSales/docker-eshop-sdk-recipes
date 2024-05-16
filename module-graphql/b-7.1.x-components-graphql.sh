@@ -3,7 +3,7 @@
 # Flags possible:
 # -e for shop edition. Possible values: CE/PE/EE
 
-edition='CE'
+edition='EE'
 while getopts e: flag; do
   case "${flag}" in
   e) edition=${OPTARG} ;;
@@ -45,6 +45,12 @@ $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/developer-tools" -v"dev-b
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/apex-theme" -v"dev-b-7.1.x"
 
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/graphql-base" -g"https://github.com/OXID-eSales/graphql-base-module" -v"dev-b-7.1.x"
+$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/graphql-storefront" -g"https://github.com/OXID-eSales/graphql-base-module" -v"dev-b-7.1.x"
+$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/graphql-configuration-access" -g"https://github.com/OXID-eSales/graphql-configuration-access.git" -v"dev-b-7.1.x"
+
+git clone https://github.com/OXID-eSales/oxapi-documentation source/documentation/oxapi-documentation
+make docpath=./source/documentation/oxapi-documentation addsphinxservice
+make up
 
 docker compose exec php composer update --no-interaction
 
@@ -54,9 +60,11 @@ perl -pi\
 
 make up
 
-$SCRIPT_PATH/../parts/shared/setup_database.sh
+$SCRIPT_PATH/../parts/shared/setup_database.sh --no-demodata
 
 docker compose exec -T php vendor/bin/oe-console oe:module:activate oe_graphql_base
+docker compose exec -T php vendor/bin/oe-console oe:module:activate oe_graphql_storefront
+docker compose exec -T php vendor/bin/oe-console oe:module:activate oe_graphql_configuration_access
 
 docker compose exec -T php vendor/bin/oe-console oe:theme:activate apex
 
@@ -69,5 +77,8 @@ perl -pi\
   -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/oxideshop-pe" vcs="Git" />\n  </component>#g;'\
   -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/oxideshop-ee" vcs="Git" />\n  </component>#g;'\
   -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/graphql-base" vcs="Git" />\n  </component>#g;'\
+  -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/graphql-storefront" vcs="Git" />\n  </component>#g;'\
+  -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/graphql-configuration-access" vcs="Git" />\n  </component>#g;'\
+  -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/documentation/oxapi-documentation" vcs="Git" />\n  </component>#g;'\
   .idea/vcs.xml
 cp .idea/vcs.xml source/.idea/vcs.xml; perl -pi -e 's#/source/vendor/#/vendor/#g;' source/.idea/vcs.xml
