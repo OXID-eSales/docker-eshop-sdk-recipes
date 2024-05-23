@@ -20,6 +20,8 @@ if [ -z ${branch+x} ] || [ -z ${theme+x} ]; then
   exit 1
 fi
 
+mkdir -p source/source/out/
+
 if [ $theme = "twig-admin" ]; then
   git clone https://github.com/OXID-eSales/twig-admin-theme --branch="$branch" source/source/Application/views/admin_twig
   docker compose exec -T \
