@@ -44,8 +44,8 @@ $SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"${edition}" -b"b-7.1.
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/developer-tools" -v"dev-b-7.1.x"
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/apex-theme" -v"dev-b-7.1.x"
 
-$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/graphql-base" -g"https://github.com/OXID-eSales/graphql-base-module" -v"dev-b-7.1.x"
-$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/graphql-storefront" -g"https://github.com/OXID-eSales/graphql-base-module" -v"dev-b-7.1.x"
+$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/graphql-base" -g"https://github.com/OXID-eSales/graphql-base-module.git" -v"dev-b-7.1.x"
+$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/graphql-storefront" -g"https://github.com/OXID-eSales/graphql-storefront-module.git" -v"dev-b-7.1.x"
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/graphql-configuration-access" -g"https://github.com/OXID-eSales/graphql-configuration-access.git" -v"dev-b-7.1.x"
 
 git clone https://github.com/OXID-eSales/oxapi-documentation source/documentation/oxapi-documentation
