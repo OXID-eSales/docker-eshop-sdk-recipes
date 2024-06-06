@@ -1,0 +1,48 @@
+name: Auto trigger on push
+
+on: push
+
+jobs:
+  changed-files:
+    name: Find changed recipes
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.changed-files.outputs.all_changed_files != '[]' && steps.changed-files.outputs.all_changed_files || '["module-template/b-7.1.x-ce-components-configuration.sh"]' }}
+    steps:
+      - name: Checkout recipes
+        uses: actions/checkout@v4
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files: '**/*.sh'
+          files_ignore: 'parts/**'
+          matrix: true
+
+  build:
+    name: Build the recipe
+    needs: [ changed-files ]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        files: ${{ fromJSON(needs.changed-files.outputs.matrix) }}
+
+    steps:
+      - name: Checkout SDK
+        uses: actions/checkout@v4
+        with:
+          repository: OXID-eSales/docker-eshop-sdk
+
+      - name: Checkout recipes
+        uses: actions/checkout@v4
+        with:
+          path: recipes/oxid-esales
+
+      - name: Run the recipe
+        run: './recipes/oxid-esales/${{ matrix.files }} -e CE'
+
+      - name: Test homepage
+        run: |
+          sudo echo "127.0.0.1 localhost.local" | sudo tee -a /etc/hosts
+          curl -s -N http://localhost.local | grep -q '<div>OXID Online Shop - Alles rund um das Thema Wassersport, Sportbekleidung und Mode </div>'
+          test ! -f source/source/oxideshop.log
