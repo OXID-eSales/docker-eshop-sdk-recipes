@@ -41,6 +41,8 @@ cp ${SCRIPT_PATH}/../parts/bases/composer.json.base ./source/composer.json
 
 $SCRIPT_PATH/../parts/shared/require_shop_edition_packages.sh -e"${edition}" -v"dev-b-7.1.x"
 $SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"${edition}" -b"b-7.1.x"
+$SCRIPT_PATH/../parts/shared/require_demodata_package.sh -e"${edition}" -b"master"
+
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/developer-tools" -v"dev-b-7.1.x"
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/apex-theme" -v"dev-b-7.1.x"
 
@@ -60,7 +62,7 @@ perl -pi\
 
 make up
 
-$SCRIPT_PATH/../parts/shared/setup_database.sh --no-demodata
+$SCRIPT_PATH/../parts/shared/setup_database.sh
 
 docker compose exec -T php vendor/bin/oe-console oe:module:activate oe_graphql_base
 docker compose exec -T php vendor/bin/oe-console oe:module:activate oe_graphql_storefront
