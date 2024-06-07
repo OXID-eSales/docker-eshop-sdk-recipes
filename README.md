@@ -9,6 +9,8 @@ Check if other docker projects are stopped! If you have something running, ports
 For recipes that involves private repositories, you will need the Github token which have access to those repositories.
 In case Github credentials are asked, put your username and the **Github Token in place of password**!
 
+Use other then **root** user, as composer and other parts of the system (like php container) may be very unhappy meeting one!
+
 Also, consider preconfiguring the git authentication to be cached globally. It will help a lot with recipes where several private repositories are involved:
 ```
 git config --global credential.helper cache
