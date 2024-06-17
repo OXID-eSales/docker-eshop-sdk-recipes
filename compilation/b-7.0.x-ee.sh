@@ -43,5 +43,4 @@ docker compose exec -T php vendor/bin/oe-console oe:module:activate ddoevisualcm
 
 $SCRIPT_PATH/../parts/shared/create_admin.sh
 
-echo "Warning! Activate theme in the Admin!"
 echo "Done!"
