@@ -53,7 +53,7 @@ docker compose exec php vendor/bin/oe-console oe:setup:shop --db-host=mysql --db
 docker compose exec -T php vendor/bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
 
 docker compose exec -T php vendor/bin/oe-console oe:module:activate oe_moduletemplate
-docker compose exec -T php vendor/bin/oe-console oe:theme:activate apex
+#docker compose exec -T php vendor/bin/oe-console oe:theme:activate apex
 
 docker compose exec -T php vendor/bin/oe-console oe:admin:create --admin-email="noreply@oxid-esales.com" --admin-password="admin"
 echo -e "\033[1;37m\033[1;42mCreate admin: Admin login: noreply@oxid-esales.com Password: admin\033[0m\n"
