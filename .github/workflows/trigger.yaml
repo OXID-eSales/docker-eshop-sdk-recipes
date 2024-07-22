@@ -44,5 +44,14 @@ jobs:
       - name: Test homepage
         run: |
           sudo echo "127.0.0.1 localhost.local" | sudo tee -a /etc/hosts
-          curl -s -N http://localhost.local | grep -q '<div>OXID Online Shop - Alles rund um das Thema Wassersport, Sportbekleidung und Mode </div>'
-          test ! -f source/source/oxideshop.log
+          curl -s -N http://localhost.local | grep -q \
+            -e 'OXID Online Shop - Alles rund um das Thema Wassersport, Sportbekleidung und Mode' \
+            -e 'OXID Online Demoshop - Ihr zuverlässiger Partner für Fahrzeuge, Ersatzteile und Merchandise'
+
+      - name: Dump log
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oxideshop.log
+          path: source/**/log/oxideshop.log
+          if-no-files-found: ignore
