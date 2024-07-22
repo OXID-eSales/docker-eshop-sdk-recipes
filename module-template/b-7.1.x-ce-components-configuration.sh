@@ -40,17 +40,17 @@ docker compose exec php composer require oxid-esales/module-template:dev-b-7.1.x
 
 $SCRIPT_PATH/../parts/shared/require_theme.sh -t"twig-admin" -b"b-7.1.x"
 $SCRIPT_PATH/../parts/shared/require_theme.sh -t"apex" -b"b-7.1.x"
+$SCRIPT_PATH/../parts/shared/require_demodata_package.sh -e"CE" -b"b-7.1.x"
 docker compose exec php composer update --no-interaction
 
 make up
-
-$SCRIPT_PATH/../parts/shared/require_demodata_package.sh -e"ce" -b"b-7.1.x"
 
 docker compose exec php vendor/bin/oe-console oe:setup:shop --db-host=mysql --db-port=3306 --db-name=example --db-user=root \
   --db-password=root --shop-url=http://localhost.local/ --shop-directory=/var/www/source/ \
   --compile-directory=/var/www/source/tmp/
 
 docker compose exec -T php vendor/bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
+docker compose exec -T php vendor/bin/oe-console oe:setup:demodata
 
 docker compose exec -T php vendor/bin/oe-console oe:module:activate oe_moduletemplate
 docker compose exec -T php vendor/bin/oe-console oe:theme:activate apex
