@@ -62,7 +62,7 @@ perl -pi\
   -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/oxideshop-ce" vcs="Git" />\n  </component>#g;'\
   -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/oxideshop-pe" vcs="Git" />\n  </component>#g;'\
   -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/oxideshop-ee" vcs="Git" />\n  </component>#g;'\
-  -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/geo-blocking-module" vcs="Git" />\n  </component>#g;'\
+  -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/vendor/oxid-esales/gdpr-optin-module" vcs="Git" />\n  </component>#g;'\
   -e 's#</component>#<mapping directory="\$PROJECT_DIR\$/source/source/Application/views/apex" vcs="Git" />\n  </component>#g;'\
   .idea/vcs.xml
 cp .idea/vcs.xml source/.idea/vcs.xml; perl -pi -e 's#/source/vendor/#/vendor/#g;' source/.idea/vcs.xml
