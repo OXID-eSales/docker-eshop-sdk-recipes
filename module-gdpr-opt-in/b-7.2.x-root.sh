@@ -22,7 +22,7 @@ make file=services/selenium-chrome.yml addservice
 # Configure containers
 perl -pi\
   -e 's#error_reporting = .*#error_reporting = E_ALL ^ E_WARNING ^ E_DEPRECATED#g;'\
-  containers/php-fpm/custom.ini
+  containers/php/custom.ini
 
 perl -pi\
   -e 's#/var/www/#/var/www/source/#g;'\
