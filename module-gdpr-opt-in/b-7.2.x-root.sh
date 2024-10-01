@@ -35,7 +35,7 @@ perl -pi\
 mkdir source
 docker compose up --build -d php
 
-git clone https://github.com/OXID-eSales/gdpr-optin-module ./source -b b-7.2.x-root-experiment
+git clone https://github.com/OXID-eSales/gdpr-optin-module ./source -b b-7.2.x
 
 $SCRIPT_PATH/../parts/shared/require_shop_edition_packages.sh -e"${edition}" -v"dev-b-7.2.x"
 $SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"${edition}" -b"b-7.2.x"
