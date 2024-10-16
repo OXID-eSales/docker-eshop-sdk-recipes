@@ -41,7 +41,7 @@ echo MyProject && git clone https://github.com/OXID-eSales/docker-eshop-sdk.git 
 
 2. Clone recipes
 ```
-git clone https://github.com/OXID-eSales/docker-eshop-sdk-recipes recipes/oxid-esales
+git clone --recurse-submodules https://github.com/OXID-eSales/docker-eshop-sdk-recipes recipes/oxid-esales
 ```
 
 3. And last - run the desired recipe, for example:
