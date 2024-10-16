@@ -1,0 +1,4 @@
+[submodule "parts"]
+	path = parts
+	url = https://github.com/OXID-eSales/docker-eshop-sdk-recipe-parts
+	branch = master
