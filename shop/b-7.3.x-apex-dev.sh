@@ -27,6 +27,10 @@ perl -pi\
   -e 's#error_reporting = .*#error_reporting = E_ALL ^ E_WARNING ^ E_DEPRECATED#g;'\
   containers/php/custom.ini
 
+perl -pi\
+  -e 's#PHP_VERSION=.*#PHP_VERSION=8.2#g;'\
+  .env
+
 "${SCRIPT_PATH}/../parts/shared/prepare_shop_package.sh" -e"${edition}" -b"${branch}"
 "${SCRIPT_PATH}/../parts/shared/require_twig_components.sh" -e"${edition}" -b"${branch}"
 
