@@ -51,7 +51,7 @@ echo "Done!"
 
 # after tests were executed sometimes reseting the db or cache is needed
 # afterwards
-# unit tests: test --testsuite Unit
-# integration tests: test --testsuite Integration
+# unit tests: vendor/bin/phpunit --testsuite Unit
+# integration tests: vendor/bin/phpunit --testsuite Integration
 # codeception tests: SELENIUM_SERVER_HOST=selenium BROWSER_NAME=chrome THEME_ID=apex vendor/bin/codecept run -c tests/codeception.yml -g xyz
 # can be executed
