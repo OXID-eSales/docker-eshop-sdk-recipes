@@ -37,6 +37,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           path: recipes/oxid-esales
+          submodules: 'true'
 
       - name: Run the recipe
         run: './recipes/oxid-esales/${{ matrix.files }} -e CE'
