@@ -41,7 +41,6 @@ cp ${SCRIPT_PATH}/../parts/bases/composer.json.base ./source/composer.json
 
 $SCRIPT_PATH/../parts/shared/require_shop_edition_packages.sh -e"${edition}" -v"dev-b-7.2.x"
 $SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"${edition}" -b"b-7.2.x"
-$SCRIPT_PATH/../parts/shared/require_demodata_package.sh -e"${edition}" -b"master"
 
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/developer-tools" -v"dev-b-7.2.x"
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/apex-theme" -v"dev-b-7.2.x"
@@ -49,6 +48,7 @@ $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/apex-theme" -v"dev-b-7.2.
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/graphql-base" -g"https://github.com/OXID-eSales/graphql-base-module.git" -v"dev-b-7.2.x"
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/graphql-storefront" -g"https://github.com/OXID-eSales/graphql-storefront-module.git" -v"dev-b-7.2.x"
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/graphql-configuration-access" -g"https://github.com/OXID-eSales/graphql-configuration-access.git" -v"dev-b-7.2.x"
+$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/graphql-storefront-administration" -g"https://github.com/OXID-eSales/graphql-storefront-administration.git" -v"dev-b-7.2.x-refactoring-OXDEV-8460"
 
 #master branch of demodata is required for tests.
 #$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/oxideshop-demodata-ee" -g"https://github.com/OXID-eSales/oxideshop_demodata_ee" -v"dev-master"
@@ -65,11 +65,12 @@ perl -pi\
 
 make up
 
-$SCRIPT_PATH/../parts/shared/setup_database.sh
+$SCRIPT_PATH/../parts/shared/setup_database.sh --no-demodata
 
 docker compose exec -T php vendor/bin/oe-console oe:module:activate oe_graphql_base
 docker compose exec -T php vendor/bin/oe-console oe:module:activate oe_graphql_storefront
 docker compose exec -T php vendor/bin/oe-console oe:module:activate oe_graphql_configuration_access
+docker compose exec -T php vendor/bin/oe-console oe:module:activate oe_graphql_storefront_administration
 
 docker compose exec -T php vendor/bin/oe-console oe:theme:activate apex
 
