@@ -36,7 +36,7 @@ perl -pi\
 mkdir source
 docker compose up --build -d php
 
-git clone https://github.com/OXID-eSales/usercentrics ./source -b b-7.3.x-imrpove-performance-OXDEV-8669
+git clone https://github.com/OXID-eSales/usercentrics ./source -b b-7.3.x
 
 $SCRIPT_PATH/../parts/shared/require_shop_edition_packages.sh -e"${edition}" -v"dev-b-7.3.x"
 $SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"${edition}" -b"b-7.3.x"
