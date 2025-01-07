@@ -39,18 +39,28 @@ docker compose up --build -d php
 git clone https://github.com/OXID-eSales/graphql-base-module ./source -b b-7.3.x
 
 $SCRIPT_PATH/../parts/shared/require_shop_edition_packages.sh -e"${edition}" -v"dev-b-7.3.x"
-$SCRIPT_PATH/../parts/shared/require_compilation.sh -e"${edition}" -v"dev-b-7.3.x"
 $SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"${edition}" -b"b-7.3.x"
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/developer-tools" -v"dev-b-7.3.x"
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/oxideshop-doctrine-migration-wrapper" -v"dev-b-7.3.x"
 $SCRIPT_PATH/../parts/shared/require_theme_dev.sh -t"apex" -b"b-7.3.x"
-$SCRIPT_PATH/../parts/shared/require_demodata_package.sh -e"${edition}" -b"b-7.3.x"
 
 git clone https://github.com/OXID-eSales/oxapi-documentation source/documentation/oxapi-documentation
 make docpath=./source/documentation/oxapi-documentation addsphinxservice
 
 docker-compose exec -T -w /var/www php \
        composer config allow-plugins.oxid-esales/oxideshop-composer-plugin true
+
+perl -pi -e '
+    BEGIN {
+        $inserted = 0;
+        $autoload_dev = qq(  "autoload-dev": {\n    "psr-4": {\n      "OxidEsales\\\\EshopCommunity\\\\Tests\\\\": "./vendor/oxid-esales/oxideshop-ce/tests"\n    }\n  },\n);
+    }
+    if (!$inserted && $_ =~ /"repositories":/) {
+        $_ = $autoload_dev . $_;
+        $inserted = 1;
+    }
+' source/composer.json
+
 make up
 
 docker compose exec php composer update --no-interaction
@@ -58,8 +68,6 @@ docker compose exec php composer update --no-interaction
 perl -pi\
   -e 'print "SetEnvIf Authorization \"(.*)\" HTTP_AUTHORIZATION=\$1\n\n" if $. == 1'\
   source/source/.htaccess
-
-make up
 
 docker compose exec -T php vendor/bin/oe-console oe:module:install ./
 
