@@ -2,7 +2,7 @@
 # Flags possible:
 # -e for shop edition. Possible values: CE/EE
 
-edition='CE'
+edition='EE'
 while getopts e: flag; do
   case "${flag}" in
   e) edition=${OPTARG} ;;
@@ -44,7 +44,6 @@ docker compose exec php composer update --no-interaction
 
 make up
 
-$SCRIPT_PATH/../parts/shared/setup_database.sh
-
+$SCRIPT_PATH/../parts/shared/setup_database.sh --no-demodata
 
 $SCRIPT_PATH/../parts/shared/create_admin.sh
