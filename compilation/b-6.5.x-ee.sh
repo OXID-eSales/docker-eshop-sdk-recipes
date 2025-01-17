@@ -2,10 +2,15 @@
 
 SCRIPT_PATH=$(dirname ${BASH_SOURCE[0]})
 
-cd $SCRIPT_PATH/../../../../ || exit
+cd $SCRIPT_PATH/../../../ || exit
 
-git clone https://github.com/OXID-eSales/oxideshop_ce.git --branch=b-6.5.x source
 
+# Replace PHP version
+perl -pi\
+  -e 's#PHP_VERSION=8.1#PHP_VERSION=8.0#g;'\
+  .env.dist
+
+# Prepare services configuration
 make setup
 make addbasicservices
 make file=services/adminer.yml addservice
@@ -14,11 +19,27 @@ make file=recipes/oxid-esales/services/selenium-firefox-old.yml addservice
 
 # Configure containers
 perl -pi\
+  -e 's#error_reporting = .*#error_reporting = E_ALL ^ E_WARNING ^ E_DEPRECATED#g;'\
+  containers/php/custom.ini
+
+perl -pi\
   -e 's#/var/www/#/var/www/source/#g;'\
   containers/httpd/project.conf
 
+mkdir source
+
+docker-compose up --build -d php
+make down
+make up
+
+docker-compose run php composer create-project oxid-esales/oxideshop-project . dev-b-6.5-ee
+
+docker-compose exec -T php composer update --no-scripts --no-plugins
+docker-compose exec -T php composer update
+
 # Configure shop
 cp source/source/config.inc.php.dist source/source/config.inc.php
+cp -r source/vendor/oxid-esales/oxideshop-ce/source/tmp source/source/tmp
 
 perl -pi\
   -e 'print "SetEnvIf Authorization \"(.*)\" HTTP_AUTHORIZATION=\$1\n\n" if $. == 1'\
@@ -35,17 +56,9 @@ perl -pi\
   -e 's#<sCompileDir>#/var/www/source/tmp/#g;'\
   source/source/config.inc.php
 
-# Start all containers
+docker-compose exec -T php vendor/bin/reset-shop
+
+make down
 make up
 
-docker-compose exec php composer config github-protocols https
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
-docker-compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
-
-docker-compose exec php composer require oxid-esales/oxideshop-pe:dev-b-6.5.x --no-update
-docker-compose exec php composer require oxid-esales/oxideshop-ee:dev-b-6.5.x --no-plugins --no-scripts
-
-docker-compose exec -T php composer update --no-interaction
-docker-compose exec -T php php vendor/bin/reset-shop
-
-echo "Done!"
+echo "Done"
