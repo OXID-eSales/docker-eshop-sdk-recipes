@@ -36,7 +36,7 @@ perl -pi\
 mkdir source
 docker compose up --build -d php
 
-git clone https://github.com/OXID-eSales/consistency-check-tool ./source -b b-7.3.x-create-skeleton-OXDEV-9049
+git clone https://github.com/OXID-eSales/consistency-check-tool ./source -b b-7.3.x
 
 $SCRIPT_PATH/../parts/shared/require_shop_edition_packages.sh -e"${edition}" -v"dev-b-7.3.x"
 
