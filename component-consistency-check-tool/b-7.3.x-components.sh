@@ -39,19 +39,18 @@ docker compose up --build -d php
 cp ${SCRIPT_PATH}/../parts/bases/composer.json.base ./source/composer.json
 
 $SCRIPT_PATH/../parts/shared/require_shop_edition_packages.sh -e"${edition}" -v"dev-b-7.3.x"
+$SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"${edition}" -b"b-7.3.x"
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/developer-tools" -v"dev-b-7.3.x"
-$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/consistency-check-tool" -g"https://github.com/OXID-eSales/consistency-check-tool.git" -v"dev-b-7.3.x-preparation-for-sdk-recipe-OXDEV-9104"
+$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/apex-theme" -v"dev-b-7.3.x"
+$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/consistency-check-tool" -g"https://github.com/OXID-eSales/consistency-check-tool" -v"dev-b-7.3.x-preparation-for-sdk-recipe-OXDEV-9104"
 
 docker compose exec php composer update --no-interaction
-
-perl -pi\
-  -e 'print "SetEnvIf Authorization \"(.*)\" HTTP_AUTHORIZATION=\$1\n\n" if $. == 1'\
-  source/source/.htaccess
 
 make up
 
 $SCRIPT_PATH/../parts/shared/setup_database.sh --no-demodata
 
+docker compose exec -T php vendor/bin/oe-console oe:theme:activate apex
 
 $SCRIPT_PATH/../parts/shared/create_admin.sh
 
