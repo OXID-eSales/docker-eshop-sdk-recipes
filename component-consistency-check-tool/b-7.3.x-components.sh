@@ -42,7 +42,7 @@ $SCRIPT_PATH/../parts/shared/require_shop_edition_packages.sh -e"${edition}" -v"
 $SCRIPT_PATH/../parts/shared/require_twig_components.sh -e"${edition}" -b"b-7.3.x"
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/developer-tools" -v"dev-b-7.3.x"
 $SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/apex-theme" -v"dev-b-7.3.x"
-$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/consistency-check-tool" -g"https://github.com/OXID-eSales/consistency-check-tool" -v"dev-b-7.3.x-preparation-for-sdk-recipe-OXDEV-9104"
+$SCRIPT_PATH/../parts/shared/require.sh -n"oxid-esales/consistency-check-tool" -g"https://github.com/OXID-eSales/consistency-check-tool" -v"dev-b-7.3.x"
 
 docker compose exec php composer update --no-interaction
 
