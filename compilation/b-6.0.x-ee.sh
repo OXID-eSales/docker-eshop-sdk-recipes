@@ -64,7 +64,6 @@ perl -pi\
 
 docker-compose exec -T php vendor/bin/reset-shop
 
-make down
-make up
+docker-compose up --build -d apache
 
 echo "Done"
