@@ -29,16 +29,20 @@ perl -pi\
 mkdir source
 
 docker-compose up --build -d php
-docker-compose exec -T php sudo composer self-update --1
-make down
 make up
 
+docker-compose exec -T php php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+docker-compose exec -T php php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec78b38b9800061b4150413ff2e3b6f88543c636f7cd84f6db9189d43a81e5503cda447da73c7e5b6') { echo 'Installer verified'.PHP_EOL; } else { echo 'Installer corrupt'.PHP_EOL; unlink('composer-setup.php'); exit(1); }"
+docker-compose exec -T php php composer-setup.php
+docker-compose exec -T php php -r "unlink('composer-setup.php');"
+docker-compose exec -T php sudo mv composer.phar /usr/bin/composer
 docker-compose exec -T php sudo composer self-update --1
-docker-compose run php composer create-project oxid-esales/oxideshop-project . dev-b-6.0-ee
-docker-compose exec -T php sudo composer self-update --1
+
+docker-compose exec -T php composer create-project oxid-esales/oxideshop-project . dev-b-6.0-ee
 
 docker-compose exec -T php composer update --no-scripts --no-plugins
 docker-compose exec -T php composer update
+
 
 # Configure shop
 cp source/source/config.inc.php.dist source/source/config.inc.php
