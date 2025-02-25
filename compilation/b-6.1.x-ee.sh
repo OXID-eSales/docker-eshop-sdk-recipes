@@ -7,7 +7,7 @@ cd $SCRIPT_PATH/../../../ || exit
 
 # Replace PHP version
 perl -pi\
-  -e 's#PHP_VERSION=8.1#PHP_VERSION=7.4#g;'\
+  -e 's#PHP_VERSION=8.1#PHP_VERSION=7.1#g;'\
   .env.dist
 
 # Prepare services configuration
