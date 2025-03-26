@@ -10,6 +10,10 @@ perl -pi\
   -e 's#PHP_VERSION=8.1#PHP_VERSION=7.0#g;'\
   .env.dist
 
+perl -pi\
+  -e 's#PHP_VERSION=8.2#PHP_VERSION=7.0#g;'\
+  .env.dist
+
 # Prepare services configuration
 make setup
 make addbasicservices
@@ -38,7 +42,7 @@ docker-compose exec -T php php -r "unlink('composer-setup.php');"
 docker-compose exec -T php sudo mv composer.phar /usr/bin/composer
 docker-compose exec -T php sudo composer self-update --1
 
-docker-compose exec -T php composer create-project oxid-esales/oxideshop-project . dev-b-6.0-ee
+docker-compose exec php composer create-project oxid-esales/oxideshop-project . dev-b-6.0-ee
 
 docker-compose exec -T php composer update --no-scripts --no-plugins
 docker-compose exec -T php composer update
