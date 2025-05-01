@@ -49,10 +49,11 @@ $SCRIPT_PATH/../parts/shared/require_demodata_package.sh -e"${edition}" -b"b-8.0
 docker compose exec php composer update --no-interaction
 make up
 
-$SCRIPT_PATH/../parts/shared/setup_database.sh
+yes | docker compose exec -T php vendor/bin/oe-console oe:database:reset
+docker compose exec -T php vendor/bin/oe-console oe:setup:demodata
 docker compose exec -T php vendor/bin/oe-console oe:theme:activate apex
 
-$SCRIPT_PATH/../parts/shared/create_admin.sh
+docker compose exec -T php vendor/bin/oe-console oe:admin:create noreply@oxid-esales.com admin
 
 # Register all related project packages git repositories
 mkdir -p .idea; mkdir -p source/.idea; cp "${SCRIPT_PATH}/../parts/bases/vcs.xml.base" .idea/vcs.xml
