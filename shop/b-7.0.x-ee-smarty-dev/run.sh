@@ -45,6 +45,7 @@ make up
 # Update composer to 2.4+
 docker compose exec php sudo composer self-update --2
 
+docker compose exec php composer config audit.block-insecure false
 docker compose exec php composer config github-protocols https
 docker compose exec php composer config repositories.oxid-esales/oxideshop-ee git https://github.com/OXID-eSales/oxideshop_ee.git
 docker compose exec php composer config repositories.oxid-esales/oxideshop-pe git https://github.com/OXID-eSales/oxideshop_pe.git
