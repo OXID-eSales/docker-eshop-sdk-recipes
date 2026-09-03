@@ -31,7 +31,7 @@ perl -pi\
   containers/httpd/project.conf
 
 perl -pi\
-  -e 's#PHP_VERSION=.*#PHP_VERSION=8.2#g;'\
+  -e 's#PHP_VERSION=.*#PHP_VERSION=8.4#g;'\
   .env
 
 mkdir source
