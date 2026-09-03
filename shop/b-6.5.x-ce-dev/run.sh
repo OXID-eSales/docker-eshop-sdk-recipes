@@ -17,6 +17,13 @@ perl -pi\
   -e 's#/var/www/#/var/www/source/#g;'\
   containers/httpd/project.conf
 
+# 6.5 stores encrypted config values with the MySQL ENCODE()/DECODE() functions,
+# which MySQL removed in 8.0. With the SDK default (8.4) the shop installer dies
+# with "FUNCTION example.DECODE does not exist".
+perl -pi\
+  -e 's#MYSQL_VERSION=.*#MYSQL_VERSION=5.7#g;'\
+  .env
+
 # Configure shop
 cp source/source/config.inc.php.dist source/source/config.inc.php
 
@@ -39,6 +46,9 @@ perl -pi\
 make up
 
 docker compose exec php composer config github-protocols https
+
+# Composer 2.9+ blocks smarty/smarty 2.6, which is EOL and permanently flagged
+docker compose exec -T php composer config policy.advisories.ignore '["smarty/smarty"]' --json
 
 docker compose exec -T php composer update --no-interaction
 docker compose exec -T php php vendor/bin/reset-shop
