@@ -48,7 +48,7 @@ make up
 docker compose exec php composer config github-protocols https
 
 # Composer 2.9+ blocks smarty/smarty 2.6, which is EOL and permanently flagged
-docker compose exec -T php composer config policy.advisories.ignore '["smarty/smarty"]' --json
+docker compose exec -T php composer config policy.advisories.ignore '{"smarty/smarty": "6.5 is pinned to the EOL 2.6 line, which will never get a fixed release"}' --json
 
 docker compose exec -T php composer update --no-interaction
 docker compose exec -T php php vendor/bin/reset-shop
